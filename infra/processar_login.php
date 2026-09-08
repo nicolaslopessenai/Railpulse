@@ -3,8 +3,18 @@ session_start();
 
 include '../infra/conexao.php';
 
-$email_digitado = $_POST['email'];
-$senha_digitada = $_POST['senha'];
+$email_digitado = "";
+$senha_digitada = "";
+
+if (isset($_POST['email'])) {
+    $email_digitado = $_POST['email'];
+}
+
+// ...e se o formulário foi enviado com a senha
+if (isset($_POST['senha'])) {
+    $senha_digitada = $_POST['senha'];
+}
+
 
 $sql = "SELECT * FROM usuarios WHERE email = '$email_digitado'";
 $query = mysqli_query($conexao, $sql);
@@ -27,6 +37,5 @@ if (mysqli_num_rows($query) == 1) {
     }
 }
 
-echo "E-mail ou senha inválidos.";
 
 ?>

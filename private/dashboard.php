@@ -1,6 +1,6 @@
 <?php
 include '../infra/conexao.php';
-
+include '../infra/processar_login.php';
 ?>
 
 
@@ -40,7 +40,7 @@ include '../infra/conexao.php';
 
 
         <main class="main-content">
-            <h2 class="page-title" id="boas-vindas">Bem-vindo</h2>
+            <h2 class="page-title" id="boas-vindas">Bem-vindo <?php echo $_SESSION['nome']; ?></h2>
             <hr class="divider"><br>
 
             <div class="section-title light" style="margin-top: 0;">RASTREAMENTO DE LOCALIZAÇÃO</div>

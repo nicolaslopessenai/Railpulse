@@ -1,6 +1,5 @@
 <?php
-include '/infra/conexao.php';
-
+include 'infra/conexao.php';
 ?>
 
 
@@ -12,25 +11,25 @@ include '/infra/conexao.php';
     <title>RailPulse</title>
     <link rel="stylesheet" href="assets/style/style.css">
 </head>
-<body class="corpo-inicial">
+<body class="corpo_inicial">
     
     <nav class="navegacao">
-        <div class="container-menu">
+        <div class="container_menu">
             <div class="logo">Rail<span>Pulse</span></div>
-            <div class="botoes-topo">
-                <a href="public/login.php" class="link-entrar">ENTRAR</a>
+            <div class="botoes_topo">
+                <a href="public/login.php" class="link_entrar">ENTRAR</a>
             </div>
         </div>
     </nav>
 
     <header class="banner">
         <div class="container">
-            <div class="conteudo-banner">
+            <div class="conteudo_banner">
                 <span class="etiqueta">SISTEMA INTELIGENTE</span>
-                <h1 class="titulo-principal">Monitoramento de Precisão para Ferrovias</h1>
-                <p class="texto-apoio">Transformamos dados brutos de sensores IoT em decisões inteligentes para aumentar a segurança e eficiência da sua operação.</p>
+                <h1 class="titulo_principal">Monitoramento de Precisão para Ferrovias</h1>
+                <p class="texto_apoio">Transformamos dados brutos de sensores IoT em decisões inteligentes para aumentar a segurança e eficiência da sua operação.</p>
                 <div class="acoes">
-                    <a href="#solucoes" class="botao-azul">CONHECER SOLUÇÃO</a>
+                    <a href="#solucoes" class="botao_azul">CONHECER SOLUÇÃO</a>
                 </div>
             </div>
         </div>
@@ -38,8 +37,8 @@ include '/infra/conexao.php';
 
     <section id="solucoes" class="recursos">
         <div class="container">
-            <div class="section-title light">O QUE OFERECEMOS</div>
-            <div class="grade-recursos">
+            <div class="section_title light">O QUE OFERECEMOS</div>
+            <div class="grade_recursos">
                 <div class="cartao">
                     <div class="numero">01</div>
                     <h3>Rastreamento</h3>
@@ -61,8 +60,8 @@ include '/infra/conexao.php';
 
     <footer class="rodape">
         <div class="container">
-            <div class="conteudo-rodape">
-                <div class="info-projeto">
+            <div class="conteudo_rodape">
+                <div class="info_projeto">
                     <p><strong>Projeto RailPulse</strong></p>
                     <p>Desenvolvimento de Sistemas - SENAI Santa Catarina</p>
                 </div>
@@ -74,4 +73,3 @@ include '/infra/conexao.php';
     </footer>
 </body>
 </html>
-
