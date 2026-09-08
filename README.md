@@ -115,7 +115,6 @@ RAILPULSE/
 ├── private/                  # Regras de negócio e processamento interno (PHP)
 │   ├── cadastro.php
 │   ├── dashboard.php
-│   ├── login.php
 │   ├── relatorios.php
 │   ├── rotas.php
 │   ├── sensores.php
@@ -123,7 +122,6 @@ RAILPULSE/
 │   └── usuarios.php
 │
 ├── public/                   # Telas e arquivos acessíveis ao usuário (PHP)
-│   ├── cadastro.php
 │   ├── dashboard.php
 │   ├── login.php
 │   ├── relatorios.php
