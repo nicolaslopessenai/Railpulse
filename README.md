@@ -131,15 +131,6 @@ RAILPULSE/
 │   ├── sensores.php
 │   └── trens.php
 │
-├── script/                   # Lógica e interatividade no Front-end (JavaScript)
-│   ├── cadastro.js
-│   ├── dashboard.js
-│   ├── login.js
-│   ├── relatorios.js
-│   ├── rotas.js
-│   ├── sensores.js
-│   ├── trens.js
-│   └── usuarios.js
 │
 ├── index.html                # Página de entrada da aplicação
 ├── LICENSE                   # Arquivo de licença do projeto
