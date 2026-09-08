@@ -17,7 +17,7 @@ include 'infra/conexao.php';
         <div class="container_menu">
             <div class="logo">Rail<span>Pulse</span></div>
             <div class="botoes_topo">
-                <a href="public/login.php" class="link_entrar">ENTRAR</a>
+                <a href="login.php" class="link_entrar">ENTRAR</a>
             </div>
         </div>
     </nav>

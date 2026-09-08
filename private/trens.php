@@ -16,12 +16,12 @@ include '../infra/conexao.php';
     <nav class="navegacao">
             <div class="container-menu">
                 <div class="logo">Rail<span>Pulse</span></div>
-                <div class="paginas"><a href="../public/dashboard.html" >PAINEL</a></div>
-                <div class="paginas"><a href="../public/sensores.html">SENSORES</a></div>
-                <div class="paginas"><a href="../public/trens.html" class="active">TRENS</a></div>
-                <div class="paginas"><a href="../public/rotas.html">ROTAS</a></div>
-                <div class="paginas"><a href="../public/relatorios.html">RELATÓRIOS</a></div>
-                <div class="paginas"><a href="../public/usuarios.html" >USUÁRIOS</a></div>
+                <div class="paginas"><a href="dashboard.php" >PAINEL</a></div>
+                <div class="paginas"><a href="sensores.php">SENSORES</a></div>
+                <div class="paginas"><a href="trens.php" class="active">TRENS</a></div>
+                <div class="paginas"><a href="rotas.php">ROTAS</a></div>
+                <div class="paginas"><a href="relatorios.php">RELATÓRIOS</a></div>
+                <div class="paginas"><a href="usuarios.php" >USUÁRIOS</a></div>
                 <div class="topbar-info">
                     <span id="info-matricula" class="topbar-matricula"></span>
                     <a href="../index.php" class="paginas">SAIR</a>

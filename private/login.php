@@ -16,7 +16,7 @@ include '../infra/conexao.php';
 
 <body class="body-login">
         <main>
-                    <div class="logo">Rail<span>Pulse</span></div>
+        <div class="logo">Rail<span>Pulse</span></div>
         <div class="e-form">
             <h2 id="titulo">Login</h2>
             <form id="form">

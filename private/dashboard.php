@@ -22,7 +22,7 @@ include '../infra/processar_login.php';
             <div class="paginas"><a href="sensores.php">SENSORES</a></div>
             <div class="paginas"><a href="trens.php">TRENS</a></div>
             <div class="paginas"><a href="rotas.php">ROTAS</a></div>
-            <div class="paginas"><a href=".relatorios.php">RELATÓRIOS</a></div>
+            <div class="paginas"><a href="relatorios.php">RELATÓRIOS</a></div>
             <div class="paginas"><a href="usuarios.php">USUÁRIOS</a></div>
             <div class="topbar-info">
                 <span id="info-matricula" class="topbar-matricula"></span>
