@@ -16,7 +16,7 @@ include '../infra/conexao.php';
 <body>
 
         <nav class="navegacao">
-            <div class="container-menu">
+            <div class="container_menu">
                 <div class="logo">Rail<span>Pulse</span></div>
                 <div class="paginas"><a href="dashboard.php" >PAINEL</a></div>
                 <div class="paginas"><a href="sensores.php">SENSORES</a></div>
@@ -24,7 +24,7 @@ include '../infra/conexao.php';
                 <div class="paginas"><a href="rotas.php">ROTAS</a></div>
                 <div class="paginas"><a href="relatorios.php">RELATÓRIOS</a></div>
                 <div class="paginas"><a href="usuarios.php" class="active">USUÁRIOS</a></div>
-                <div class="topbar-info">
+                <div class="topbar_info">
                     <span id="info_matricula" class="topbar_matricula"></span>
                     <a href="../index.php" class="paginas">SAIR</a>
                 </div>
@@ -72,10 +72,10 @@ include '../infra/conexao.php';
                 </div>
 
                 <div class="buttons_row">
-                    <button type="submit" class="btn btn-primary" id="btn_cadastrar">CADASTRAR NOVO</button>
+                    <button type="submit" class="btn btn_primary" id="btn_cadastrar">CADASTRAR NOVO</button>
                 </div>
 
-                <div class="paginas"><a href="usuarios.html">Cancelar</a></div>
+                <div class="paginas"><a href="usuarios.php">Cancelar</a></div>
             </form>
             
         </main>
