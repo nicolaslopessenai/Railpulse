@@ -305,6 +305,57 @@ body {
 /* ==========================================
    NAVEGAÇÃO INTERNA (todas as páginas internas)
    ========================================== */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+.topbar {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 250px;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 30px;
+}
+
+/* HTML em uso: private/usuarios.php, private/relatorios.php  */
+.topbar_info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-left: auto;
+}
+
+/* HTML em uso: private/usuarios.php, private/relatorios.php */
+.topbar_matricula {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #444;
+    background-color: #e9ecef;
+    padding: 4px 12px;
+    border-radius: 4px;
+}
+
+/* HTML em uso: private/usuarios.php, private/relatorios.php */
+.topbar_matricula:empty {
+    display: none;
+}
+
+.topbar a {
+    text-decoration: none;
+    color: #666;
+    font-weight: 600;
+}
+
+.topbar a:hover {
+    color: #000;
+}
+
+/* HTML em uso: private/usuarios.php, private/relatorios.php */
 .navegacao {
     width: 100%;
     background-color: #fff;
@@ -314,6 +365,17 @@ body {
     z-index: 1000;
 }
 
+/* HTML em uso: private/usuarios.php, private/relatorios.php */
+.container_menu {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    height: 70px;
+}
+
+/* HTML em uso: private/usuarios.php, private/relatorios.php */
 .logo {
     font-size: 1.4rem;
     font-weight: 800;
@@ -322,16 +384,7 @@ body {
 }
 
 .logo span {
-    color: var(--cor_detalhe);
-}
-
-.container_menu {
-    width: 100%;
-    max-width: 100%;
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    height: 70px;
+    color: rgb(45, 151, 212);
 }
 
 .paginas {
@@ -358,15 +411,15 @@ body {
 }
 
 .paginas a.active {
-    color: var(--cor_detalhe);
+    color: rgb(45, 151, 212);
     background-color: #f0f4ff;
-    border-bottom: 3px solid var(--cor_detalhe);
+    border-bottom: 3px solid rgb(45, 151, 212);
     position: relative;
 }
 
 .paginas:hover {
     background-color: #f5f5f5;
-    color: var(--cor_detalhe);
+    color: rgb(45, 151, 212);
 }
 
 .paginas.active {
@@ -374,87 +427,7 @@ body {
     color: #fff;
 }
 
-.topbar_info {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-left: auto;
-}
-
-.topbar_matricula {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: #444;
-    background-color: #e9ecef;
-    padding: 4px 12px;
-    border-radius: 4px;
-}
-
-.topbar_matricula:empty {
-    display: none;
-}
-
-.topbar_user {
-    font-size: 0.8rem;
-    color: #888;
-    margin-right: 18px;
-}
-
-/* ==========================================
-   LAYOUT PRINCIPAL
-   ========================================== */
-.app_container {
-    display: flex;
-    min-height: 100vh;
-}
-
-.topbar {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 250px;
-    height: 50px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0 30px;
-}
-
-.topbar a {
-    text-decoration: none;
-    color: #666;
-    font-weight: 600;
-}
-
-.topbar a:hover {
-    color: #000;
-}
-
-.main_content {
-    flex: 1;
-    padding: 70px 40px;
-}
-
-.page_title {
-    font-size: 1.8rem;
-    margin-bottom: 15px;
-}
-
-.divider {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin-bottom: 15px;
-}
-
-.section_title.light {
-    border-bottom: 1px solid #999;
-    margin: 20px 0;
-}
-
-/* ==========================================
-   SIDEBAR
-   ========================================== */
-.sidebar .menu_title {
+.sidebar .menu-title {
     font-size: 0.75rem;
     color: #888;
     font-weight: bold;
@@ -486,42 +459,56 @@ body {
     color: #fff;
 }
 
-/* ==========================================
-   FORMULÁRIOS — definição única e completa
-   ========================================== */
-.form_group {
-    margin-bottom: 14px;
-    position: relative;
+/* HTML em uso: private/usuarios.php, private/relatorios.php */
+.main_content {
     flex: 1;
+    padding: 70px 40px;
 }
 
-.form_group label {
-    display: block;
+/* HTML em uso: private/usuarios.php, private/relatorios.php */
+.page_title {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+.divider {
+    border: none;
+    border-top: 1px solid #ddd;
+    margin-bottom: 15px;
+}
+
+.section-title.light {
+    border-bottom: 1px solid #999;
+    margin: 20px 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.form-group label {
     font-size: 0.7rem;
-    font-weight: 700;
-    margin-bottom: 5px;
-    letter-spacing: .04em;
+    font-weight: bold;
 }
 
-.form_group input,
-.form_group select {
+.form-group input,
+.form-group select {
     width: 100%;
-    padding: 10px 12px;
+    padding: 12px;
     border: 1px solid #ccc;
-    font-size: 0.88rem;
-    border-radius: 3px;
+    font-size: 0.9rem;
     background-color: #fff;
-    transition: border-color .2s;
 }
 
-.form_group input:focus,
-.form_group select:focus {
+.form-group input:focus,
+.form-group select:focus {
     outline: none;
-    border-color: var(--cor_detalhe);
-    box-shadow: 0 0 0 2px rgba(45, 151, 212, .15);
+    border-color: rgb(45, 151, 212);
+    box-shadow: 0 0 0 2px rgba(0, 0, 205, 0.1);
 }
 
-.form_group select {
+.form-group select {
     appearance: none;
     cursor: pointer;
     background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='20' viewBox='0 0 24 24' width='20'><path d='M7 10l5 5 5-5z'/></svg>");
@@ -529,28 +516,25 @@ body {
     background-position: right 10px center;
 }
 
-.form_group select:hover {
-    border-color: var(--cor_detalhe);
+.form-group select:hover {
+    border-color: rgb(45, 151, 212);
 }
 
-.form_row {
+.form-row {
     display: flex;
     gap: 20px;
 }
 
-.form_row .form_group {
+.form-row .form-group {
     flex: 1;
 }
 
-.buttons_row {
+.buttons-row {
     display: flex;
     gap: 15px;
     margin-top: 20px;
 }
 
-/* ==========================================
-   BOTÕES — compartilhados em todas as páginas
-   ========================================== */
 .btn {
     padding: 15px;
     font-weight: bold;
@@ -563,48 +547,69 @@ body {
     opacity: 0.85;
 }
 
+/* HTML em uso: private/usuarios.php */
 .btn_primary {
-    background-color: var(--cor_detalhe);
+    background-color: rgb(45, 151, 212);
     color: #fff;
 }
 
-.btn_secondary {
+.btn-secondary {
     background-color: #fff;
     border: 1px solid #000;
 }
 
-.btn_link {
-    text-decoration: none;
-}
-
-/* ==========================================
-   MENSAGENS DE RETORNO — compartilhadas em todas as páginas
-   .msg_sucesso e .msg_ok têm o mesmo estilo
-   .msg_erro e .msg_err têm o mesmo estilo
-   ========================================== */
-.msg_sucesso,
-.msg_ok {
+.msg-sucesso {
     background-color: #d4edda;
     color: #155724;
-    padding: 10px 14px;
+    padding: 10px;
     margin: 10px 0;
     border-radius: 4px;
     font-weight: 600;
 }
 
-.msg_erro,
-.msg_err {
+/* HTML em uso: private/relatorios.php */
+.relatorios_grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+}
+
+/* HTML em uso: private/relatorios.php */
+.relatorio_card {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.relatorio_card h2 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.relatorio_card p {
+    color: #666;
+    font-size: 0.85rem;
+    margin-bottom: 12px;
+}
+
+.relatorio_card strong {
+    color: rgb(45, 151, 212);
+    font-size: 1.8rem;
+}
+
+.msg-erro {
     background-color: #f8d7da;
     color: #721c24;
-    padding: 10px 14px;
+    padding: 10px;
     margin: 10px 0;
     border-radius: 4px;
     font-weight: 600;
 }
 
-/* ==========================================
-   USUÁRIOS
-   ========================================== */
+/* HTML em uso: private/usuarios.php, private/relatorios.php */
 .usuarios_header {
     display: flex;
     justify-content: space-between;
@@ -612,11 +617,13 @@ body {
     margin-bottom: 20px;
 }
 
-/* ==========================================
-   TABELA — classe única para TODAS as tabelas do projeto
-   Usada em: sensores, usuários, trens, rotas, relatórios, etc.
-   ========================================== */
-.tabela {
+/* HTML em uso: private/usuarios.php */
+.btn_link {
+    text-decoration: none;
+}
+
+/* HTML em uso: private/usuarios.php */
+.usuarios_table {
     width: 100%;
     border-collapse: collapse;
     background-color: #fff;
@@ -624,26 +631,23 @@ body {
     font-size: 0.85rem;
 }
 
-.tabela th,
-.tabela td {
-    padding: 12px 16px;
+.usuarios_table th,
+.usuarios_table td {
+    padding: 15px;
     text-align: left;
     border-bottom: 1px solid #eee;
 }
 
-.tabela thead {
-    background-color: #e8e8e8;
-}
-
-.tabela th {
-    font-size: 0.75rem;
+.usuarios_table th {
+    background-color: #f5f5f5;
+    font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: .04em;
     color: #555;
 }
 
-.tabela tbody tr:hover {
-    background-color: #f7f9ff;
+.usuarios_table tr:hover {
+    background-color: #f9f9f9;
 }
 
 .sem_registros {

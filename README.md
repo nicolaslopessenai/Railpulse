@@ -115,7 +115,6 @@ RAILPULSE/
 ├── private/                  # Regras de negócio e processamento interno (PHP)
 │   ├── cadastro.php
 │   ├── dashboard.php
-│   ├── login.php
 │   ├── relatorios.php
 │   ├── rotas.php
 │   ├── sensores.php
@@ -123,7 +122,6 @@ RAILPULSE/
 │   └── usuarios.php
 │
 ├── public/                   # Telas e arquivos acessíveis ao usuário (PHP)
-│   ├── cadastro.php
 │   ├── dashboard.php
 │   ├── login.php
 │   ├── relatorios.php
@@ -131,15 +129,6 @@ RAILPULSE/
 │   ├── sensores.php
 │   └── trens.php
 │
-├── script/                   # Lógica e interatividade no Front-end (JavaScript)
-│   ├── cadastro.js
-│   ├── dashboard.js
-│   ├── login.js
-│   ├── relatorios.js
-│   ├── rotas.js
-│   ├── sensores.js
-│   ├── trens.js
-│   └── usuarios.js
 │
 ├── index.html                # Página de entrada da aplicação
 ├── LICENSE                   # Arquivo de licença do projeto
