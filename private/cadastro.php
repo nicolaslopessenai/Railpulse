@@ -1,5 +1,6 @@
 <?php
 include '../infra/conexao.php';
+include '../infra/auth.php';
 ?>
 
 
@@ -41,13 +42,13 @@ include '../infra/conexao.php';
             <form id="form_cadastro">
 
                 <div class="form_group">
-                    <label style="font-size: 0.7rem; font-weight: bold;">NOME COMPLETO</label>
+                    <label>NOME COMPLETO</label>
                     <input type="text" id="cad_nome" placeholder="Ex: João da Silva" required>
                 </div>
 
                 <div class="form_row">
                     <div class="form_group">
-                        <label style="font-size: 0.7rem; font-weight: bold;">MATRÍCULA</label>
+                        <label>MATRÍCULA</label>
                         <input type="text" id="cad_matricula" placeholder="Ex: 4325" maxlength="10" required>
                     </div>
 
@@ -62,12 +63,12 @@ include '../infra/conexao.php';
                 </div>
 
                 <div class="form_group">
-                    <label style="font-size: 0.7rem; font-weight: bold;">E-MAIL</label>
+                    <label>E-MAIL</label>
                     <input type="email" id="cad_email" placeholder="exemplo@empresa.com.br" required>
                 </div>
 
                 <div class="form_group">
-                    <label style="font-size: 0.7rem; font-weight: bold;">SENHA</label>
+                    <label>SENHA</label>
                     <input type="password" id="cad_senha" placeholder="Senha do funcionário" required>
                 </div>
 

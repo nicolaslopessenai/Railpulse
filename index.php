@@ -17,7 +17,7 @@ include 'infra/conexao.php';
         <div class="container_menu">
             <div class="logo">Rail<span>Pulse</span></div>
             <div class="botoes_topo">
-                <a href="/public/login.php" class="link_entrar">ENTRAR</a>
+                <a href="public/login.php" class="link_entrar">ENTRAR</a>
             </div>
         </div>
     </nav>
@@ -29,7 +29,7 @@ include 'infra/conexao.php';
                 <h1 class="titulo_principal">Monitoramento de Precisão para Ferrovias</h1>
                 <p class="texto_apoio">Transformamos dados brutos de sensores IoT em decisões inteligentes para aumentar a segurança e eficiência da sua operação.</p>
                 <div class="acoes">
-                    <a href="#solucoes" class="botao_azul">CONHECER SOLUÇÃO</a>
+                    <a href="#solucoes" class="btn btn_primary">CONHECER SOLUÇÃO</a>
                 </div>
             </div>
         </div>

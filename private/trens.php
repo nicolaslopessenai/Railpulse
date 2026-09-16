@@ -1,6 +1,6 @@
 <?php
 include '../infra/conexao.php';
-
+include '../infra/auth.php';
 ?>
 
 
