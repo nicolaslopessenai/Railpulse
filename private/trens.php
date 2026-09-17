@@ -30,14 +30,14 @@ include '../infra/auth.php';
     </nav>
 
     <main class="conteudo_principal">
-        <h2 class="titulo_pagina">TRENS</h2>
+        <h2 class="titulo_pagina">Trens</h2>
         <hr class="divider">
 
         <div class="barra_ferramentas">
             <div class="campo_pesquisa">
                 <input type="text" id="input_busca" placeholder="Buscar trem...">
             </div>
-            <button id="btn_novo_trem" class="botao botao_primario admin_only oculto">+ NOVO TREM</button>
+            <button id="btn_novo_trem" class="botao botao_primario admin_only">+ NOVO TREM</button>
         </div>
 
         <div class="titulo_secao light">LISTAGEM DE TRENS</div>

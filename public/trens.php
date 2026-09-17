@@ -34,7 +34,6 @@ include '../infra/conexao.php';
             <div class="campo_pesquisa">
                 <input type="text" id="input_busca" placeholder="Buscar trem...">
             </div>
-            <button id="btn_novo_trem" class="botao botao_primario admin_only oculto">+ NOVO TREM</button>
         </div>
 
         <div class="titulo_secao light">LISTAGEM DE TRENS</div>
