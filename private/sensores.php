@@ -31,6 +31,9 @@ include '../infra/auth.php';
     </nav>
 
     <main class="conteudo_principal">
+
+        <h1 class="titulo_pagina">Sensores Cadastrados</h1>
+
         <section id="section_cadastro" class="oculto">
             <div class="titulo_secao light">CADASTRO NOVO SENSOR</div>
 
