@@ -43,7 +43,7 @@ include '../infra/auth.php';
             </a>
         </div>
 
-        <table class="usuarios_table">
+        <table class="table">
             <thead>
                 <tr>
                     <th>ID</th>

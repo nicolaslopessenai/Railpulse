@@ -42,7 +42,7 @@ include '../infra/conexao.php';
         <div class="section_title light">LISTAGEM DE ROTAS</div>
 
         <div class="table_wrapper">
-            <table class="tabela" id="tabela_rotas">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>ID</th>

@@ -2,7 +2,7 @@
 
 $host = "localhost";
 $user = "root";
-$senha = "";
+$senha = "root";
 $banco = "railpulse";
 
 $conexao = new mysqli($host, $user, $senha, $banco);

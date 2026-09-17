@@ -33,7 +33,7 @@ include '../infra/conexao.php';
         <div class="section_title light">LISTAGEM DE RELATÓRIOS</div>
 
         <div class="table_wrapper">
-            <table class="tabela" id="tabela_relatorios">
+            <table class="table" >
                 <thead>
                     <tr>
                         <th>ID</th>

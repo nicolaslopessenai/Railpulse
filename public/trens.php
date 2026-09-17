@@ -40,7 +40,7 @@ include '../infra/conexao.php';
         <div class="section_title light">LISTAGEM DE TRENS</div>
 
         <div class="table_wrapper">
-            <table class="tabela" id="tabela_trens">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>ID</th>

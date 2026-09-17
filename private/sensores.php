@@ -87,13 +87,13 @@ include '../infra/auth.php';
             <div class="search_wrap">
                 <input type="text" id="input_busca" placeholder="Buscar sensor...">
             </div>
-            <button id="btn_novo_sensor" class="btn btn_primary admin_only" style="display:none;">+ NOVO SENSOR</button>
+            <button id="btn_novo_sensor" class="btn btn_primary admin_only">+ NOVO SENSOR</button>
         </div>
 
         <div class="section_title light">LISTAGEM DE SENSORES</div>
 
         <div class="table_wrapper">
-            <table class="tabela" id="tabela_sensores">
+            <table class="table">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -172,6 +172,6 @@ include '../infra/auth.php';
         </div>
     </div>
 
-    <script src="../script/sensores.js"></script>
+    <script src="../js/sensores_private.js"></script>
 </body>
 </html>
