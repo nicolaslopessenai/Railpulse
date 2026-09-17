@@ -59,6 +59,5 @@ include '../infra/conexao.php';
         </div>
     </main>
 
-    <script src="../script/trens.js"></script>
 </body>
 </html>

@@ -28,5 +28,38 @@ include '../infra/auth.php';
             </div>
         </div>
     </nav>
+
+    <main class="conteudo_principal">
+        <h2 class="titulo_pagina">TRENS</h2>
+        <hr class="divider">
+
+        <div class="barra_ferramentas">
+            <div class="campo_pesquisa">
+                <input type="text" id="input_busca" placeholder="Buscar trem...">
+            </div>
+            <button id="btn_novo_trem" class="botao botao_primario admin_only oculto">+ NOVO TREM</button>
+        </div>
+
+        <div class="titulo_secao light">LISTAGEM DE TRENS</div>
+
+        <div class="container_tabela">
+            <table class="tabela">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOME</th>
+                        <th>MODELO</th>
+                        <th>STATUS</th>
+                        <th id="col_acoes" class="oculto">AÇÕES</th>
+                    </tr>
+                </thead>
+                <tbody id="tbody_trens">
+                </tbody>
+            </table>
+            <div id="msg_vazio" class="mensagem_vazia oculto">
+                Nenhum trem cadastrado ainda.
+            </div>
+        </div>
+    </main>
 </body>
 </html>
