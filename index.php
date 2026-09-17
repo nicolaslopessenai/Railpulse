@@ -29,7 +29,7 @@ include 'infra/conexao.php';
                 <h1 class="titulo_principal">Monitoramento de Precisão para Ferrovias</h1>
                 <p class="texto_apoio">Transformamos dados brutos de sensores IoT em decisões inteligentes para aumentar a segurança e eficiência da sua operação.</p>
                 <div class="acoes">
-                    <a href="#solucoes" class="btn btn_primary">CONHECER SOLUÇÃO</a>
+                    <a href="#solucoes" class="botao botao_primario">CONHECER SOLUÇÃO</a>
                 </div>
             </div>
         </div>
@@ -37,7 +37,7 @@ include 'infra/conexao.php';
 
     <section id="solucoes" class="recursos">
         <div class="container">
-            <div class="section_title light">O QUE OFERECEMOS</div>
+            <div class="titulo_secao light">O QUE OFERECEMOS</div>
             <div class="grade_recursos">
                 <div class="cartao">
                     <div class="numero">01</div>

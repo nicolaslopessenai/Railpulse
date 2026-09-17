@@ -21,30 +21,30 @@ include '../infra/auth.php';
             <div class="paginas"><a href="rotas.php">ROTAS</a></div>
             <div class="paginas"><a href="relatorios.php">RELATÓRIOS</a></div>
             <div class="paginas"><a href="usuarios.php">USUÁRIOS</a></div>
-            <div class="topbar_info">
-                <span id="info_matricula" class="topbar_matricula"></span>
+            <div class="barra_topo_info">
+                <span id="info_matricula" class="matricula_topo"></span>
                 <a href="../index.php" class="paginas">SAIR</a>
             </div>
         </div>
     </nav>
 
-    <main class="main_content">
-        <section id="section_cadastro" style="display:none;">
-            <div class="section_title light">CADASTRO NOVO SENSOR</div>
+    <main class="conteudo_principal">
+        <section id="section_cadastro" class="oculto">
+            <div class="titulo_secao light">CADASTRO NOVO SENSOR</div>
 
             <form id="form_sensor" autocomplete="off">
-                <div class="form_row">
-                    <div class="form_group">
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
                         <label for="snr_nome">NOME DO SENSOR</label>
                         <input type="text" id="snr_nome">
                     </div>
-                    <div class="form_group">
+                    <div class="grupo_formulario">
                         <label for="snr_id">IDENTIFICAÇÃO (ID)</label>
                         <input type="text" id="snr_id">
                     </div>
                 </div>
-                <div class="form_row">
-                    <div class="form_group">
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
                         <label for="snr_tipo">TIPO</label>
                         <select id="snr_tipo" required>
                             <option value="">Selecione o tipo</option>
@@ -56,13 +56,13 @@ include '../infra/auth.php';
                             <option value="OUTROS">Outros</option>
                         </select>
                     </div>
-                    <div class="form_group">
+                    <div class="grupo_formulario">
                         <label for="snr_localizacao">LOCALIZAÇÃO</label>
                         <input type="text" id="snr_localizacao">
                     </div>
                 </div>
-                <div class="form_row">
-                    <div class="form_group">
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
                         <label for="snr_status">STATUS INICIAL</label>
                         <select id="snr_status" required>
                             <option value="Ativo">Ativo</option>
@@ -70,30 +70,30 @@ include '../infra/auth.php';
                             <option value="Falha">Falha</option>
                         </select>
                     </div>
-                    <div class="form_group" style="flex:2;">
+                    <div class="grupo_formulario grupo_formulario_largo">
                         <label for="snr_descricao">DESCRIÇÃO (opcional)</label>
                         <input type="text" id="snr_descricao">
                     </div>
                 </div>
-                <div class="buttons_row">
-                    <button type="submit" class="btn btn_primary" id="btn_salvar_sensor">CADASTRAR SENSOR</button>
-                    <button type="button" class="btn btn_secondary" id="btn_cancelar_sensor">CANCELAR</button>
+                <div class="botoes_linha">
+                    <button type="submit" class="botao botao_primario" id="btn_salvar_sensor">CADASTRAR SENSOR</button>
+                    <button type="button" class="botao botao_secundario" id="btn_cancelar_sensor">CANCELAR</button>
                 </div>
             </form>
             <div id="msg_sensor"></div>
         </section>
 
-        <div class="list_toolbar">
-            <div class="search_wrap">
+        <div class="barra_ferramentas">
+            <div class="campo_pesquisa">
                 <input type="text" id="input_busca" placeholder="Buscar sensor...">
             </div>
-            <button id="btn_novo_sensor" class="btn btn_primary admin_only">+ NOVO SENSOR</button>
+            <button id="btn_novo_sensor" class="botao botao_primario admin_only">+ NOVO SENSOR</button>
         </div>
 
-        <div class="section_title light">LISTAGEM DE SENSORES</div>
+        <div class="titulo_secao light">LISTAGEM DE SENSORES</div>
 
-        <div class="table_wrapper">
-            <table class="table">
+        <div class="container_tabela">
+            <table class="tabela">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -101,40 +101,40 @@ include '../infra/auth.php';
                         <th>TIPO</th>
                         <th>LOCALIZAÇÃO</th>
                         <th>STATUS</th>
-                        <th id="col_acoes" style="display:none;">AÇÕES</th>
+                        <th id="col_acoes" class="oculto">AÇÕES</th>
                     </tr>
                 </thead>
                 <tbody id="tbody_sensores">
                 </tbody>
             </table>
 
-            <div id="msg_vazio" class="msg_vazio" style="display: none;">
+            <div id="msg_vazio" class="mensagem_vazia oculto">
                 Nenhum sensor cadastrado ainda.
             </div>
         </div>
 
-        <div id="aviso_historico" class="aviso_info" style="display: none;">
+        <div id="aviso_historico" class="aviso_info oculto">
             NÃO É POSSIVEL EXCLUIR SENSORES COM DADOS HISTÓRICOS
         </div>
     </main>
 
-    <div id="modal_editar" class="modal_overlay" style="display: none;">
-        <div class="modal_box">
-            <h3 class="modal_title">EDITAR SENSOR</h3>
+    <div id="modal_editar" class="sobreposicao_modal oculto">
+        <div class="caixa_modal">
+            <h3 class="titulo_modal">EDITAR SENSOR</h3>
             <form id="form_editar">
                 <input type="hidden" id="edit_original_id">
-                <div class="form_row">
-                    <div class="form_group">
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
                         <label for="edit_nome">NOME</label>
                         <input type="text" id="edit_nome" required>
                     </div>
-                    <div class="form_group">
+                    <div class="grupo_formulario">
                         <label for="edit_id">IDENTIFICAÇÃO</label>
                         <input type="text" id="edit_id" required>
                     </div>
                 </div>
-                <div class="form_row">
-                    <div class="form_group">
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
                         <label for="edit_tipo">TIPO</label>
                         <select id="edit_tipo" required>
                             <option value="">Selecione o tipo</option>
@@ -146,13 +146,13 @@ include '../infra/auth.php';
                             <option value="OUTROS">Outros</option>
                         </select>
                     </div>
-                    <div class="form_group">
+                    <div class="grupo_formulario">
                         <label for="edit_localizacao">LOCALIZAÇÃO</label>
                         <input type="text" id="edit_localizacao" required>
                     </div>
                 </div>
-                <div class="form_row">
-                    <div class="form_group">
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
                         <label for="edit_status">STATUS</label>
                         <select id="edit_status">
                             <option value="Ativo">Ativo</option>
@@ -160,13 +160,13 @@ include '../infra/auth.php';
                             <option value="Falha">Falha</option>
                         </select>
                     </div>
-                    <div class="form_group" style="flex:2;">
+                    <div class="grupo_formulario grupo_formulario_largo">
                         <label for="edit_descricao">DESCRIÇÃO</label>
                         <input type="text" id="edit_descricao">
                     </div>
                 </div>
                 <div class="buttons_row">
-                    <button type="submit" class="btn btn_primary">SALVAR</button>
+                    <button type="submit" class="botao botao_primario">SALVAR</button>
                 </div>
             </form>
         </div>

@@ -1,21 +1,21 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const btnNovoSensor = document.getElementById('btn_novo_sensor');
-    const btnCancelarSensor = document.getElementById('btn_cancelar_sensor');
-    const sectionCadastro = document.getElementById('section_cadastro');
-    const formSensor = document.getElementById('form_sensor');
+document.addEventListener("DOMContentLoaded", () => {
+  const btn_novo_sensor = document.getElementById("btn_novo_sensor");
+  const btn_cancelar_sensor = document.getElementById("btn_cancelar_sensor");
+  const section_cadastro = document.getElementById("section_cadastro");
+  const form_sensor = document.getElementById("form_sensor");
 
-    if (btnNovoSensor) {
-        btnNovoSensor.addEventListener('click', () => {
-            sectionCadastro.style.display = 'block'; // Mostra a área de cadastro
-            btnNovoSensor.style.display = 'none';    // Esconde o botão de novo sensor temporariamente
-        });
-    }
+  if (btn_novo_sensor && section_cadastro) {
+    btn_novo_sensor.addEventListener("click", () => {
+      section_cadastro.classList.remove("oculto");
+      btn_novo_sensor.classList.add("oculto");
+    });
+  }
 
-    if (btnCancelarSensor) {
-        btnCancelarSensor.addEventListener('click', () => {
-            sectionCadastro.style.display = 'none';  // Esconde a área de cadastro
-            formSensor.reset();                     // Limpa todos os inputs preenchidos
-            btnNovoSensor.style.display = 'block';   // Faz o botão principal aparecer de volta
-        });
-    }
+  if (btn_cancelar_sensor && section_cadastro && form_sensor && btn_novo_sensor) {
+    btn_cancelar_sensor.addEventListener("click", () => {
+      section_cadastro.classList.add("oculto");
+      form_sensor.reset();
+      btn_novo_sensor.classList.remove("oculto");
+    });
+  }
 });

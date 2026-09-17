@@ -19,21 +19,21 @@ include '../infra/conexao.php';
             <div class="paginas"><a href="trens.php">TRENS</a></div>
             <div class="paginas"><a href="rotas.php">ROTAS</a></div>
             <div class="paginas"><a href="relatorios.php" class="active">RELATÓRIOS</a></div>
-            <div class="topbar_info">
-                <span id="info_matricula" class="topbar_matricula"></span>
+            <div class="barra_topo_info">
+                <span id="info_matricula" class="matricula_topo"></span>
                 <a href="../index.php" class="paginas">SAIR</a>
             </div>
         </div>
     </nav>
 
-    <main class="main_content">
-        <h2 class="page_title">RELATÓRIOS</h2>
+    <main class="conteudo_principal">
+        <h2 class="titulo_pagina">RELATÓRIOS</h2>
         <hr class="divider">
 
-        <div class="section_title light">LISTAGEM DE RELATÓRIOS</div>
+        <div class="titulo_secao light">LISTAGEM DE RELATÓRIOS</div>
 
-        <div class="table_wrapper">
-            <table class="table" >
+        <div class="container_tabela">
+            <table class="tabela" >
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -46,7 +46,7 @@ include '../infra/conexao.php';
                 <tbody id="tbody_relatorios">
                 </tbody>
             </table>
-            <div id="msg_vazio" class="msg_vazio" style="display:none;">
+            <div id="msg_vazio" class="mensagem_vazia oculto">
                 Nenhum relatório disponível ainda.
             </div>
         </div>

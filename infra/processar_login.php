@@ -10,7 +10,6 @@ if (isset($_POST['email'])) {
     $email_digitado = $_POST['email'];
 }
 
-// ...e se o formulário foi enviado com a senha
 if (isset($_POST['senha'])) {
     $senha_digitada = $_POST['senha'];
 }
@@ -19,7 +18,6 @@ if (isset($_POST['senha'])) {
 $sql = "SELECT * FROM usuarios WHERE email = '$email_digitado'";
 $query = mysqli_query($conexao, $sql);
 
-# Verifica se retorna linhas por isso == 1, se sim, pega a senha do banco e compara com a digitada
 if (mysqli_num_rows($query) == 1) {
     $usuario = mysqli_fetch_assoc($query);
 
