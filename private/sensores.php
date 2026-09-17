@@ -5,12 +5,14 @@ include '../infra/auth.php';
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensores - RailPulse</title>
     <link rel="stylesheet" href="../assets/style/style.css">
 </head>
+
 <body>
     <nav class="navegacao">
         <div class="container_menu">
@@ -38,15 +40,11 @@ include '../infra/auth.php';
                         <label for="snr_nome">NOME DO SENSOR</label>
                         <input type="text" id="snr_nome">
                     </div>
-                    <div class="grupo_formulario">
-                        <label for="snr_id">IDENTIFICAÇÃO (ID)</label>
-                        <input type="text" id="snr_id">
-                    </div>
                 </div>
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="snr_tipo">TIPO</label>
-                        <select id="snr_tipo" required>
+                        <select id="snr_tipo" name="snr_tipo" required>
                             <option value="">Selecione o tipo</option>
                             <option value="THERMAL_ARRAY">Thermal Array</option>
                             <option value="PRESSURE_FLUID">Pressure Fluid</option>
@@ -58,13 +56,13 @@ include '../infra/auth.php';
                     </div>
                     <div class="grupo_formulario">
                         <label for="snr_localizacao">LOCALIZAÇÃO</label>
-                        <input type="text" id="snr_localizacao">
+                        <input type="text" id="snr_localizacao" name="snr_localizacao" required>
                     </div>
                 </div>
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="snr_status">STATUS INICIAL</label>
-                        <select id="snr_status" required>
+                        <select id="snr_status" name="snr_status" required>
                             <option value="Ativo">Ativo</option>
                             <option value="Em Espera">Em Espera</option>
                             <option value="Falha">Falha</option>
@@ -72,7 +70,7 @@ include '../infra/auth.php';
                     </div>
                     <div class="grupo_formulario grupo_formulario_largo">
                         <label for="snr_descricao">DESCRIÇÃO (opcional)</label>
-                        <input type="text" id="snr_descricao">
+                        <input type="text" id="snr_descricao" name="snr_descricao">
                     </div>
                 </div>
                 <div class="botoes_linha">
@@ -80,6 +78,7 @@ include '../infra/auth.php';
                     <button type="button" class="botao botao_secundario" id="btn_cancelar_sensor">CANCELAR</button>
                 </div>
             </form>
+
             <div id="msg_sensor"></div>
         </section>
 
@@ -174,4 +173,5 @@ include '../infra/auth.php';
 
     <script src="../js/sensores_private.js"></script>
 </body>
+
 </html>
