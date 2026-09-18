@@ -35,8 +35,10 @@ include '../infra/auth.php';
 
             <h1 class="titulo_pagina">Usuários Cadastrados</h1>
             <a href="cadastro.php" class="link_botao">
-
-                <button class="botao botao_primario" type="button">NOVO USUÁRIO</button>
+                <div class="campo_pesquisa">
+                    <input type="text" id="input_busca" placeholder="Buscar trem...">
+                </div>
+                <button class="botao botao_primario" type="button">+NOVO USUÁRIO</button>
 
             </a>
         </div>

@@ -51,7 +51,5 @@ include '../infra/conexao.php';
             </div>
         </div>
     </main>
-
-    <script src="../script/relatorios.js"></script>
 </body>
 </html>

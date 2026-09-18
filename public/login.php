@@ -31,7 +31,5 @@ include '../infra/conexao.php';
             </form>
         </div>
     </main>
-    <script src="../script/login.js"></script>
 </body>
-
 </html>

@@ -33,8 +33,6 @@ include '../infra/conexao.php';
 
         <div class="titulo_secao light">RASTREAMENTO DE LOCALIZAÇÃO</div>
     </main>
-
-    <script src="../script/dashboard.js"></script>
 </body>
 
 </html>
