@@ -31,30 +31,77 @@ include '../infra/auth.php';
     </nav>
 
     <main class="conteudo_principal">
-        <div class="usuarios_header">
+        <h2 class="titulo_pagina">Usuários</h2>
+        <hr class="divider">
 
-            <h1 class="titulo_pagina">Usuários Cadastrados</h1>
-            <a href="cadastro.php" class="link_botao">
-                <div class="campo_pesquisa">
-                    <input type="text" id="input_busca" placeholder="Buscar trem...">
+        <section id="section_cadastro_usuario" class="oculto">
+            <div class="titulo_secao light">CADASTRO NOVO USUÁRIO</div>
+
+            <form id="form_usuario" autocomplete="off">
+                <div class="grupo_formulario">
+                    <label for="cad_nome">NOME COMPLETO</label>
+                    <input type="text" id="cad_nome" required>
                 </div>
-                <button class="botao botao_primario" type="button">+NOVO USUÁRIO</button>
 
-            </a>
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
+                        <label for="cad_matricula">MATRÍCULA</label>
+                        <input type="text" id="cad_matricula" maxlength="10" required>
+                    </div>
+
+                    <div class="grupo_formulario">
+                        <label for="cad_cargo">CARGO</label>
+                        <select id="cad_cargo" required>
+                            <option value="">Selecione um cargo</option>
+                            <option value="admin">Administrador</option>
+                            <option value="funcionario">Funcionário</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grupo_formulario">
+                    <label for="cad_email">E-MAIL</label>
+                    <input type="email" id="cad_email" required>
+                </div>
+
+                <div class="grupo_formulario">
+                    <label for="cad_senha">SENHA</label>
+                    <input type="password" id="cad_senha" required>
+                </div>
+
+                <div class="botoes_linha">
+                    <button type="submit" class="botao botao_primario">CADASTRAR USUÁRIO</button>
+                    <button type="button" class="botao botao_secundario" id="btn_cancelar_usuario">CANCELAR</button>
+                </div>
+            </form>
+        </section>
+
+        <div class="barra_ferramentas">
+            <div class="campo_pesquisa">
+                <input type="text" id="input_busca" placeholder="Buscar usuário...">
+            </div>
+            <button id="btn_novo_usuario" class="botao botao_primario admin_only">+ NOVO USUÁRIO</button>
         </div>
 
-        <table class="tabela">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>NOME</th>
-                    <th>EMAIL</th>
-                    <th>MATRÍCULA</th>
-                </tr>
-            </thead>
-            <tbody id="tabela_usuarios"></tbody>
-        </table>
+        <div class="titulo_secao light">LISTAGEM DE USUÁRIOS</div>
+
+        <div class="container_tabela">
+            <table class="tabela">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>NOME</th>
+                        <th>EMAIL</th>
+                        <th>MATRÍCULA</th>
+                        <th id="col_acoes" class="oculto">AÇÕES</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela_usuarios"></tbody>
+            </table>
+        </div>
     </main>
+
+    <script src="../js/usuarios_private.js"></script>
 </body>
 
 </html>

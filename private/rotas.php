@@ -31,14 +31,14 @@ include '../infra/auth.php';
     </nav>
 
     <main class="conteudo_principal">
-        <h2 class="titulo_pagina">ROTAS</h2>
+        <h2 class="titulo_pagina">Rotas</h2>
         <hr class="divider">
 
         <div class="barra_ferramentas">
             <div class="campo_pesquisa">
                 <input type="text" id="input_busca" placeholder="Buscar rota...">
             </div>
-            <button id="btn_nova_rota" class="botao botao_primario admin_only oculto">+ NOVA ROTA</button>
+            <button id="btn_nova_rota" class="botao botao_primario admin_only oculto">+NOVA ROTA</button>
         </div>
 
         <div class="titulo_secao light">LISTAGEM DE ROTAS</div>
@@ -55,8 +55,7 @@ include '../infra/auth.php';
                         <th id="col_acoes" class="oculto">AÇÕES</th>
                     </tr>
                 </thead>
-                <tbody id="tbody_rotas">
-                </tbody>
+                <tbody id="tbody_rotas"></tbody>
             </table>
             <div id="msg_vazio" class="mensagem_vazia oculto">
                 Nenhuma rota cadastrada ainda.
