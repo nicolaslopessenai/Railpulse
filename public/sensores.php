@@ -27,65 +27,12 @@ include '../infra/conexao.php';
     </nav>
 
     <main class="conteudo_principal">
-        <section id="section_cadastro" class="oculto">
-            <div class="titulo_secao light">CADASTRO NOVO SENSOR</div>
-
-            <form id="form_sensor" autocomplete="off">
-                <div class="linha_formulario">
-                    <div class="grupo_formulario">
-                        <label for="snr_nome">NOME DO SENSOR</label>
-                        <input type="text" id="snr_nome">
-                    </div>
-                    <div class="grupo_formulario">
-                        <label for="snr_id">IDENTIFICAÇÃO (ID)</label>
-                        <input type="text" id="snr_id">
-                    </div>
-                </div>
-                <div class="linha_formulario">
-                    <div class="grupo_formulario">
-                        <label for="snr_tipo">TIPO</label>
-                        <select id="snr_tipo" required>
-                            <option value="">Selecione o tipo</option>
-                            <option value="THERMAL_ARRAY">Thermal Array</option>
-                            <option value="PRESSURE_FLUID">Pressure Fluid</option>
-                            <option value="OPTICAL_LIDAR">Optical Lidar</option>
-                            <option value="HUMIDITY_RES">Humidity Resistive</option>
-                            <option value="GPS">GPS / Localização</option>
-                            <option value="OUTROS">Outros</option>
-                        </select>
-                    </div>
-                    <div class="grupo_formulario">
-                        <label for="snr_localizacao">LOCALIZAÇÃO</label>
-                        <input type="text" id="snr_localizacao">
-                    </div>
-                </div>
-                <div class="linha_formulario">
-                    <div class="grupo_formulario">
-                        <label for="snr_status">STATUS INICIAL</label>
-                        <select id="snr_status" required>
-                            <option value="Ativo">Ativo</option>
-                            <option value="Em Espera">Em Espera</option>
-                            <option value="Falha">Falha</option>
-                        </select>
-                    </div>
-                    <div class="grupo_formulario grupo_formulario_largo">
-                        <label for="snr_descricao">DESCRIÇÃO (opcional)</label>
-                        <input type="text" id="snr_descricao">
-                    </div>
-                </div>
-                <div class="botoes_linha">
-                    <button type="submit" class="botao botao_primario" id="btn_salvar_sensor">CADASTRAR SENSOR</button>
-                    <button type="button" class="botao botao_secundario" id="btn_cancelar_sensor">CANCELAR</button>
-                </div>
-            </form>
-            <div id="msg_sensor"></div>
-        </section>
+        <h1 class="titulo_pagina">Sensores</h1>
 
         <div class="barra_ferramentas">
             <div class="campo_pesquisa">
                 <input type="text" id="input_busca" placeholder="Buscar sensor...">
             </div>
-            <button id="btn_novo_sensor" class="botao botao_primario admin_only oculto">+ NOVO SENSOR</button>
         </div>
 
         <div class="titulo_secao light">LISTAGEM DE SENSORES</div>
@@ -99,7 +46,6 @@ include '../infra/conexao.php';
                         <th>TIPO</th>
                         <th>LOCALIZAÇÃO</th>
                         <th>STATUS</th>
-                        <th id="col_acoes" class="oculto">AÇÕES</th>
                     </tr>
                 </thead>
                 <tbody id="tbody_sensores">
@@ -111,65 +57,7 @@ include '../infra/conexao.php';
             </div>
         </div>
 
-        <div id="aviso_historico" class="aviso_info oculto">
-            NÃO É POSSIVEL EXCLUIR SENSORES COM DADOS HISTÓRICOS
-        </div>
     </main>
 
-    <div id="modal_editar" class="sobreposicao_modal oculto">
-        <div class="caixa_modal">
-            <h3 class="titulo_modal">EDITAR SENSOR</h3>
-            <form id="form_editar">
-                <input type="hidden" id="edit_original_id">
-                <div class="linha_formulario">
-                    <div class="grupo_formulario">
-                        <label for="edit_nome">NOME</label>
-                        <input type="text" id="edit_nome" required>
-                    </div>
-                    <div class="grupo_formulario">
-                        <label for="edit_id">IDENTIFICAÇÃO</label>
-                        <input type="text" id="edit_id" required>
-                    </div>
-                </div>
-                <div class="linha_formulario">
-                    <div class="grupo_formulario">
-                        <label for="edit_tipo">TIPO</label>
-                        <select id="edit_tipo" required>
-                            <option value="">Selecione o tipo</option>
-                            <option value="THERMAL_ARRAY">Thermal Array</option>
-                            <option value="PRESSURE_FLUID">Pressure Fluid</option>
-                            <option value="OPTICAL_LIDAR">Optical Lidar</option>
-                            <option value="HUMIDITY_RES">Humidity Resistive</option>
-                            <option value="GPS">GPS / Localização</option>
-                            <option value="OUTROS">Outros</option>
-                        </select>
-                    </div>
-                    <div class="grupo_formulario">
-                        <label for="edit_localizacao">LOCALIZAÇÃO</label>
-                        <input type="text" id="edit_localizacao" required>
-                    </div>
-                </div>
-                <div class="linha_formulario">
-                    <div class="grupo_formulario">
-                        <label for="edit_status">STATUS</label>
-                        <select id="edit_status">
-                            <option value="Ativo">Ativo</option>
-                            <option value="Em Espera">Em Espera</option>
-                            <option value="Falha">Falha</option>
-                        </select>
-                    </div>
-                    <div class="grupo_formulario grupo_formulario_largo">
-                        <label for="edit_descricao">DESCRIÇÃO</label>
-                        <input type="text" id="edit_descricao">
-                    </div>
-                </div>
-                <div class="botoes_linha">
-                    <button type="submit" class="botao botao_primario">SALVAR</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <script src="../js/sensores_private.js"></script>
 </body>
 </html>

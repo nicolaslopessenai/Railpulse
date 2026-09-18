@@ -10,7 +10,7 @@ include '../infra/auth.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trens - RailPulse</title>
-    <link rel="stylesheet" href="../assets/style/style.css">
+    <link rel="stylesheet" href="../assets/style/style.css?v=2">
 </head>
 <body>
     <nav class="navegacao">
@@ -30,8 +30,62 @@ include '../infra/auth.php';
     </nav>
 
     <main class="conteudo_principal">
+
         <h2 class="titulo_pagina">Trens</h2>
-        <hr class="divider">
+
+        <section id="section_cadastro_trem" class="painel_formulario oculto">
+            <div class="titulo_secao light">CADASTRO / EDIÇÃO DE TREM</div>
+
+            <form id="form_editar" autocomplete="off">
+                <input type="hidden" id="edit_original_id">
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
+                        <label for="edit_nome">NOME</label>
+                        <input type="text" id="edit_nome" required>
+                    </div>
+                    <div class="grupo_formulario">
+                        <label for="edit_modelo">MODELO</label>
+                        <input type="text" id="edit_modelo" required>
+                    </div>
+                </div>
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
+                        <label for="edit_status_operacional">STATUS OPERACIONAL</label>
+                        <select id="edit_status_operacional" required>
+                            <option value="normal">Normal</option>
+                            <option value="alerta">Alerta</option>
+                            <option value="falha">Falha</option>
+                        </select>
+                    </div>
+                    <div class="grupo_formulario">
+                        <label for="edit_id_rota">ROTA</label>
+                        <select id="edit_id_rota" required>
+                            <option value="">Selecione a rota</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
+                        <label for="edit_velocidade_atual">VELOCIDADE ATUAL</label>
+                        <input type="number" id="edit_velocidade_atual" min="0" step="0.01">
+                    </div>
+                    <div class="grupo_formulario">
+                        <label for="edit_latitude">LATITUDE</label>
+                        <input type="number" id="edit_latitude" step="0.0000001">
+                    </div>
+                </div>
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
+                        <label for="edit_longitude">LONGITUDE</label>
+                        <input type="number" id="edit_longitude" step="0.0000001">
+                    </div>
+                </div>
+                <div class="botoes_linha">
+                    <button type="submit" id="btn_salvar_trem" class="botao botao_primario">SALVAR</button>
+                    <button type="button" id="btn_cancelar_trem" class="botao botao_secundario">CANCELAR</button>
+                </div>
+            </form>
+        </section>
 
         <div class="barra_ferramentas">
             <div class="campo_pesquisa">
@@ -61,5 +115,7 @@ include '../infra/auth.php';
             </div>
         </div>
     </main>
+
+    <script src="../js/trens_private.js"></script>
 </body>
 </html>

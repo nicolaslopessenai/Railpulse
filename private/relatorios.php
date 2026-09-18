@@ -39,19 +39,16 @@ include '../infra/auth.php';
             <article class="relatorio_card">
                 <h2>Trens em operação</h2>
                 <p>Resumo da frota e status geral.</p>
-                <strong>42</strong>
             </article>
 
             <article class="relatorio_card">
                 <h2>Rotas ativas</h2>
                 <p>Linhas com movimentação registrada hoje.</p>
-                <strong>18</strong>
             </article>
 
             <article class="relatorio_card">
                 <h2>Alertas</h2>
                 <p>Sensores e falhas pendentes de atenção.</p>
-                <strong>05</strong>
             </article>
         </section>
     </main>

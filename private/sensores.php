@@ -34,7 +34,7 @@ include '../infra/auth.php';
 
         <h1 class="titulo_pagina">Sensores Cadastrados</h1>
 
-        <section id="section_cadastro" class="oculto">
+        <section id="section_cadastro" class="painel_formulario oculto">
             <div class="titulo_secao light">CADASTRO NOVO SENSOR</div>
 
             <form id="form_sensor" autocomplete="off">
@@ -118,11 +118,9 @@ include '../infra/auth.php';
         <div id="aviso_historico" class="aviso_info oculto">
             NÃO É POSSIVEL EXCLUIR SENSORES COM DADOS HISTÓRICOS
         </div>
-    </main>
 
-    <div id="modal_editar" class="sobreposicao_modal oculto">
-        <div class="caixa_modal">
-            <h3 class="titulo_modal">EDITAR SENSOR</h3>
+    <section id="section_edicao_sensor" class="painel_formulario oculto">
+            <div class="titulo_secao light">EDITAR SENSOR</div>
             <form id="form_editar">
                 <input type="hidden" id="edit_original_id">
                 <div class="linha_formulario">
@@ -167,12 +165,14 @@ include '../infra/auth.php';
                         <input type="text" id="edit_descricao">
                     </div>
                 </div>
-                <div class="buttons_row">
+                <div class="botoes_linha">
                     <button type="submit" class="botao botao_primario">SALVAR</button>
+                    <button type="button" id="btn_cancelar_edicao_sensor" class="botao botao_secundario">CANCELAR</button>
                 </div>
             </form>
-        </div>
-    </div>
+    </section>
+
+    </main>
 
     <script src="../js/sensores_private.js"></script>
 </body>

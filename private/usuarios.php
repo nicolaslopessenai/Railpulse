@@ -31,24 +31,25 @@ include '../infra/auth.php';
     </nav>
 
     <main class="conteudo_principal">
-        <h2 class="titulo_pagina">Usuários</h2>
-        <hr class="divider">
 
-        <section id="section_cadastro_usuario" class="oculto">
+        <h1 class="titulo_pagina">Usuários</h1>
+
+        <section id="section_cadastro_usuario" class="painel_formulario oculto">
             <div class="titulo_secao light">CADASTRO NOVO USUÁRIO</div>
 
             <form id="form_usuario" autocomplete="off">
-                <div class="grupo_formulario">
-                    <label for="cad_nome">NOME COMPLETO</label>
-                    <input type="text" id="cad_nome" required>
-                </div>
-
                 <div class="linha_formulario">
+                    <div class="grupo_formulario">
+                        <label for="cad_nome">NOME COMPLETO</label>
+                        <input type="text" id="cad_nome" required>
+                    </div>
                     <div class="grupo_formulario">
                         <label for="cad_matricula">MATRÍCULA</label>
                         <input type="text" id="cad_matricula" maxlength="10" required>
                     </div>
+                </div>
 
+                <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="cad_cargo">CARGO</label>
                         <select id="cad_cargo" required>
@@ -57,16 +58,17 @@ include '../infra/auth.php';
                             <option value="funcionario">Funcionário</option>
                         </select>
                     </div>
+                    <div class="grupo_formulario">
+                        <label for="cad_email">E-MAIL</label>
+                        <input type="email" id="cad_email" required>
+                    </div>
                 </div>
 
-                <div class="grupo_formulario">
-                    <label for="cad_email">E-MAIL</label>
-                    <input type="email" id="cad_email" required>
-                </div>
-
-                <div class="grupo_formulario">
-                    <label for="cad_senha">SENHA</label>
-                    <input type="password" id="cad_senha" required>
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
+                        <label for="cad_senha">SENHA</label>
+                        <input type="password" id="cad_senha" required>
+                    </div>
                 </div>
 
                 <div class="botoes_linha">

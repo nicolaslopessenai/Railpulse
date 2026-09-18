@@ -10,7 +10,7 @@ include '../infra/auth.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rotas - RailPulse</title>
-    <link rel="stylesheet" href="../assets/style/style.css">
+    <link rel="stylesheet" href="../assets/style/style.css?v=2">
 </head>
 <body>
     <nav class="navegacao">
@@ -31,14 +31,46 @@ include '../infra/auth.php';
     </nav>
 
     <main class="conteudo_principal">
+
         <h2 class="titulo_pagina">Rotas</h2>
-        <hr class="divider">
+
+        <section id="section_cadastro_rota" class="painel_formulario oculto">
+            <div class="titulo_secao light">CADASTRO / EDIÇÃO DE ROTA</div>
+
+            <form id="form_rota" autocomplete="off">
+                <input type="hidden" id="edit_original_id">
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
+                        <label for="rota_nome">NOME</label>
+                        <input type="text" id="rota_nome" required>
+                    </div>
+                    <div class="grupo_formulario">
+                        <label for="rota_origem">ORIGEM</label>
+                        <input type="text" id="rota_origem" required>
+                    </div>
+                </div>
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
+                        <label for="rota_destino">DESTINO</label>
+                        <input type="text" id="rota_destino" required>
+                    </div>
+                    <div class="grupo_formulario">
+                        <label for="rota_distancia_km">DISTÂNCIA (KM)</label>
+                        <input type="number" id="rota_distancia_km" min="0.01" step="0.01" required>
+                    </div>
+                </div>
+                <div class="botoes_linha">
+                    <button type="submit" id="btn_salvar_rota" class="botao botao_primario">SALVAR</button>
+                    <button type="button" id="btn_cancelar_rota" class="botao botao_secundario">CANCELAR</button>
+                </div>
+            </form>
+        </section>
 
         <div class="barra_ferramentas">
             <div class="campo_pesquisa">
                 <input type="text" id="input_busca" placeholder="Buscar rota...">
             </div>
-            <button id="btn_nova_rota" class="botao botao_primario admin_only oculto">+NOVA ROTA</button>
+            <button id="btn_nova_rota" class="botao botao_primario admin_only">+ NOVA ROTA</button>
         </div>
 
         <div class="titulo_secao light">LISTAGEM DE ROTAS</div>
@@ -62,5 +94,7 @@ include '../infra/auth.php';
             </div>
         </div>
     </main>
+
+    <script src="../js/rotas_private.js"></script>
 </body>
 </html>

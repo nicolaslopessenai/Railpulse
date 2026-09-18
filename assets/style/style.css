@@ -308,7 +308,7 @@ select {
   margin-bottom: 16px;
 }
 
-/* ===== MODAIS E BOTÕES DE AÇÃO ===== */
+/* ===== SEÇÕES E BOTÕES DE AÇÃO ===== */
 
 .divider {
   border: 0;
@@ -330,15 +330,11 @@ select {
   padding-bottom: 8px;
 }
 
-#section_cadastro,
-.caixa_modal {
+.painel_formulario {
   background: #fff;
   border: 1px solid #dfe5ec;
   border-radius: 10px;
   padding: 24px;
-}
-
-#section_cadastro {
   margin-bottom: 20px;
 }
 
@@ -462,32 +458,19 @@ select {
   background: #f9fbfd;
 }
 
-.mensagem_vazia,
-.sem_registros {
+.mensagem_vazia {
   text-align: center;
   padding: 20px;
   color: #667085;
   font-size: 0.85rem;
 }
 
-.mensagem_sucesso,
-.mensagem_erro,
 .aviso_info {
   margin-top: 12px;
   padding: 10px 12px;
   border-radius: 8px;
   font-size: 0.8rem;
   font-weight: 700;
-}
-
-.mensagem_sucesso {
-  background: #eaf7ee;
-  color: #2e8b57;
-}
-
-.mensagem_erro {
-  background: #fdecec;
-  color: #d9534f;
 }
 
 .aviso_info {
@@ -504,31 +487,51 @@ select {
   margin-bottom: 18px;
 }
 
-.link_botao {
-  display: inline-flex;
+.relatorios_grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 8px;
 }
 
-.sobreposicao_modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 23, 42, 0.45);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 30;
+.relatorio_card {
+  position: relative;
+  min-height: 178px;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #dfe5ec;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(31, 41, 51, 0.05);
+  overflow: hidden;
 }
 
-.caixa_modal {
-  width: min(680px, 92vw);
+.relatorio_card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: #2d97d4;
 }
 
-.titulo_modal {
+.relatorio_card h2 {
+  margin-bottom: 10px;
+  color: #1f2933;
   font-size: 1rem;
-  font-weight: 800;
+}
+
+.relatorio_card p {
+  min-height: 42px;
+  color: #667085;
+  font-size: 0.84rem;
+  line-height: 1.5;
+}
+
+.relatorio_card strong {
+  display: block;
+  margin-top: 18px;
   color: #2d97d4;
-  margin-bottom: 18px;
-  border-bottom: 2px solid #2d97d4;
-  padding-bottom: 8px;
+  font-size: 2rem;
+  line-height: 1;
 }
 
 /* ===== RESPONSIVO ===== */
@@ -557,5 +560,9 @@ select {
   .usuarios_header {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .relatorios_grid {
+    grid-template-columns: 1fr;
   }
 }
