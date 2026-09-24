@@ -1,6 +1,6 @@
 <?php
-include '../infra/conexao.php';
-include '../infra/auth.php';
+include 'conexao.php';
+include 'auth.php';
 
 $nome        = $_POST['snr_nome'];
 $tipo        = $_POST['snr_tipo'];
@@ -11,9 +11,9 @@ $descricao   = $_POST['snr_descricao'];
 $sql = "INSERT INTO sensores (nome, tipo_dado, localizacao, status, descricao) 
         VALUES ('$nome', '$tipo', '$localizacao', '$status', '$descricao')";
 
-if (mysqli_query($conn, $sql)) {
-    header("Location: sensores.php");
+if (mysqli_query($conexao, $sql)) {
+    header("Location: ../private/sensores.php");
 } else {
-    echo "Erro ao cadastrar: " . mysqli_error($conn);
+    echo "Erro ao cadastrar no banco: " . mysqli_error($conexao);
 }
 ?>

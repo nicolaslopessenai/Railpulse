@@ -37,11 +37,11 @@ include '../infra/auth.php';
         <section id="section_cadastro" class="painel_formulario oculto">
             <div class="titulo_secao light">CADASTRO NOVO SENSOR</div>
 
-            <form id="form_sensor" autocomplete="off">
+            <form id="form_sensor" action="../infra/salvar_sensor.php" method="POST" autocomplete="off">
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="snr_nome">NOME DO SENSOR</label>
-                        <input type="text" id="snr_nome">
+                        <input type="text" id="snr_nome" name="snr_nome" required>
                     </div>
                 </div>
                 <div class="linha_formulario">
@@ -49,12 +49,11 @@ include '../infra/auth.php';
                         <label for="snr_tipo">TIPO</label>
                         <select id="snr_tipo" name="snr_tipo" required>
                             <option value="">Selecione o tipo</option>
-                            <option value="THERMAL_ARRAY">Thermal Array</option>
-                            <option value="PRESSURE_FLUID">Pressure Fluid</option>
-                            <option value="OPTICAL_LIDAR">Optical Lidar</option>
-                            <option value="HUMIDITY_RES">Humidity Resistive</option>
-                            <option value="GPS">GPS / Localização</option>
-                            <option value="OUTROS">Outros</option>
+                            <option value="temperatura">temperatura</option>
+                            <option value="falha">falha</option>
+                            <option value="vibracao">vibracao</option>
+                            <option value="pressao">pressao</option>
+                            <option value="umidade">umidade</option>
                         </select>
                     </div>
                     <div class="grupo_formulario">
@@ -66,9 +65,9 @@ include '../infra/auth.php';
                     <div class="grupo_formulario">
                         <label for="snr_status">STATUS INICIAL</label>
                         <select id="snr_status" name="snr_status" required>
-                            <option value="Ativo">Ativo</option>
-                            <option value="Em Espera">Em Espera</option>
-                            <option value="Falha">Falha</option>
+                            <option value="ativo">Ativo</option>
+                            <option value="em_espera">Em Espera</option>
+                            <option value="falha">Falha</option>
                         </select>
                     </div>
                     <div class="grupo_formulario grupo_formulario_largo">
