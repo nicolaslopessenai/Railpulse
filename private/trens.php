@@ -1,6 +1,8 @@
 <?php
 include '../infra/conexao.php';
 include '../infra/auth.php';
+
+$rotas = mysqli_query($conexao, "SELECT id_rota, nome FROM rotas ORDER BY nome");
 ?>
 
 
@@ -36,22 +38,22 @@ include '../infra/auth.php';
         <section id="section_cadastro_trem" class="painel_formulario oculto">
             <div class="titulo_secao light">CADASTRO / EDIÇÃO DE TREM</div>
 
-            <form id="form_editar" autocomplete="off">
+            <form id="form_editar" action="../infra/salvar_trem.php" method="POST" autocomplete="off">
                 <input type="hidden" id="edit_original_id">
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="edit_nome">NOME</label>
-                        <input type="text" id="edit_nome" required>
+                        <input type="text" id="edit_nome" name="trn_nome" required>
                     </div>
                     <div class="grupo_formulario">
                         <label for="edit_modelo">MODELO</label>
-                        <input type="text" id="edit_modelo" required>
+                        <input type="text" id="edit_modelo" name="trn_modelo" required>
                     </div>
                 </div>
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="edit_status_operacional">STATUS OPERACIONAL</label>
-                        <select id="edit_status_operacional" required>
+                        <select id="edit_status_operacional" name="trn_status" required>
                             <option value="normal">Normal</option>
                             <option value="alerta">Alerta</option>
                             <option value="falha">Falha</option>
@@ -59,25 +61,28 @@ include '../infra/auth.php';
                     </div>
                     <div class="grupo_formulario">
                         <label for="edit_id_rota">ROTA</label>
-                        <select id="edit_id_rota" required>
+                        <select id="edit_id_rota" name="trn_id_rota" required>
                             <option value="">Selecione a rota</option>
+                            <?php while ($rota = mysqli_fetch_assoc($rotas)) { ?>
+                                <option value="<?php echo $rota['id_rota']; ?>"><?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?></option>
+                            <?php } ?>
                         </select>
                     </div>
                 </div>
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="edit_velocidade_atual">VELOCIDADE ATUAL</label>
-                        <input type="number" id="edit_velocidade_atual" min="0" step="0.01">
+                        <input type="number" id="edit_velocidade_atual" name="trn_velocidade" min="0" step="0.01">
                     </div>
                     <div class="grupo_formulario">
                         <label for="edit_latitude">LATITUDE</label>
-                        <input type="number" id="edit_latitude" step="0.0000001">
+                        <input type="number" id="edit_latitude" name="trn_latitude" step="0.0000001">
                     </div>
                 </div>
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="edit_longitude">LONGITUDE</label>
-                        <input type="number" id="edit_longitude" step="0.0000001">
+                        <input type="number" id="edit_longitude" name="trn_longitude" step="0.0000001">
                     </div>
                 </div>
                 <div class="botoes_linha">

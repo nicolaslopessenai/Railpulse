@@ -37,26 +37,26 @@ include '../infra/auth.php';
         <section id="section_cadastro_rota" class="painel_formulario oculto">
             <div class="titulo_secao light">CADASTRO / EDIÇÃO DE ROTA</div>
 
-            <form id="form_rota" autocomplete="off">
+            <form id="form_rota" action="../infra/salvar_rota.php" method="POST" autocomplete="off">
                 <input type="hidden" id="edit_original_id">
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="rota_nome">NOME</label>
-                        <input type="text" id="rota_nome" required>
+                        <input type="text" id="rota_nome" name="rta_nome" required>
                     </div>
                     <div class="grupo_formulario">
                         <label for="rota_origem">ORIGEM</label>
-                        <input type="text" id="rota_origem" required>
+                        <input type="text" id="rota_origem" name="rta_origem" required>
                     </div>
                 </div>
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="rota_destino">DESTINO</label>
-                        <input type="text" id="rota_destino" required>
+                        <input type="text" id="rota_destino" name="rta_destino" required>
                     </div>
                     <div class="grupo_formulario">
                         <label for="rota_distancia_km">DISTÂNCIA (KM)</label>
-                        <input type="number" id="rota_distancia_km" min="0.01" step="0.01" required>
+                        <input type="number" id="rota_distancia_km" name="rta_distancia_km" min="0.01" step="0.01" required>
                     </div>
                 </div>
                 <div class="botoes_linha">

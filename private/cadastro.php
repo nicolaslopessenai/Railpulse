@@ -39,22 +39,22 @@ include '../infra/auth.php';
             <div id="mensagem_container"></div>
 
             <div class="titulo_secao light">DADOS USUÁRIOS</div>
-            <form id="form_cadastro">
+            <form id="form_cadastro" action="../infra/salvar_usuario.php" method="POST">
 
                 <div class="grupo_formulario">
                     <label>NOME COMPLETO</label>
-                    <input type="text" id="cad_nome" placeholder="Ex: João da Silva" required>
+                    <input type="text" id="cad_nome" name="usr_nome" placeholder="Ex: João da Silva" required>
                 </div>
 
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label>MATRÍCULA</label>
-                        <input type="text" id="cad_matricula" placeholder="Ex: 4325" maxlength="10" required>
+                        <input type="text" id="cad_matricula" name="usr_matricula" placeholder="Ex: 4325" maxlength="10" required>
                     </div>
 
                     <div class="grupo_formulario">
                         <label class="form_label">CARGO</label>
-                        <select id="cad_cargo" required>
+                        <select id="cad_cargo" name="usr_cargo" required>
                             <option value="">Selecione um cargo</option>
                             <option value="admin">Administrador</option>
                             <option value="funcionario">Funcionário</option>
@@ -64,12 +64,12 @@ include '../infra/auth.php';
 
                 <div class="grupo_formulario">
                     <label>E-MAIL</label>
-                    <input type="email" id="cad_email" placeholder="exemplo@empresa.com.br" required>
+                    <input type="email" id="cad_email" name="usr_email" placeholder="exemplo@empresa.com.br" required>
                 </div>
 
                 <div class="grupo_formulario">
                     <label>SENHA</label>
-                    <input type="password" id="cad_senha" placeholder="Senha do funcionário" required>
+                    <input type="password" id="cad_senha" name="usr_senha" placeholder="Senha do funcionário" required>
                 </div>
 
                 <div class="botoes_linha">

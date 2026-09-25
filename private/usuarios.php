@@ -37,22 +37,22 @@ include '../infra/auth.php';
         <section id="section_cadastro_usuario" class="painel_formulario oculto">
             <div class="titulo_secao light">CADASTRO NOVO USUÁRIO</div>
 
-            <form id="form_usuario" autocomplete="off">
+            <form id="form_usuario" action="../infra/salvar_usuario.php" method="POST" autocomplete="off">
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="cad_nome">NOME COMPLETO</label>
-                        <input type="text" id="cad_nome" required>
+                        <input type="text" id="cad_nome" name="usr_nome" required>
                     </div>
                     <div class="grupo_formulario">
                         <label for="cad_matricula">MATRÍCULA</label>
-                        <input type="text" id="cad_matricula" maxlength="10" required>
+                        <input type="text" id="cad_matricula" name="usr_matricula" maxlength="10" required>
                     </div>
                 </div>
 
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="cad_cargo">CARGO</label>
-                        <select id="cad_cargo" required>
+                        <select id="cad_cargo" name="usr_cargo" required>
                             <option value="">Selecione um cargo</option>
                             <option value="admin">Administrador</option>
                             <option value="funcionario">Funcionário</option>
@@ -60,14 +60,14 @@ include '../infra/auth.php';
                     </div>
                     <div class="grupo_formulario">
                         <label for="cad_email">E-MAIL</label>
-                        <input type="email" id="cad_email" required>
+                        <input type="email" id="cad_email" name="usr_email" required>
                     </div>
                 </div>
 
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="cad_senha">SENHA</label>
-                        <input type="password" id="cad_senha" required>
+                        <input type="password" id="cad_senha" name="usr_senha" required>
                     </div>
                 </div>
 
