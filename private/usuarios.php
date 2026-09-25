@@ -1,6 +1,8 @@
 <?php
 include '../infra/conexao.php';
 include '../infra/auth.php';
+
+$usuarios = mysqli_query($conexao, "SELECT id_usuario, nome, email, matricula, cargo FROM usuarios ORDER BY id_usuario");
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +12,7 @@ include '../infra/auth.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuários - RailPulse</title>
-    <link rel="stylesheet" href="../assets/style/style.css">
+    <link rel="stylesheet" href="../assets/style/style.css?v=4">
 </head>
 
 <body>
@@ -34,10 +36,12 @@ include '../infra/auth.php';
 
         <h1 class="titulo_pagina">Usuários</h1>
 
-        <section id="section_cadastro_usuario" class="painel_formulario oculto">
-            <div class="titulo_secao light">CADASTRO NOVO USUÁRIO</div>
+        <div id="modal_usuario" class="crud_modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_usuario">
+        <section id="section_cadastro_usuario" class="painel_formulario">
+            <div id="titulo_modal_usuario" class="titulo_secao light">CADASTRO / EDIÇÃO DE USUÁRIO</div>
 
             <form id="form_usuario" action="../infra/salvar_usuario.php" method="POST" autocomplete="off">
+            <input type="hidden" id="usr_id" name="usr_id">
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="cad_nome">NOME COMPLETO</label>
@@ -66,8 +70,8 @@ include '../infra/auth.php';
 
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
-                        <label for="cad_senha">SENHA</label>
-                        <input type="password" id="cad_senha" name="usr_senha" required>
+                        <label for="cad_senha">SENHA (VAZIA MANTÉM A ATUAL NA EDIÇÃO)</label>
+                        <input type="password" id="cad_senha" name="usr_senha" data-required-on-create>
                     </div>
                 </div>
 
@@ -77,6 +81,7 @@ include '../infra/auth.php';
                 </div>
             </form>
         </section>
+        </div>
 
         <div class="barra_ferramentas">
             <div class="campo_pesquisa">
@@ -95,15 +100,43 @@ include '../infra/auth.php';
                         <th>NOME</th>
                         <th>EMAIL</th>
                         <th>MATRÍCULA</th>
-                        <th id="col_acoes" class="oculto">AÇÕES</th>
+                        <th>CARGO</th>
+                        <th>AÇÕES</th>
                     </tr>
                 </thead>
-                <tbody id="tabela_usuarios"></tbody>
+                <tbody id="tabela_usuarios">
+                    <?php if (mysqli_num_rows($usuarios) === 0) { ?>
+                        <tr><td colspan="6">Nenhum usuário cadastrado ainda.</td></tr>
+                    <?php } ?>
+                    <?php while ($usuario = mysqli_fetch_assoc($usuarios)) { ?>
+                        <tr>
+                            <td><?php echo (int) $usuario['id_usuario']; ?></td>
+                            <td><?php echo htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($usuario['email'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($usuario['matricula'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($usuario['cargo'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td class="crud_actions">
+                                <button type="button" class="botao botao_secundario crud_edit_button"
+                                    data-id="<?php echo (int) $usuario['id_usuario']; ?>"
+                                    data-nome="<?php echo htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-email="<?php echo htmlspecialchars($usuario['email'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-matricula="<?php echo htmlspecialchars($usuario['matricula'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-cargo="<?php echo htmlspecialchars($usuario['cargo'], ENT_QUOTES, 'UTF-8'); ?>">
+                                    EDITAR
+                                </button>
+                                <form class="crud_delete_form" data-confirm="Excluir este usuário?" action="../infra/excluir_usuario.php" method="POST">
+                                    <input type="hidden" name="id_usuario" value="<?php echo (int) $usuario['id_usuario']; ?>">
+                                    <button type="submit" class="botao botao_secundario">EXCLUIR</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
         </div>
     </main>
 
-    <script src="../js/usuarios_private.js"></script>
+    <script src="../js/usuarios_private.js?v=2"></script>
 </body>
 
 </html>

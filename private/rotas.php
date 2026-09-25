@@ -1,6 +1,8 @@
 <?php
 include '../infra/conexao.php';
 include '../infra/auth.php';
+
+$rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distancia_km FROM rotas ORDER BY id_rota");
 ?>
 
 
@@ -10,7 +12,7 @@ include '../infra/auth.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rotas - RailPulse</title>
-    <link rel="stylesheet" href="../assets/style/style.css?v=2">
+    <link rel="stylesheet" href="../assets/style/style.css?v=4">
 </head>
 <body>
     <nav class="navegacao">
@@ -34,11 +36,12 @@ include '../infra/auth.php';
 
         <h2 class="titulo_pagina">Rotas</h2>
 
-        <section id="section_cadastro_rota" class="painel_formulario oculto">
-            <div class="titulo_secao light">CADASTRO / EDIÇÃO DE ROTA</div>
+        <div id="modal_rota" class="crud_modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_rota">
+        <section id="section_cadastro_rota" class="painel_formulario">
+            <div id="titulo_modal_rota" class="titulo_secao light">CADASTRO / EDIÇÃO DE ROTA</div>
 
             <form id="form_rota" action="../infra/salvar_rota.php" method="POST" autocomplete="off">
-                <input type="hidden" id="edit_original_id">
+            <input type="hidden" id="edit_original_id" name="rta_id_rota">
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="rota_nome">NOME</label>
@@ -65,6 +68,11 @@ include '../infra/auth.php';
                 </div>
             </form>
         </section>
+        </div>
+
+        <?php if (isset($_GET['erro']) && $_GET['erro'] === 'em_uso') { ?>
+            <div class="crud_error">Esta rota está vinculada a trens ou sensores e não pode ser excluída.</div>
+        <?php } ?>
 
         <div class="barra_ferramentas">
             <div class="campo_pesquisa">
@@ -83,18 +91,42 @@ include '../infra/auth.php';
                         <th>NOME</th>
                         <th>ORIGEM</th>
                         <th>DESTINO</th>
-                        <th>STATUS</th>
-                        <th id="col_acoes" class="oculto">AÇÕES</th>
+                        <th>DISTÂNCIA (KM)</th>
+                        <th>AÇÕES</th>
                     </tr>
                 </thead>
-                <tbody id="tbody_rotas"></tbody>
+                <tbody id="tbody_rotas">
+                    <?php if (mysqli_num_rows($rotas) === 0) { ?>
+                        <tr><td colspan="6">Nenhuma rota cadastrada ainda.</td></tr>
+                    <?php } ?>
+                    <?php while ($rota = mysqli_fetch_assoc($rotas)) { ?>
+                        <tr>
+                            <td><?php echo (int) $rota['id_rota']; ?></td>
+                            <td><?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($rota['origem'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($rota['destino'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars((string) $rota['distancia_km'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td class="crud_actions">
+                                <button type="button" class="botao botao_secundario crud_edit_button"
+                                    data-id="<?php echo (int) $rota['id_rota']; ?>"
+                                    data-nome="<?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-origem="<?php echo htmlspecialchars($rota['origem'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-destino="<?php echo htmlspecialchars($rota['destino'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-distancia="<?php echo htmlspecialchars((string) $rota['distancia_km'], ENT_QUOTES, 'UTF-8'); ?>">
+                                    EDITAR
+                                </button>
+                                <form class="crud_delete_form" data-confirm="Excluir esta rota? O banco não permite excluir rotas vinculadas a trens ou sensores." action="../infra/excluir_rota.php" method="POST">
+                                    <input type="hidden" name="id_rota" value="<?php echo (int) $rota['id_rota']; ?>">
+                                    <button type="submit" class="botao botao_secundario">EXCLUIR</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                </tbody>
             </table>
-            <div id="msg_vazio" class="mensagem_vazia oculto">
-                Nenhuma rota cadastrada ainda.
-            </div>
         </div>
     </main>
 
-    <script src="../js/rotas_private.js"></script>
+    <script src="../js/rotas_private.js?v=2"></script>
 </body>
 </html>

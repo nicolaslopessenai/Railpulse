@@ -1,6 +1,10 @@
 <?php
 include '../infra/conexao.php';
 include '../infra/auth.php';
+
+$trens = mysqli_query($conexao, "SELECT id_trem, nome FROM trens ORDER BY nome");
+$rotas = mysqli_query($conexao, "SELECT id_rota, nome FROM rotas ORDER BY nome");
+$sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.localizacao, s.status, s.descricao, s.id_trem, s.id_rota, t.nome AS trem_nome, r.nome AS rota_nome FROM sensores s JOIN trens t ON s.id_trem = t.id_trem JOIN rotas r ON s.id_rota = r.id_rota ORDER BY s.id_sensor");
 ?>
 
 <!DOCTYPE html>
@@ -10,7 +14,7 @@ include '../infra/auth.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sensores - RailPulse</title>
-    <link rel="stylesheet" href="../assets/style/style.css">
+    <link rel="stylesheet" href="../assets/style/style.css?v=4">
 </head>
 
 <body>
@@ -34,10 +38,12 @@ include '../infra/auth.php';
 
         <h1 class="titulo_pagina">Sensores Cadastrados</h1>
 
-        <section id="section_cadastro" class="painel_formulario oculto">
-            <div class="titulo_secao light">CADASTRO NOVO SENSOR</div>
+        <div id="modal_sensor" class="crud_modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_sensor">
+        <section id="section_cadastro" class="painel_formulario">
+            <div id="titulo_modal_sensor" class="titulo_secao light">CADASTRO / EDIÇÃO DE SENSOR</div>
 
             <form id="form_sensor" action="../infra/salvar_sensor.php" method="POST" autocomplete="off">
+                <input type="hidden" id="snr_id_sensor" name="snr_id_sensor">
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="snr_nome">NOME DO SENSOR</label>
@@ -49,6 +55,7 @@ include '../infra/auth.php';
                         <label for="snr_tipo">TIPO</label>
                         <select id="snr_tipo" name="snr_tipo" required>
                             <option value="">Selecione o tipo</option>
+                            <option value="velocidade">velocidade</option>
                             <option value="temperatura">temperatura</option>
                             <option value="falha">falha</option>
                             <option value="vibracao">vibracao</option>
@@ -59,6 +66,26 @@ include '../infra/auth.php';
                     <div class="grupo_formulario">
                         <label for="snr_localizacao">LOCALIZAÇÃO</label>
                         <input type="text" id="snr_localizacao" name="snr_localizacao" required>
+                    </div>
+                </div>
+                <div class="linha_formulario">
+                    <div class="grupo_formulario">
+                        <label for="snr_id_trem">TREM</label>
+                        <select id="snr_id_trem" name="snr_id_trem" required>
+                            <option value="">Selecione o trem</option>
+                            <?php while ($trem = mysqli_fetch_assoc($trens)) { ?>
+                                <option value="<?php echo $trem['id_trem']; ?>"><?php echo htmlspecialchars($trem['nome'], ENT_QUOTES, 'UTF-8'); ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="grupo_formulario">
+                        <label for="snr_id_rota">ROTA</label>
+                        <select id="snr_id_rota" name="snr_id_rota" required>
+                            <option value="">Selecione a rota</option>
+                            <?php while ($rota = mysqli_fetch_assoc($rotas)) { ?>
+                                <option value="<?php echo $rota['id_rota']; ?>"><?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?></option>
+                            <?php } ?>
+                        </select>
                     </div>
                 </div>
                 <div class="linha_formulario">
@@ -80,9 +107,8 @@ include '../infra/auth.php';
                     <button type="button" class="botao botao_secundario" id="btn_cancelar_sensor">CANCELAR</button>
                 </div>
             </form>
-
-            <div id="msg_sensor"></div>
         </section>
+        </div>
 
         <div class="barra_ferramentas">
             <div class="campo_pesquisa">
@@ -102,78 +128,50 @@ include '../infra/auth.php';
                         <th>TIPO</th>
                         <th>LOCALIZAÇÃO</th>
                         <th>STATUS</th>
-                        <th id="col_acoes" class="oculto">AÇÕES</th>
+                        <th>TREM</th>
+                        <th>ROTA</th>
+                        <th>AÇÕES</th>
                     </tr>
                 </thead>
                 <tbody id="tbody_sensores">
+                    <?php if (mysqli_num_rows($sensores) === 0) { ?>
+                        <tr><td colspan="8">Nenhum sensor cadastrado ainda.</td></tr>
+                    <?php } ?>
+                    <?php while ($sensor = mysqli_fetch_assoc($sensores)) { ?>
+                        <tr>
+                            <td><?php echo (int) $sensor['id_sensor']; ?></td>
+                            <td><?php echo htmlspecialchars($sensor['nome'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($sensor['tipo_dado'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($sensor['localizacao'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($sensor['status'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($sensor['trem_nome'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($sensor['rota_nome'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td class="crud_actions">
+                                <button type="button" class="botao botao_secundario crud_edit_button"
+                                    data-id="<?php echo (int) $sensor['id_sensor']; ?>"
+                                    data-nome="<?php echo htmlspecialchars($sensor['nome'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-tipo="<?php echo htmlspecialchars($sensor['tipo_dado'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-localizacao="<?php echo htmlspecialchars($sensor['localizacao'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-status="<?php echo htmlspecialchars($sensor['status'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-descricao="<?php echo htmlspecialchars((string) $sensor['descricao'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-trem="<?php echo (int) $sensor['id_trem']; ?>"
+                                    data-rota="<?php echo (int) $sensor['id_rota']; ?>">
+                                    EDITAR
+                                </button>
+                                <form class="crud_delete_form" data-confirm="Excluir este sensor e todos os dados históricos dele?" action="../infra/excluir_sensor.php" method="POST">
+                                    <input type="hidden" name="id_sensor" value="<?php echo (int) $sensor['id_sensor']; ?>">
+                                    <button type="submit" class="botao botao_secundario">EXCLUIR</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
-
-            <div id="msg_vazio" class="mensagem_vazia oculto">
-                Nenhum sensor cadastrado ainda.
-            </div>
         </div>
-
-        <div id="aviso_historico" class="aviso_info oculto">
-            NÃO É POSSIVEL EXCLUIR SENSORES COM DADOS HISTÓRICOS
-        </div>
-
-    <section id="section_edicao_sensor" class="painel_formulario oculto">
-            <div class="titulo_secao light">EDITAR SENSOR</div>
-            <form id="form_editar">
-                <input type="hidden" id="edit_original_id">
-                <div class="linha_formulario">
-                    <div class="grupo_formulario">
-                        <label for="edit_nome">NOME</label>
-                        <input type="text" id="edit_nome" required>
-                    </div>
-                    <div class="grupo_formulario">
-                        <label for="edit_id">IDENTIFICAÇÃO</label>
-                        <input type="text" id="edit_id" required>
-                    </div>
-                </div>
-                <div class="linha_formulario">
-                    <div class="grupo_formulario">
-                        <label for="edit_tipo">TIPO</label>
-                        <select id="edit_tipo" required>
-                            <option value="">Selecione o tipo</option>
-                            <option value="THERMAL_ARRAY">Thermal Array</option>
-                            <option value="PRESSURE_FLUID">Pressure Fluid</option>
-                            <option value="OPTICAL_LIDAR">Optical Lidar</option>
-                            <option value="HUMIDITY_RES">Humidity Resistive</option>
-                            <option value="GPS">GPS / Localização</option>
-                            <option value="OUTROS">Outros</option>
-                        </select>
-                    </div>
-                    <div class="grupo_formulario">
-                        <label for="edit_localizacao">LOCALIZAÇÃO</label>
-                        <input type="text" id="edit_localizacao" required>
-                    </div>
-                </div>
-                <div class="linha_formulario">
-                    <div class="grupo_formulario">
-                        <label for="edit_status">STATUS</label>
-                        <select id="edit_status">
-                            <option value="Ativo">Ativo</option>
-                            <option value="Em Espera">Em Espera</option>
-                            <option value="Falha">Falha</option>
-                        </select>
-                    </div>
-                    <div class="grupo_formulario grupo_formulario_largo">
-                        <label for="edit_descricao">DESCRIÇÃO</label>
-                        <input type="text" id="edit_descricao">
-                    </div>
-                </div>
-                <div class="botoes_linha">
-                    <button type="submit" class="botao botao_primario">SALVAR</button>
-                    <button type="button" id="btn_cancelar_edicao_sensor" class="botao botao_secundario">CANCELAR</button>
-                </div>
-            </form>
-    </section>
 
     </main>
 
-    <script src="../js/sensores_private.js"></script>
+    <script src="../js/sensores_private.js?v=2"></script>
 </body>
 
 </html>

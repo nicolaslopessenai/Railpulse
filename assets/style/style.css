@@ -338,6 +338,51 @@ select {
   margin-bottom: 20px;
 }
 
+.crud_modal {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(10, 16, 24, 0.82);
+}
+
+.crud_modal .painel_formulario {
+  width: min(760px, 100%);
+  max-height: 90vh;
+  margin: 0;
+  overflow-y: auto;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+}
+
+.crud_actions {
+  white-space: nowrap;
+}
+
+.crud_delete_form {
+  display: inline;
+}
+
+.crud_error {
+  margin: 12px 0;
+  padding: 12px 14px;
+  border-left: 4px solid #b42318;
+  background: #fff1f0;
+  color: #7a271a;
+}
+
+@media (max-width: 600px) {
+  .crud_modal {
+    padding: 10px;
+  }
+
+  .crud_actions .botao {
+    padding: 9px 10px;
+  }
+}
+
 .linha_formulario {
   display: flex;
   gap: 20px;

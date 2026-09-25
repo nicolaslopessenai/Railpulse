@@ -3,6 +3,7 @@ include '../infra/conexao.php';
 include '../infra/auth.php';
 
 $rotas = mysqli_query($conexao, "SELECT id_rota, nome FROM rotas ORDER BY nome");
+$trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operacional, velocidade_atual, latitude, longitude, id_rota FROM trens ORDER BY id_trem");
 ?>
 
 
@@ -12,7 +13,7 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome FROM rotas ORDER BY nome")
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trens - RailPulse</title>
-    <link rel="stylesheet" href="../assets/style/style.css?v=2">
+    <link rel="stylesheet" href="../assets/style/style.css?v=4">
 </head>
 <body>
     <nav class="navegacao">
@@ -35,11 +36,12 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome FROM rotas ORDER BY nome")
 
         <h2 class="titulo_pagina">Trens</h2>
 
-        <section id="section_cadastro_trem" class="painel_formulario oculto">
-            <div class="titulo_secao light">CADASTRO / EDIÇÃO DE TREM</div>
+        <div id="modal_trem" class="crud_modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_trem">
+        <section id="section_cadastro_trem" class="painel_formulario">
+            <div id="titulo_modal_trem" class="titulo_secao light">CADASTRO / EDIÇÃO DE TREM</div>
 
             <form id="form_editar" action="../infra/salvar_trem.php" method="POST" autocomplete="off">
-                <input type="hidden" id="edit_original_id">
+            <input type="hidden" id="edit_original_id" name="trn_id_trem">
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="edit_nome">NOME</label>
@@ -72,17 +74,17 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome FROM rotas ORDER BY nome")
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="edit_velocidade_atual">VELOCIDADE ATUAL</label>
-                        <input type="number" id="edit_velocidade_atual" name="trn_velocidade" min="0" step="0.01">
+                        <input type="number" id="edit_velocidade_atual" name="trn_velocidade" min="0" step="0.01" required>
                     </div>
                     <div class="grupo_formulario">
                         <label for="edit_latitude">LATITUDE</label>
-                        <input type="number" id="edit_latitude" name="trn_latitude" step="0.0000001">
+                        <input type="number" id="edit_latitude" name="trn_latitude" step="0.0000001" required>
                     </div>
                 </div>
                 <div class="linha_formulario">
                     <div class="grupo_formulario">
                         <label for="edit_longitude">LONGITUDE</label>
-                        <input type="number" id="edit_longitude" name="trn_longitude" step="0.0000001">
+                        <input type="number" id="edit_longitude" name="trn_longitude" step="0.0000001" required>
                     </div>
                 </div>
                 <div class="botoes_linha">
@@ -91,6 +93,7 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome FROM rotas ORDER BY nome")
                 </div>
             </form>
         </section>
+        </div>
 
         <div class="barra_ferramentas">
             <div class="campo_pesquisa">
@@ -109,18 +112,43 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome FROM rotas ORDER BY nome")
                         <th>NOME</th>
                         <th>MODELO</th>
                         <th>STATUS</th>
-                        <th id="col_acoes" class="oculto">AÇÕES</th>
+                        <th id="col_acoes">AÇÕES</th>
                     </tr>
                 </thead>
                 <tbody id="tbody_trens">
+                    <?php if (mysqli_num_rows($trens) === 0) { ?>
+                        <tr><td colspan="5">Nenhum trem cadastrado ainda.</td></tr>
+                    <?php } ?>
+                    <?php while ($trem = mysqli_fetch_assoc($trens)) { ?>
+                        <tr>
+                            <td><?php echo (int) $trem['id_trem']; ?></td>
+                            <td><?php echo htmlspecialchars($trem['nome'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($trem['modelo'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($trem['status_operacional'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td class="crud_actions">
+                                <button type="button" class="botao botao_secundario crud_edit_button"
+                                    data-id="<?php echo (int) $trem['id_trem']; ?>"
+                                    data-nome="<?php echo htmlspecialchars($trem['nome'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-modelo="<?php echo htmlspecialchars($trem['modelo'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-status="<?php echo htmlspecialchars($trem['status_operacional'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-rota="<?php echo (int) $trem['id_rota']; ?>"
+                                    data-velocidade="<?php echo htmlspecialchars((string) $trem['velocidade_atual'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-latitude="<?php echo htmlspecialchars((string) $trem['latitude'], ENT_QUOTES, 'UTF-8'); ?>"
+                                    data-longitude="<?php echo htmlspecialchars((string) $trem['longitude'], ENT_QUOTES, 'UTF-8'); ?>">
+                                    EDITAR
+                                </button>
+                                <form class="crud_delete_form" data-confirm="Excluir este trem, os sensores vinculados e os dados desses sensores?" action="../infra/excluir_trem.php" method="POST">
+                                    <input type="hidden" name="id_trem" value="<?php echo (int) $trem['id_trem']; ?>">
+                                    <button type="submit" class="botao botao_secundario">EXCLUIR</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
-            <div id="msg_vazio" class="mensagem_vazia oculto">
-                Nenhum trem cadastrado ainda.
-            </div>
         </div>
     </main>
 
-    <script src="../js/trens_private.js"></script>
+    <script src="../js/trens_private.js?v=3"></script>
 </body>
 </html>
