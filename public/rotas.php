@@ -21,7 +21,7 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distanci
                 <div class="paginas"><a href="sensores.html">SENSORES</a></div>
                 <div class="paginas"><a href="trens.html">TRENS</a></div>
                 <div class="paginas"><a href="rotas.html" class="active">ROTAS</a></div>
-                <div class="paginas"><a href="relatorios.html">RELATÓRIOS</a></div>
+                <div class="paginas"><a href="relatorios.php">RELATÓRIOS</a></div>
                 <div class="barra_topo_info">
                     <span id="info_matricula" class="matricula_topo"></span>
                     <a href="../infra/logout.php" class="paginas">SAIR</a>
