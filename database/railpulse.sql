@@ -133,4 +133,4 @@ INSERT INTO usuarios (nome, email, senha, matricula, cargo) VALUES
 ('Nicolas Lopes',        'nicolas@empresa.com','senac123', '0002', 'admin'),
 ('Arthur Vieira',        'arthur@empresa.com', 'senac123', '0003', 'funcionario'),
 ('Gabriel Ostrovski',    'gabriel@empresa.com','senac123', '0004', 'funcionario'),
-('Gustavo Miquelute',    'gustavo@empresa.com','senac123', '0005', 'funcionario');
+('Gustavo Miquelute',    'mk@gmail.com','1234', '0011', 'admin');
