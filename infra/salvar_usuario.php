@@ -2,6 +2,8 @@
 include 'conexao.php';
 include 'auth.php';
 
+
+# Recupera os dados do formulário
 $nome      = $_POST['usr_nome'];
 $email     = $_POST['usr_email'];
 $senha     = $_POST['usr_senha'];
