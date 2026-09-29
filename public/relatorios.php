@@ -4,12 +4,14 @@ include '../infra/conexao.php';
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relatórios - RailPulse</title>
     <link rel="stylesheet" href="../assets/style/style.css">
 </head>
+
 <body>
     <nav class="navegacao">
         <div class="container_menu">
@@ -27,29 +29,34 @@ include '../infra/conexao.php';
     </nav>
 
     <main class="conteudo_principal">
-        <h2 class="titulo_pagina">RELATÓRIOS</h2>
-        <hr class="divider">
+        <div class="usuarios_header">
+            <h1 class="titulo_pagina">Relatórios</h1>
+        </div>
 
-        <div class="titulo_secao light">LISTAGEM DE RELATÓRIOS</div>
-
-        <div class="container_tabela">
-            <table class="tabela" >
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>TÍTULO</th>
-                        <th>DATA</th>
-                        <th>TIPO</th>
-                        <th>STATUS</th>
-                    </tr>
-                </thead>
-                <tbody id="tbody_relatorios">
-                </tbody>
-            </table>
-            <div id="msg_vazio" class="mensagem_vazia oculto">
-                Nenhum relatório disponível ainda.
+        <div class="barra_ferramentas">
+            <div class="campo_pesquisa">
+                <input type="search" id="input_busca" placeholder="Buscar relatório..." aria-label="Buscar relatório">
             </div>
         </div>
+
+        <section class="relatorios_grid">
+            <article class="relatorio_card">
+                <h2>Trens em operação</h2>
+                <p>Resumo da frota e status geral.</p>
+            </article>
+
+            <article class="relatorio_card">
+                <h2>Rotas ativas</h2>
+                <p>Linhas com movimentação registrada hoje.</p>
+            </article>
+
+            <article class="relatorio_card">
+                <h2>Alertas</h2>
+                <p>Sensores e falhas pendentes de atenção.</p>
+            </article>
+        </section>
     </main>
+
 </body>
+
 </html>

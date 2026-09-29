@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '../infra/conexao.php';
 ?>
 
@@ -28,7 +29,7 @@ include '../infra/conexao.php';
     </nav>
 
     <main class="conteudo_principal">
-        <h2 class="titulo_pagina" id="boas_vindas">Bem-vindo</h2>
+        <h2 class="titulo_pagina" id="boas_vindas">Bem-vindo <?php echo htmlspecialchars($_SESSION['nome'] ?? '', ENT_QUOTES, 'UTF-8'); ?></h2>
         <hr class="divider"><br>
 
         <div class="titulo_secao light">RASTREAMENTO DE LOCALIZAÇÃO</div>

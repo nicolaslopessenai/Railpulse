@@ -1,15 +1,18 @@
 <?php
 include '../infra/conexao.php';
-?>
 
+$trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operacional FROM trens ORDER BY id_trem");
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trens - RailPulse</title>
-    <link rel="stylesheet" href="../assets/style/style.css">
+    <link rel="stylesheet" href="../assets/style/style.css?v=4">
 </head>
+
 <body>
     <nav class="navegacao">
         <div class="container_menu">
@@ -27,12 +30,11 @@ include '../infra/conexao.php';
     </nav>
 
     <main class="conteudo_principal">
-        <h2 class="titulo_pagina">TRENS</h2>
-        <hr class="divider">
+        <h1 class="titulo_pagina">Trens</h1>
 
         <div class="barra_ferramentas">
             <div class="campo_pesquisa">
-                <input type="text" id="input_busca" placeholder="Buscar trem...">
+                <input type="search" id="input_busca" placeholder="Buscar trem..." aria-label="Buscar trem">
             </div>
         </div>
 
@@ -46,17 +48,25 @@ include '../infra/conexao.php';
                         <th>NOME</th>
                         <th>MODELO</th>
                         <th>STATUS</th>
-                        <th id="col_acoes" class="oculto">AÇÕES</th>
                     </tr>
                 </thead>
-                <tbody id="tbody_trens">
+                <tbody>
+                    <?php if (mysqli_num_rows($trens) === 0) { ?>
+                        <tr><td colspan="4">Nenhum trem cadastrado ainda.</td></tr>
+                    <?php } ?>
+                    <?php while ($trem = mysqli_fetch_assoc($trens)) { ?>
+                        <tr>
+                            <td><?php echo (int) $trem['id_trem']; ?></td>
+                            <td><?php echo htmlspecialchars($trem['nome'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($trem['modelo'], ENT_QUOTES, 'UTF-8'); ?></td>
+                            <td><?php echo htmlspecialchars($trem['status_operacional'], ENT_QUOTES, 'UTF-8'); ?></td>
+                        </tr>
+                    <?php } ?>
                 </tbody>
             </table>
-            <div id="msg_vazio" class="mensagem_vazia oculto">
-                Nenhum trem cadastrado ainda.
-            </div>
         </div>
     </main>
-
+    <script src="../js/trens.public.js?v=1"></script>
 </body>
+
 </html>
