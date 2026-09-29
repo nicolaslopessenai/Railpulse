@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
       usr_id.value = "";
       cad_senha.required = true;
       modal_usuario.classList.remove("oculto");
+      document.body.classList.add("modal-open");
     });
   }
 
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       modal_usuario.classList.add("oculto");
       form_usuario.reset();
       cad_senha.required = false;
+      document.body.classList.remove("modal-open");
     });
   }
 
@@ -32,7 +34,8 @@ document.addEventListener("DOMContentLoaded", () => {
         usr_id.value = btn_editar.dataset.id;
         document.getElementById("cad_nome").value = btn_editar.dataset.nome;
         document.getElementById("cad_email").value = btn_editar.dataset.email;
-        document.getElementById("cad_matricula").value = btn_editar.dataset.matricula;
+        document.getElementById("cad_matricula").value =
+          btn_editar.dataset.matricula;
         document.getElementById("cad_cargo").value = btn_editar.dataset.cargo;
         cad_senha.required = false;
         modal_usuario.classList.remove("oculto");
@@ -51,12 +54,14 @@ document.addEventListener("DOMContentLoaded", () => {
     modal_usuario.addEventListener("click", (event) => {
       if (event.target === modal_usuario) {
         modal_usuario.classList.add("oculto");
+        document.body.classList.remove("modal-open");
       }
     });
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
         modal_usuario.classList.add("oculto");
+        document.body.classList.remove("modal-open");
       }
     });
   }

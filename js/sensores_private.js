@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       form_sensor.reset();
       snr_id_sensor.value = "";
       modal_sensor.classList.remove("oculto");
+      document.body.classList.add("modal-open");
     });
   }
 
@@ -18,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn_cancelar_sensor.addEventListener("click", () => {
       modal_sensor.classList.add("oculto");
       form_sensor.reset();
+      document.body.classList.remove("modal-open");
     });
   }
 
@@ -28,9 +30,11 @@ document.addEventListener("DOMContentLoaded", () => {
         snr_id_sensor.value = btn_editar.dataset.id;
         document.getElementById("snr_nome").value = btn_editar.dataset.nome;
         document.getElementById("snr_tipo").value = btn_editar.dataset.tipo;
-        document.getElementById("snr_localizacao").value = btn_editar.dataset.localizacao;
+        document.getElementById("snr_localizacao").value =
+          btn_editar.dataset.localizacao;
         document.getElementById("snr_status").value = btn_editar.dataset.status;
-        document.getElementById("snr_descricao").value = btn_editar.dataset.descricao;
+        document.getElementById("snr_descricao").value =
+          btn_editar.dataset.descricao;
         document.getElementById("snr_id_trem").value = btn_editar.dataset.trem;
         document.getElementById("snr_id_rota").value = btn_editar.dataset.rota;
         modal_sensor.classList.remove("oculto");
@@ -49,12 +53,14 @@ document.addEventListener("DOMContentLoaded", () => {
     modal_sensor.addEventListener("click", (event) => {
       if (event.target === modal_sensor) {
         modal_sensor.classList.add("oculto");
+        document.body.classList.remove("modal-open");
       }
     });
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
         modal_sensor.classList.add("oculto");
+        document.body.classList.remove("modal-open");
       }
     });
   }

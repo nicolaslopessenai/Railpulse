@@ -3,87 +3,91 @@ include '../infra/conexao.php';
 include '../infra/auth.php';
 ?>
 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Usuários - RailPulse</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../assets/style/style.css">
 </head>
-
 <body>
-
-        <nav class="navegacao">
-            <div class="container_menu">
-                <div class="logo">Rail<span>Pulse</span></div>
-                <div class="paginas"><a href="dashboard.php" >PAINEL</a></div>
-                <div class="paginas"><a href="sensores.php">SENSORES</a></div>
-                <div class="paginas"><a href="trens.php">TRENS</a></div>
-                <div class="paginas"><a href="rotas.php">ROTAS</a></div>
-                <div class="paginas"><a href="relatorios.php">RELATÓRIOS</a></div>
-                <div class="paginas"><a href="usuarios.php" class="active">USUÁRIOS</a></div>
-                <div class="barra_topo_info">
-                    <span id="info_matricula" class="matricula_topo"></span>
-                    <a href="../index.php" class="paginas">SAIR</a>
+    <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm sticky-top">
+        <div class="container-fluid px-4">
+            <a class="navbar-brand fw-bold fs-4" href="../index.php">Rail<span class="text-primary">Pulse</span></a>
+            <div class="collapse navbar-collapse show">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="dashboard.php">Painel</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sensores.php">Sensores</a></li>
+                    <li class="nav-item"><a class="nav-link" href="trens.php">Trens</a></li>
+                    <li class="nav-item"><a class="nav-link" href="rotas.php">Rotas</a></li>
+                    <li class="nav-item"><a class="nav-link" href="relatorios.php">Relatórios</a></li>
+                    <li class="nav-item"><a class="nav-link active fw-semibold" href="usuarios.php">Usuários</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <span id="info_matricula" class="badge badge-soft rounded-pill px-3 py-2"></span>
+                    <a href="../index.php" class="btn btn-outline-secondary btn-sm">Sair</a>
                 </div>
-
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main class="conteudo_principal">
-            <h2 class="titulo_pagina">SISTEMA DE CADASTROS - USUÁRIOS</h2>
+    <main class="container py-4">
+        <h1 class="h3 fw-bold mb-4">Sistema de cadastros - Usuários</h1>
 
-            <div id="mensagem_container"></div>
+        <div id="mensagem_container"></div>
 
-            <div class="titulo_secao light">DADOS USUÁRIOS</div>
-            <form id="form_cadastro" action="../infra/salvar_usuario.php" method="POST">
-
-                <div class="grupo_formulario">
-                    <label>NOME COMPLETO</label>
-                    <input type="text" id="cad_nome" name="usr_nome" placeholder="Ex: João da Silva" required>
-                </div>
-
-                <div class="linha_formulario">
-                    <div class="grupo_formulario">
-                        <label>MATRÍCULA</label>
-                        <input type="text" id="cad_matricula" name="usr_matricula" placeholder="Ex: 4325" maxlength="10" required>
+        <div class="card card-soft border-0">
+            <div class="card-body p-4">
+                <h2 class="h5 fw-bold text-uppercase text-secondary mb-3">Dados do usuário</h2>
+                <form id="form_cadastro" action="../infra/salvar_usuario.php" method="POST">
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-12">
+                            <label class="form-label text-uppercase small fw-semibold text-secondary">Nome completo</label>
+                            <input type="text" class="form-control" id="cad_nome" name="usr_nome" placeholder="Ex: João da Silva" required>
+                        </div>
                     </div>
 
-                    <div class="grupo_formulario">
-                        <label class="form_label">CARGO</label>
-                        <select id="cad_cargo" name="usr_cargo" required>
-                            <option value="">Selecione um cargo</option>
-                            <option value="admin">Administrador</option>
-                            <option value="funcionario">Funcionário</option>
-                        </select>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-uppercase small fw-semibold text-secondary">Matrícula</label>
+                            <input type="text" class="form-control" id="cad_matricula" name="usr_matricula" placeholder="Ex: 4325" maxlength="10" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-uppercase small fw-semibold text-secondary">Cargo</label>
+                            <select class="form-select" id="cad_cargo" name="usr_cargo" required>
+                                <option value="">Selecione um cargo</option>
+                                <option value="admin">Administrador</option>
+                                <option value="funcionario">Funcionário</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="grupo_formulario">
-                    <label>E-MAIL</label>
-                    <input type="email" id="cad_email" name="usr_email" placeholder="exemplo@empresa.com.br" required>
-                </div>
+                    <div class="row g-3 mb-3">
+                        <div class="col-md-12">
+                            <label class="form-label text-uppercase small fw-semibold text-secondary">E-mail</label>
+                            <input type="email" class="form-control" id="cad_email" name="usr_email" placeholder="exemplo@empresa.com.br" required>
+                        </div>
+                    </div>
 
-                <div class="grupo_formulario">
-                    <label>SENHA</label>
-                    <input type="password" id="cad_senha" name="usr_senha" placeholder="Senha do funcionário" required>
-                </div>
+                    <div class="row g-3 mb-4">
+                        <div class="col-md-12">
+                            <label class="form-label text-uppercase small fw-semibold text-secondary">Senha</label>
+                            <input type="password" class="form-control" id="cad_senha" name="usr_senha" placeholder="Senha do funcionário" required>
+                        </div>
+                    </div>
 
-                <div class="botoes_linha">
-                    <button type="submit" class="botao botao_primario" id="btn_cadastrar">CADASTRAR NOVO</button>
-                </div>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <button type="submit" class="btn btn-primary" id="btn_cadastrar">Cadastrar novo</button>
+                        <a href="usuarios.php" class="btn btn-outline-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
 
-                <div class="paginas"><a href="usuarios.php">Cancelar</a></div>
-            </form>
-            
-        </main>
-    </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../script/cadastro.js"></script>
-
 </body>
-
 </html>

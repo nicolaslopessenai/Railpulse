@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       form_rota.reset();
       edit_original_id.value = "";
       modal_rota.classList.remove("oculto");
+      document.body.classList.add("modal-open");
     });
   }
 
@@ -18,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn_cancelar_rota.addEventListener("click", () => {
       modal_rota.classList.add("oculto");
       form_rota.reset();
+      document.body.classList.remove("modal-open");
     });
   }
 
@@ -27,9 +29,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (btn_editar) {
         edit_original_id.value = btn_editar.dataset.id;
         document.getElementById("rota_nome").value = btn_editar.dataset.nome;
-        document.getElementById("rota_origem").value = btn_editar.dataset.origem;
-        document.getElementById("rota_destino").value = btn_editar.dataset.destino;
-        document.getElementById("rota_distancia_km").value = btn_editar.dataset.distancia;
+        document.getElementById("rota_origem").value =
+          btn_editar.dataset.origem;
+        document.getElementById("rota_destino").value =
+          btn_editar.dataset.destino;
+        document.getElementById("rota_distancia_km").value =
+          btn_editar.dataset.distancia;
         modal_rota.classList.remove("oculto");
       }
     });
@@ -46,12 +51,14 @@ document.addEventListener("DOMContentLoaded", () => {
     modal_rota.addEventListener("click", (event) => {
       if (event.target === modal_rota) {
         modal_rota.classList.add("oculto");
+        document.body.classList.remove("modal-open");
       }
     });
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
         modal_rota.classList.add("oculto");
+        document.body.classList.remove("modal-open");
       }
     });
   }

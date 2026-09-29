@@ -2,71 +2,82 @@
 include 'infra/conexao.php';
 ?>
 
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RailPulse</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/style/style.css">
 </head>
-<body class="corpo_inicial">
-    
-    <nav class="navegacao">
-        <div class="container_menu">
-            <div class="logo">Rail<span>Pulse</span></div>
-            <div class="botoes_topo">
-                <a href="public/login.php" class="link_entrar">ENTRAR</a>
+<body>
+    <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold fs-3" href="index.php">Rail<span class="text-primary">Pulse</span></a>
+            <div class="ms-auto">
+                <a class="btn btn-primary px-4" href="public/login.php">Entrar</a>
             </div>
         </div>
     </nav>
 
-    <header class="banner">
+    <header class="bg-white border-bottom py-5">
         <div class="container">
-            <div class="conteudo_banner">
-                <span class="etiqueta">SISTEMA INTELIGENTE</span>
-                <h1 class="titulo_principal">Monitoramento de Precisão para Ferrovias</h1>
-                <p class="texto_apoio">Transformamos dados brutos de sensores IoT em decisões inteligentes para aumentar a segurança e eficiência da sua operação.</p>
-                <div class="acoes">
-                    <a href="#solucoes" class="botao botao_primario">CONHECER SOLUÇÃO</a>
+            <div class="row align-items-center g-5">
+                <div class="col-lg-7">
+                    <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 text-uppercase">Sistema inteligente</span>
+                    <h1 class="display-5 fw-bold mt-3 mb-3">Monitoramento de precisão para ferrovias</h1>
+                    <p class="lead text-secondary mb-4">Dados de sensores em tempo real para melhorar segurança, operação e tomada de decisão.</p>
+                    <a href="#solucoes" class="btn btn-primary btn-lg px-4">Conhecer solução</a>
                 </div>
             </div>
         </div>
     </header>
 
-    <section id="solucoes" class="recursos">
+    <section id="solucoes" class="py-5">
         <div class="container">
-            <div class="titulo_secao light">O QUE OFERECEMOS</div>
-            <div class="grade_recursos">
-                <div class="cartao">
-                    <div class="numero">01</div>
-                    <h3>Rastreamento</h3>
-                    <p>Captura de velocidade, localização e consumo em tempo real por meio de sensores nos trilhos e locomotivas.</p>
+            <div class="text-uppercase small fw-bold text-secondary mb-4">O que oferecemos</div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 card-soft border-0">
+                        <div class="card-body p-4">
+                            <div class="fs-3 fw-bold text-primary mb-3">01</div>
+                            <h3 class="h5 fw-bold mb-2">Rastreamento</h3>
+                            <p class="text-secondary mb-0">Acompanhamento de velocidade, localização e operação em tempo real.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="cartao">
-                    <div class="numero">02</div>
-                    <h3>Segurança</h3>
-                    <p>Detecção antecipada de falhas e manutenção preditiva baseada em padrões de dados operacionais.</p>
+                <div class="col-md-4">
+                    <div class="card h-100 card-soft border-0">
+                        <div class="card-body p-4">
+                            <div class="fs-3 fw-bold text-primary mb-3">02</div>
+                            <h3 class="h5 fw-bold mb-2">Segurança</h3>
+                            <p class="text-secondary mb-0">Monitoramento de falhas e alertas para agir antes que o problema se agrave.</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="cartao">
-                    <div class="numero">03</div>
-                    <h3>Gestão</h3>
-                    <p>Controle de acesso seguro, geração de relatórios detalhados e gráficos interativos para gestores.</p>
+                <div class="col-md-4">
+                    <div class="card h-100 card-soft border-0">
+                        <div class="card-body p-4">
+                            <div class="fs-3 fw-bold text-primary mb-3">03</div>
+                            <h3 class="h5 fw-bold mb-2">Gestão</h3>
+                            <p class="text-secondary mb-0">Relatórios claros e organização de rotas, trens e sensores em um só painel.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="rodape">
+    <footer class="bg-white border-top py-4 mt-5">
         <div class="container">
-            <div class="conteudo_rodape">
-                <div class="info_projeto">
-                    <p><strong>Projeto RailPulse</strong></p>
-                    <p>Desenvolvimento de Sistemas - SENAI Santa Catarina</p>
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-2">
+                <div>
+                    <strong>Projeto RailPulse</strong>
+                    <div class="text-secondary small">Desenvolvimento de Sistemas - SENAI Santa Catarina</div>
                 </div>
-                <div class="equipe">
-                    <span>Arthur Vieira • Gabriel Ostrovski • Gustavo Miquelute • Nicolas Lopes  </span>
+                <div class="text-secondary small text-md-end">
+                    Arthur Vieira • Gabriel Ostrovski • Gustavo Miquelute • Nicolas Lopes
                 </div>
             </div>
         </div>

@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
       form_editar.reset();
       edit_original_id.value = "";
       modal_trem.classList.remove("oculto");
+      document.body.classList.add("modal-open");
     });
   }
 
@@ -18,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn_cancelar_trem.addEventListener("click", () => {
       modal_trem.classList.add("oculto");
       form_editar.reset();
+      document.body.classList.remove("modal-open");
     });
   }
 
@@ -28,12 +30,17 @@ document.addEventListener("DOMContentLoaded", () => {
       if (btn_editar) {
         edit_original_id.value = btn_editar.dataset.id;
         document.getElementById("edit_nome").value = btn_editar.dataset.nome;
-        document.getElementById("edit_modelo").value = btn_editar.dataset.modelo;
-        document.getElementById("edit_status_operacional").value = btn_editar.dataset.status;
+        document.getElementById("edit_modelo").value =
+          btn_editar.dataset.modelo;
+        document.getElementById("edit_status_operacional").value =
+          btn_editar.dataset.status;
         document.getElementById("edit_id_rota").value = btn_editar.dataset.rota;
-        document.getElementById("edit_velocidade_atual").value = btn_editar.dataset.velocidade;
-        document.getElementById("edit_latitude").value = btn_editar.dataset.latitude;
-        document.getElementById("edit_longitude").value = btn_editar.dataset.longitude;
+        document.getElementById("edit_velocidade_atual").value =
+          btn_editar.dataset.velocidade;
+        document.getElementById("edit_latitude").value =
+          btn_editar.dataset.latitude;
+        document.getElementById("edit_longitude").value =
+          btn_editar.dataset.longitude;
         modal_trem.classList.remove("oculto");
       }
     });
@@ -50,12 +57,14 @@ document.addEventListener("DOMContentLoaded", () => {
     modal_trem.addEventListener("click", (event) => {
       if (event.target === modal_trem) {
         modal_trem.classList.add("oculto");
+        document.body.classList.remove("modal-open");
       }
     });
 
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
         modal_trem.classList.add("oculto");
+        document.body.classList.remove("modal-open");
       }
     });
   }
