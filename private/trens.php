@@ -27,7 +27,7 @@ $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operaciona
             <div class="paginas"><a href="usuarios.php">USUÁRIOS</a></div>
             <div class="barra_topo_info">
                 <span id="info_matricula" class="matricula_topo"></span>
-                <a href="../index.php" class="paginas">SAIR</a>
+                <a href="../infra/logout.php" class="paginas">SAIR</a>
             </div>
         </div>
     </nav>
