@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("input_busca");
-  const tableBody = document.querySelector(".container_tabela tbody");
+  const tableBody = document.getElementById("tbody_trens");
   if (!searchInput || !tableBody) return;
 
   const normalizeText = (value) => value

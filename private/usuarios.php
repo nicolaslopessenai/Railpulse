@@ -15,7 +15,6 @@ $usuarios = mysqli_query($conexao, "SELECT id_usuario, nome, email, matricula, c
     <link rel="stylesheet" href="../assets/style/style.css">
 </head>
 <body>
-<<<<<<< HEAD
     <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm sticky-top">
         <div class="container-fluid px-4">
             <a class="navbar-brand fw-bold fs-4" href="../index.php">Rail<span class="text-primary">Pulse</span></a>
@@ -32,20 +31,6 @@ $usuarios = mysqli_query($conexao, "SELECT id_usuario, nome, email, matricula, c
                     <span id="info_matricula" class="badge badge-soft rounded-pill px-3 py-2"></span>
                     <a href="../index.php" class="btn btn-outline-secondary btn-sm">Sair</a>
                 </div>
-=======
-    <nav class="navegacao">
-        <div class="container_menu">
-            <div class="logo">Rail<span>Pulse</span></div>
-            <div class="paginas"><a href="dashboard.php">PAINEL</a></div>
-            <div class="paginas"><a href="sensores.php">SENSORES</a></div>
-            <div class="paginas"><a href="trens.php">TRENS</a></div>
-            <div class="paginas"><a href="rotas.php">ROTAS</a></div>
-            <div class="paginas"><a href="relatorios.php">RELATÓRIOS</a></div>
-            <div class="paginas"><a href="usuarios.php" class="active">USUÁRIOS</a></div>
-            <div class="barra_topo_info">
-                <span id="info_matricula" class="matricula_topo"></span>
-                <a href="../infra/logout.php" class="paginas">SAIR</a>
->>>>>>> d22df44cbd8e68993957f41f8a9dd03fd564962b
             </div>
         </div>
     </nav>

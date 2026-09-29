@@ -37,7 +37,7 @@ include '../infra/conexao.php';
 
     <main class="container py-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
-            <h1 class="h3 fw-bold mb-0" id="boas_vindas">Bem-vindo</h1>
+            <h1 class="h3 fw-bold mb-0" id="boas_vindas">Bem-vindo, <?php echo htmlspecialchars($_SESSION['nome'] ?? '', ENT_QUOTES, 'UTF-8'); ?></h1>
             <span class="badge text-bg-primary rounded-pill px-3 py-2">Operação ativa</span>
         </div>
 

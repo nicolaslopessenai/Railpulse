@@ -53,10 +53,21 @@ $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operaciona
                                 <th>Nome</th>
                                 <th>Modelo</th>
                                 <th>Status</th>
-                                <th id="col_acoes" class="oculto">Ações</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody_trens"></tbody>
+                        <tbody id="tbody_trens">
+                            <?php if (mysqli_num_rows($trens) === 0) { ?>
+                                <tr><td colspan="4" class="text-secondary">Nenhum trem cadastrado ainda.</td></tr>
+                            <?php } ?>
+                            <?php while ($trem = mysqli_fetch_assoc($trens)) { ?>
+                                <tr>
+                                    <td><?php echo (int) $trem['id_trem']; ?></td>
+                                    <td><?php echo htmlspecialchars($trem['nome'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                    <td><?php echo htmlspecialchars($trem['modelo'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                    <td><?php echo htmlspecialchars($trem['status_operacional'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                </tr>
+                            <?php } ?>
+                        </tbody>
                     </table>
                 </div>
                 <div id="msg_vazio" class="text-secondary small oculto">Nenhum trem cadastrado ainda.</div>
@@ -65,6 +76,7 @@ $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operaciona
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/trens.public.js?v=1"></script>
 </body>
 
 </html>
