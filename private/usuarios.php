@@ -107,7 +107,7 @@ $usuarios = mysqli_query($conexao, "SELECT id_usuario, nome, email, matricula, c
                                 <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody id="tabela_usuarios">
+                        <tbody class="tbody-busca-universal">
                             <?php if (mysqli_num_rows($usuarios) === 0) { ?>
                                 <tr><td colspan="6" class="text-secondary">Nenhum usuário cadastrado ainda.</td></tr>
                             <?php } ?>
@@ -143,5 +143,7 @@ $usuarios = mysqli_query($conexao, "SELECT id_usuario, nome, email, matricula, c
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/usuarios_private.js?v=2"></script>
+        <script src="../js/pesquisa_tabelas.js"></script>
+
 </body>
 </html>

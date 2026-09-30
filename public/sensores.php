@@ -50,26 +50,22 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Nome</th>
                                 <th>Tipo</th>
                                 <th>Localização</th>
                                 <th>Status</th>
-                                <th>Trem</th>
                                 <th>Rota</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody_sensores">
+                        <tbody class="tbody-busca-universal">
                             <?php if (mysqli_num_rows($sensores) === 0) { ?>
                                 <tr><td colspan="7" class="text-secondary">Nenhum sensor cadastrado ainda.</td></tr>
                             <?php } ?>
                             <?php while ($sensor = mysqli_fetch_assoc($sensores)) { ?>
                                 <tr>
                                     <td><?php echo (int) $sensor['id_sensor']; ?></td>
-                                    <td><?php echo htmlspecialchars($sensor['nome'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars($sensor['tipo_dado'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars($sensor['localizacao'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars($sensor['status'], ENT_QUOTES, 'UTF-8'); ?></td>
-                                    <td><?php echo htmlspecialchars($sensor['trem_nome'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars($sensor['rota_nome'], ENT_QUOTES, 'UTF-8'); ?></td>
                                 </tr>
                             <?php } ?>
@@ -83,6 +79,8 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/sensores.public.js?v=1"></script>
+        <script src="../js/pesquisa_tabelas.js"></script>
+
 </body>
 
 </html>

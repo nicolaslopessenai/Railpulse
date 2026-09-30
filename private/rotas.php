@@ -98,7 +98,7 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distanci
                                 <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody_rotas">
+                        <tbody class="tbody-busca-universal">
                             <?php if (mysqli_num_rows($rotas) === 0) { ?>
                                 <tr><td colspan="6" class="text-secondary">Nenhuma rota cadastrada ainda.</td></tr>
                             <?php } ?>
@@ -134,5 +134,7 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distanci
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/rotas_private.js?v=2"></script>
+        <script src="../js/pesquisa_tabelas.js"></script>
+
 </body>
 </html>

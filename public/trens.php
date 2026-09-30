@@ -55,7 +55,7 @@ $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operaciona
                                 <th>Status</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody_trens">
+                        <tbody class="tbody-busca-universal">
                             <?php if (mysqli_num_rows($trens) === 0) { ?>
                                 <tr><td colspan="4" class="text-secondary">Nenhum trem cadastrado ainda.</td></tr>
                             <?php } ?>
@@ -77,6 +77,8 @@ $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operaciona
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/trens.public.js?v=1"></script>
+        <script src="../js/pesquisa_tabelas.js"></script>
+
 </body>
 
 </html>

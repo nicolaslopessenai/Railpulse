@@ -103,7 +103,7 @@ $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operaciona
         <div class="card card-soft border-0">
             <div class="card-body">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" id="input_busca" placeholder="Buscar trem...">
+                    <input type="text" class="form-control" class="input_busca" placeholder="Buscar trem...">
                 </div>
                 <h2 class="h5 fw-bold text-uppercase text-secondary mb-3">Listagem de trens</h2>
                 <div class="table-responsive">
@@ -117,7 +117,7 @@ $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operaciona
                                 <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody id="tbody_trens">
+                        <tbody class="tbody-busca-universal">
                             <?php if (mysqli_num_rows($trens) === 0) { ?>
                                 <tr><td colspan="5" class="text-secondary">Nenhum trem cadastrado ainda.</td></tr>
                             <?php } ?>
@@ -155,5 +155,7 @@ $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operaciona
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/trens_private.js?v=3"></script>
+        <script src="../js/pesquisa_tabelas.js"></script>
+
 </body>
 </html>
