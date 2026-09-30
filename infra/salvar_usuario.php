@@ -2,38 +2,35 @@
 include 'conexao.php';
 include 'auth.php';
 
+$nome       = $_POST['usr_nome'] ?? '';
+$email      = $_POST['usr_email'] ?? '';
+$senha      = $_POST['usr_senha'] ?? '';
+$matricula  = $_POST['usr_matricula'] ?? '';
+$cargo      = $_POST['usr_cargo'] ?? '';
+$id_usuario = isset($_POST['usr_id']) && $_POST['usr_id'] !== '' ? (int) $_POST['usr_id'] : null;
 
-# Recupera os dados do formulário
-$nome      = $_POST['usr_nome'];
-$email     = $_POST['usr_email'];
-$senha     = $_POST['usr_senha'];
-$matricula = $_POST['usr_matricula'];
-$cargo     = $_POST['usr_cargo'];
-$id_usuario = '';
-
-if (isset($_POST['usr_id'])) {
-    $id_usuario = $_POST['usr_id'];
-}
-
-if ($id_usuario !== '') {
+if ($id_usuario !== null) {
     if ($senha !== '') {
-        $sql = "UPDATE usuarios
-                SET nome = '$nome', email = '$email', senha = '$senha', matricula = '$matricula', cargo = '$cargo'
-                WHERE id_usuario = '$id_usuario'";
+        $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+        $sql = "UPDATE usuarios SET nome = ?, email = ?, senha = ?, matricula = ?, cargo = ? WHERE id_usuario = ?";
+        $stmt = $conexao->prepare($sql);
+        $stmt->bind_param("sssssi", $nome, $email, $senha_hash, $matricula, $cargo, $id_usuario);
     } else {
-        $sql = "UPDATE usuarios
-                SET nome = '$nome', email = '$email', matricula = '$matricula', cargo = '$cargo'
-                WHERE id_usuario = '$id_usuario'";
+        $sql = "UPDATE usuarios SET nome = ?, email = ?, matricula = ?, cargo = ? WHERE id_usuario = ?";
+        $stmt = $conexao->prepare($sql);
+        $stmt->bind_param("ssssi", $nome, $email, $matricula, $cargo, $id_usuario);
     }
 } else {
-    $sql = "INSERT INTO usuarios (nome, email, senha, matricula, cargo)
-            VALUES ('$nome', '$email', '$senha', '$matricula', '$cargo')";
+    $senha_hash = password_hash($senha, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO usuarios (nome, email, senha, matricula, cargo) VALUES (?, ?, ?, ?, ?)";
+    $stmt = $conexao->prepare($sql);
+    $stmt->bind_param("sssss", $nome, $email, $senha_hash, $matricula, $cargo);
 }
 
-if (mysqli_query($conexao, $sql)) {
+if ($stmt->execute()) {
     header("Location: ../private/usuarios.php");
     exit;
 } else {
-    echo "Erro ao cadastrar no banco: " . mysqli_error($conexao);
+    echo "Erro ao cadastrar no banco: " . $stmt->error;
 }
 ?>

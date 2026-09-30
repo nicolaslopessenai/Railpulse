@@ -3,25 +3,19 @@ session_start();
 
 include '../infra/conexao.php';
 
-$email_digitado = "";
-$senha_digitada = "";
+$email_digitado = $_POST['email'] ?? '';
+$senha_digitada = $_POST['senha'] ?? '';
 
-if (isset($_POST['email'])) {
-    $email_digitado = $_POST['email'];
-}
+$stmt = $conexao->prepare("SELECT id_usuario, nome, cargo, senha FROM usuarios WHERE email = ?");
+$stmt->bind_param("s", $email_digitado);
+$stmt->execute();
+$result = $stmt->get_result();
 
-if (isset($_POST['senha'])) {
-    $senha_digitada = $_POST['senha'];
-}
+if ($result && $result->num_rows === 1) {
+    $usuario = $result->fetch_assoc();
+    $senha_armazenada = $usuario['senha'];
 
-
-$sql = "SELECT * FROM usuarios WHERE email = '$email_digitado'";
-$query = mysqli_query($conexao, $sql);
-
-if (mysqli_num_rows($query) == 1) {
-    $usuario = mysqli_fetch_assoc($query);
-
-    if ($senha_digitada == $usuario['senha']) {
+    if (password_verify($senha_digitada, $senha_armazenada) || $senha_digitada === $senha_armazenada) {
         $_SESSION['id'] = $usuario['id_usuario'];
         $_SESSION['nome'] = $usuario['nome'];
         $_SESSION['cargo'] = $usuario['cargo'];
@@ -35,5 +29,5 @@ if (mysqli_num_rows($query) == 1) {
     }
 }
 
-
-?>
+header('Location: ../public/login.php?erro=1');
+exit;
