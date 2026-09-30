@@ -2,14 +2,15 @@
 include 'conexao.php';
 include 'auth.php';
 
-$id_usuario = (int) $_POST['id_usuario'];
+$id_usuario = isset($_POST['id_usuario']) ? (int) $_POST['id_usuario'] : 0;
 
-$sql = "DELETE FROM usuarios WHERE id_usuario = $id_usuario";
+$stmt = $conexao->prepare("DELETE FROM usuarios WHERE id_usuario = ?");
+$stmt->bind_param("i", $id_usuario);
 
-if (mysqli_query($conexao, $sql)) {
+if ($stmt->execute()) {
     header("Location: ../private/usuarios.php");
     exit;
 } else {
-    echo "Erro ao excluir do banco: " . mysqli_error($conexao);
+    echo "Erro ao excluir do banco: " . $stmt->error;
 }
 ?>
