@@ -129,8 +129,8 @@ INSERT INTO dados_sensores (id_sensor, valor, unidade, data_hora) VALUES
 
 -- 5. Usuários
 INSERT INTO usuarios (nome, email, senha, matricula, cargo) VALUES
-('Administrador Master', 'admin@gmail.com',    '1234',     '0001', 'admin'),
-('Nicolas Lopes',        'nicolas@empresa.com','senac123', '0002', 'admin'),
-('Arthur Vieira',        'arthur@empresa.com', 'senac123', '0003', 'funcionario'),
-('Gabriel Ostrovski',    'gabriel@empresa.com','senac123', '0004', 'funcionario'),
-('Gustavo Miquelute',    'mk@gmail.com','1234', '0011', 'admin');
+('Administrador Master', 'admin@gmail.com', '$2y$10$hzzAyq0tdLb83.4g2zqfHeo2x0JW1S68PiiJ47/SlM60OiG1RtMyi', '0001', 'admin'),
+('Nicolas Lopes', 'nicolas@empresa.com', '$2y$10$4A74XWST0RyRU7r/cmOSZ.gHtwBC9BtgFlrMDAeZ7o.ZMaFsb3HVm', '0002', 'admin'),
+('Arthur Vieira', 'arthur@empresa.com', '$2y$10$4A74XWST0RyRU7r/cmOSZ.gHtwBC9BtgFlrMDAeZ7o.ZMaFsb3HVm', '0003', 'funcionario'),
+('Gabriel Ostrovski', 'gabriel@empresa.com', '$2y$10$4A74XWST0RyRU7r/cmOSZ.gHtwBC9BtgFlrMDAeZ7o.ZMaFsb3HVm', '0004', 'funcionario'),
+('Gustavo Miquelute', 'mk@gmail.com', '$2y$10$hzzAyq0tdLb83.4g2zqfHeo2x0JW1S68PiiJ47/SlM60OiG1RtMyi', '0011', 'admin');
