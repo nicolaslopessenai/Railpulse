@@ -96,7 +96,7 @@ $usuarios = mysqli_query($conexao, "SELECT id_usuario, nome, email, matricula, c
                 </div>
                 <h2 class="h5 fw-bold text-uppercase text-secondary mb-3">Listagem de usuários</h2>
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle table-soft">
+                    <table id="tabela_usuarios" class="table table-hover align-middle table-soft">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -107,7 +107,7 @@ $usuarios = mysqli_query($conexao, "SELECT id_usuario, nome, email, matricula, c
                                 <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody class="tbody-busca-universal">
+                        <tbody id="tbody_usuarios" class="tbody-busca-universal">
                             <?php if (mysqli_num_rows($usuarios) === 0) { ?>
                                 <tr><td colspan="6" class="text-secondary">Nenhum usuário cadastrado ainda.</td></tr>
                             <?php } ?>
