@@ -6,7 +6,7 @@ $nome        = $_POST['snr_nome'] ?? '';
 $tipo        = $_POST['snr_tipo'] ?? '';
 $localizacao = $_POST['snr_localizacao'] ?? '';
 $status      = $_POST['snr_status'] ?? '';
-$descricao   = $_POST['snr_descricao'] ?? '';
+$descricao   = '';
 $id_trem     = isset($_POST['snr_id_trem']) && $_POST['snr_id_trem'] !== '' ? (int) $_POST['snr_id_trem'] : 0;
 $id_rota     = isset($_POST['snr_id_rota']) && $_POST['snr_id_rota'] !== '' ? (int) $_POST['snr_id_rota'] : 0;
 $id_sensor   = isset($_POST['snr_id_sensor']) && $_POST['snr_id_sensor'] !== '' ? (int) $_POST['snr_id_sensor'] : null;

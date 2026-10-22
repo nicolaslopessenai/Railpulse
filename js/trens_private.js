@@ -31,19 +31,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const edit_nome = document.getElementById("edit_nome");
         const edit_modelo = document.getElementById("edit_modelo");
         const edit_status_operacional = document.getElementById("edit_status_operacional");
+        const edit_id_usuario = document.getElementById("edit_id_usuario");
         const edit_id_rota = document.getElementById("edit_id_rota");
-        const edit_velocidade_atual = document.getElementById("edit_velocidade_atual");
-        const edit_latitude = document.getElementById("edit_latitude");
-        const edit_longitude = document.getElementById("edit_longitude");
 
         if (edit_original_id) edit_original_id.value = btn_editar.dataset.id || "";
         if (edit_nome) edit_nome.value = btn_editar.dataset.nome || "";
         if (edit_modelo) edit_modelo.value = btn_editar.dataset.modelo || "";
         if (edit_status_operacional) edit_status_operacional.value = btn_editar.dataset.status || "";
+        if (edit_id_usuario) edit_id_usuario.value = btn_editar.dataset.usuario || "";
         if (edit_id_rota) edit_id_rota.value = btn_editar.dataset.rota || "";
-        if (edit_velocidade_atual) edit_velocidade_atual.value = btn_editar.dataset.velocidade || "";
-        if (edit_latitude) edit_latitude.value = btn_editar.dataset.latitude || "";
-        if (edit_longitude) edit_longitude.value = btn_editar.dataset.longitude || "";
 
         modal_trem.classList.remove("oculto");
         document.body.classList.add("modal-open");

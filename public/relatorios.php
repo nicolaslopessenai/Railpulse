@@ -1,6 +1,9 @@
 <?php
 include '../infra/auth.php';
 include '../infra/conexao.php';
+
+$cargo_atual = strtolower($_SESSION['cargo'] ?? 'funcionario');
+$cargo_label = $cargo_atual === 'admin' ? 'Admin' : 'Funcionário';
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -24,6 +27,9 @@ include '../infra/conexao.php';
                     <li class="nav-item"><a class="nav-link active fw-semibold" href="relatorios.php">Relatórios</a></li>
                 </ul>
                 <div class="d-flex align-items-center gap-2">
+                    <span class="badge border rounded-pill px-2 py-1 text-secondary small">
+                        <?php echo htmlspecialchars($cargo_label, ENT_QUOTES, 'UTF-8'); ?>
+                    </span>
                     <span id="info_matricula" class="badge badge-soft rounded-pill px-3 py-2"></span>
                     <a href="../infra/logout.php" class="btn btn-outline-secondary btn-sm">Sair</a>
                 </div>

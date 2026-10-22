@@ -2,6 +2,9 @@
 include '../infra/conexao.php';
 include '../infra/auth.php';
 
+$cargo_atual = strtolower($_SESSION['cargo'] ?? 'funcionario');
+$cargo_label = $cargo_atual === 'admin' ? 'Admin' : 'Funcionário';
+
 $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distancia_km FROM rotas ORDER BY id_rota");
 ?>
 
@@ -28,6 +31,9 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distanci
                     <li class="nav-item"><a class="nav-link" href="usuarios.php">Usuários</a></li>
                 </ul>
                 <div class="d-flex align-items-center gap-2">
+                    <span class="badge border rounded-pill px-2 py-1 text-secondary small">
+                        <?php echo htmlspecialchars($cargo_label, ENT_QUOTES, 'UTF-8'); ?>
+                    </span>
                     <span id="info_matricula" class="badge badge-soft rounded-pill px-3 py-2"></span>
                     <a href="../infra/logout.php" class="btn btn-outline-secondary btn-sm">Sair</a>
                 </div>
@@ -115,7 +121,8 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distanci
                                             data-nome="<?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?>"
                                             data-origem="<?php echo htmlspecialchars($rota['origem'], ENT_QUOTES, 'UTF-8'); ?>"
                                             data-destino="<?php echo htmlspecialchars($rota['destino'], ENT_QUOTES, 'UTF-8'); ?>"
-                                            data-distancia="<?php echo htmlspecialchars((string) $rota['distancia_km'], ENT_QUOTES, 'UTF-8'); ?>">
+                                            data-distancia="<?php echo htmlspecialchars((string) $rota['distancia_km'], ENT_QUOTES, 'UTF-8'); ?>"
+                                            data-trem="<?php echo (int) $rota['id_rota']; ?>">
                                             Editar
                                         </button>
                                         <form class="d-inline crud_delete_form" data-confirm="Excluir esta rota? O banco não permite excluir rotas vinculadas a trens ou sensores." action="../infra/excluir_rota.php" method="POST">

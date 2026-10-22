@@ -2,7 +2,14 @@
 include '../infra/conexao.php';
 include '../infra/auth.php';
 
+$cargo_atual = strtolower($_SESSION['cargo'] ?? 'funcionario');
+$cargo_label = $cargo_atual === 'admin' ? 'Admin' : 'Funcionário';
+
 $trens = mysqli_query($conexao, "SELECT id_trem, nome FROM trens ORDER BY nome");
+$primeiro_trem = mysqli_fetch_assoc($trens);
+if ($primeiro_trem) {
+    mysqli_data_seek($trens, 0);
+}
 $rotas = mysqli_query($conexao, "SELECT id_rota, nome FROM rotas ORDER BY nome");
 $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.localizacao, s.status, s.descricao, s.id_trem, s.id_rota, t.nome AS trem_nome, r.nome AS rota_nome FROM sensores s JOIN trens t ON s.id_trem = t.id_trem JOIN rotas r ON s.id_rota = r.id_rota ORDER BY s.id_sensor");
 ?>
@@ -32,6 +39,9 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                     <li class="nav-item"><a class="nav-link" href="usuarios.php">Usuários</a></li>
                 </ul>
                 <div class="d-flex align-items-center gap-2">
+                    <span class="badge border rounded-pill px-2 py-1 text-secondary small">
+                        <?php echo htmlspecialchars($cargo_label, ENT_QUOTES, 'UTF-8'); ?>
+                    </span>
                     <span id="info_matricula" class="badge badge-soft rounded-pill px-3 py-2"></span>
                     <a href="../infra/logout.php" class="btn btn-outline-secondary btn-sm">Sair</a>
                 </div>
@@ -45,6 +55,10 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
             <button id="btn_novo_sensor" class="btn btn-primary admin_only">+ Novo sensor</button>
         </div>
 
+        <?php if (isset($_GET['erro']) && $_GET['erro'] === 'vinculado') { ?>
+            <div class="alert alert-warning mt-3">Este sensor está vinculado a dados e não pode ser excluído.</div>
+        <?php } ?>
+
         <div id="modal_sensor" class="crud_modal oculto" role="dialog" aria-modal="true"
             aria-labelledby="titulo_modal_sensor">
             <div class="card card-soft border-0 w-100" style="max-width: 760px;">
@@ -53,12 +67,15 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                         de sensor</h2>
                     <form id="form_sensor" action="../infra/salvar_sensor.php" method="POST" autocomplete="off">
                         <input type="hidden" id="snr_id_sensor" name="snr_id_sensor">
-                        <div class="row g-3 mb-3">
-                        </div>
+                        <input type="hidden" id="snr_id_trem" name="snr_id_trem" value="<?php echo isset($primeiro_trem['id_trem']) ? (int) $primeiro_trem['id_trem'] : ''; ?>" data-default="<?php echo isset($primeiro_trem['id_trem']) ? (int) $primeiro_trem['id_trem'] : ''; ?>">
+
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
-                                <label for="snr_tipo"
-                                    class="form-label text-uppercase small fw-semibold text-secondary">Tipo</label>
+                                <label for="snr_nome" class="form-label text-uppercase small fw-semibold text-secondary">Nome</label>
+                                <input type="text" class="form-control" id="snr_nome" name="snr_nome" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="snr_tipo" class="form-label text-uppercase small fw-semibold text-secondary">Tipo</label>
                                 <select class="form-select" id="snr_tipo" name="snr_tipo" required>
                                     <option value="">Selecione o tipo</option>
                                     <option value="velocidade">velocidade</option>
@@ -69,42 +86,15 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                                     <option value="umidade">umidade</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
-                                <label for="snr_localizacao"
-                                    class="form-label text-uppercase small fw-semibold text-secondary">Localização</label>
-                                <input type="text" class="form-control" id="snr_localizacao" name="snr_localizacao"
-                                    required>
-                            </div>
                         </div>
+
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
-                                <select class="form-select" id="snr_id_trem" name="snr_id_trem" style="display: none;">
-                                    <?php while ($trem = mysqli_fetch_assoc($trens)) { ?>
-                                    <option value="<?php echo $trem['id_trem']; ?>">
-                                        <?php echo htmlspecialchars($trem['nome'], ENT_QUOTES, 'UTF-8'); ?>
-                                    </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                            
-                        </div>
-                        <div class="row g-3 mb-4">
-                            <div class="col-md-6">
-                                <label for="snr_id_rota"
-                                    class="form-label text-uppercase small fw-semibold text-secondary">Rota</label>
-                                <select class="form-select" id="snr_id_rota" name="snr_id_rota" required>
-                                    <option value="">Selecione a rota</option>
-                                    <?php while ($rota = mysqli_fetch_assoc($rotas)) { ?>
-                                    <option value="<?php echo $rota['id_rota']; ?>">
-                                        <?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?>
-                                    </option>
-                                    <?php } ?>
-                                </select>
+                                <label for="snr_localizacao" class="form-label text-uppercase small fw-semibold text-secondary">Localização</label>
+                                <input type="text" class="form-control" id="snr_localizacao" name="snr_localizacao" required>
                             </div>
                             <div class="col-md-6">
-                                <label for="snr_status"
-                                    class="form-label text-uppercase small fw-semibold text-secondary">Status
-                                    inicial</label>
+                                <label for="snr_status" class="form-label text-uppercase small fw-semibold text-secondary">Status inicial</label>
                                 <select class="form-select" id="snr_status" name="snr_status" required>
                                     <option value="ativo">Ativo</option>
                                     <option value="em_espera">Em Espera</option>
@@ -112,10 +102,22 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                                 </select>
                             </div>
                         </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-12">
+                                <label for="snr_id_rota" class="form-label text-uppercase small fw-semibold text-secondary">Rota</label>
+                                <select class="form-select" id="snr_id_rota" name="snr_id_rota" required>
+                                    <option value="">Selecione a rota</option>
+                                    <?php while ($rota = mysqli_fetch_assoc($rotas)) { ?>
+                                        <option value="<?php echo $rota['id_rota']; ?>"><?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?></option>
+                                    <?php } ?>
+                                </select>
+                            </div>
+                        </div>
+
                         <div class="d-flex gap-2 flex-wrap">
                             <button type="submit" class="btn btn-primary" id="btn_salvar_sensor">Salvar sensor</button>
-                            <button type="button" class="btn btn-outline-secondary"
-                                id="btn_cancelar_sensor">Cancelar</button>
+                            <button type="button" class="btn btn-outline-secondary" id="btn_cancelar_sensor">Cancelar</button>
                         </div>
                     </form>
                 </div>
