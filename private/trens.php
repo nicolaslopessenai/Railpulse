@@ -59,21 +59,21 @@ $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operaciona
                             </div>
                         </div>
                         <div class="row g-3 mb-3">
+                            <div class="col-md-12">
                                 <label for="edit_status_operacional" class="form-label text-uppercase small fw-semibold text-secondary">Status operacional</label>
                                 <select class="form-select" id="edit_status_operacional" name="trn_status" required>
                                     <option value="normal">Normal</option>
                                     <option value="alerta">Alerta</option>
                                     <option value="falha">Falha</option>
                                 </select>
-                            <div class="col-md-6">
-                                <select class="form-select" id="edit_id_rota" name="trn_id_rota" style="display: none;">
-                                    <?php while ($rota = mysqli_fetch_assoc($rotas)) { ?>
-                                        <option value="<?php echo $rota['id_rota']; ?>"><?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?></option>
-                                    <?php } ?>
-                                </select>
                             </div>
                         </div>
-            
+
+                        <input type="hidden" id="edit_id_rota" name="trn_id_rota" value="">
+                        <input type="hidden" id="edit_velocidade_atual" name="trn_velocidade" value="">
+                        <input type="hidden" id="edit_latitude" name="trn_latitude" value="">
+                        <input type="hidden" id="edit_longitude" name="trn_longitude" value="">
+
                         <div class="d-flex gap-2 flex-wrap">
                             <button type="submit" id="btn_salvar_trem" class="btn btn-primary">Salvar</button>
                             <button type="button" id="btn_cancelar_trem" class="btn btn-outline-secondary">Cancelar</button>
