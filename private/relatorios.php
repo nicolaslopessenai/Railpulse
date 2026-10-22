@@ -18,7 +18,7 @@ $cargo_label = $cargo_atual === 'admin' ? 'Admin' : 'Funcionário';
 <body>
     <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm sticky-top">
         <div class="container-fluid px-4">
-            <a class="navbar-brand fw-bold fs-4" href="../index.php">Rail<span class="text-primary">Pulse</span></a>
+            <a class="navbar-brand fw-bold fs-4" href="dashboard.php">Rail<span class="text-primary">Pulse</span></a>
             <div class="collapse navbar-collapse show">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link" href="dashboard.php">Painel</a></li>
