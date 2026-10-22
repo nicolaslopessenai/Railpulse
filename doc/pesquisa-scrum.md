@@ -1,5 +1,3 @@
-![Texto Alternativo](./logo_scrum.png)
-
 <h1 align=center>SCRUM</h1>
 
 <h2 align=center>O Scrum é uma estrutura de gerenciamento (framework) leve, baseada em princípios ágeis, que ajuda equipes a lidar com problemas complexos e adaptáveis enquanto entregam produtos de alto valor de forma criativa e produtiva</h2>
