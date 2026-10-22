@@ -15,7 +15,7 @@ include '../infra/conexao.php';
 <body>
     <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm sticky-top">
         <div class="container-fluid px-4">
-            <a class="navbar-brand fw-bold fs-4" href="../index.php">Rail<span class="text-primary">Pulse</span></a>
+            <a class="navbar-brand fw-bold fs-4" href="dashboard.php">Rail<span class="text-primary">Pulse</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuRail">
                 <span class="navbar-toggler-icon"></span>
             </button>
