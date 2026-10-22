@@ -1,4 +1,5 @@
 <?php
+include '../infra/auth.php';
 include '../infra/conexao.php';
 
 $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.localizacao, s.status, t.nome AS trem_nome, r.nome AS rota_nome FROM sensores s JOIN trens t ON s.id_trem = t.id_trem JOIN rotas r ON s.id_rota = r.id_rota ORDER BY s.id_sensor");

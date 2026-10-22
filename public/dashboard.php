@@ -1,5 +1,5 @@
 <?php
-session_start();
+include '../infra/auth.php';
 include '../infra/conexao.php';
 ?>
 

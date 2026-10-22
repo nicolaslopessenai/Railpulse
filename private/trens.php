@@ -59,38 +59,21 @@ $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operaciona
                             </div>
                         </div>
                         <div class="row g-3 mb-3">
-                            <div class="col-md-6">
                                 <label for="edit_status_operacional" class="form-label text-uppercase small fw-semibold text-secondary">Status operacional</label>
                                 <select class="form-select" id="edit_status_operacional" name="trn_status" required>
                                     <option value="normal">Normal</option>
                                     <option value="alerta">Alerta</option>
                                     <option value="falha">Falha</option>
                                 </select>
-                            </div>
                             <div class="col-md-6">
-                                <label for="edit_id_rota" class="form-label text-uppercase small fw-semibold text-secondary">Rota</label>
-                                <select class="form-select" id="edit_id_rota" name="trn_id_rota" required>
-                                    <option value="">Selecione a rota</option>
+                                <select class="form-select" id="edit_id_rota" name="trn_id_rota" style="display: none;">
                                     <?php while ($rota = mysqli_fetch_assoc($rotas)) { ?>
                                         <option value="<?php echo $rota['id_rota']; ?>"><?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?></option>
                                     <?php } ?>
                                 </select>
                             </div>
                         </div>
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-4">
-                                <label for="edit_velocidade_atual" class="form-label text-uppercase small fw-semibold text-secondary">Velocidade</label>
-                                <input type="number" class="form-control" id="edit_velocidade_atual" name="trn_velocidade" min="0" step="0.01" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="edit_latitude" class="form-label text-uppercase small fw-semibold text-secondary">Latitude</label>
-                                <input type="number" class="form-control" id="edit_latitude" name="trn_latitude" step="0.0000001" required>
-                            </div>
-                            <div class="col-md-4">
-                                <label for="edit_longitude" class="form-label text-uppercase small fw-semibold text-secondary">Longitude</label>
-                                <input type="number" class="form-control" id="edit_longitude" name="trn_longitude" step="0.0000001" required>
-                            </div>
-                        </div>
+            
                         <div class="d-flex gap-2 flex-wrap">
                             <button type="submit" id="btn_salvar_trem" class="btn btn-primary">Salvar</button>
                             <button type="button" id="btn_cancelar_trem" class="btn btn-outline-secondary">Cancelar</button>

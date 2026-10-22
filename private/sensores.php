@@ -77,7 +77,18 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                             </div>
                         </div>
                         <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <select class="form-select" id="snr_id_trem" name="snr_id_trem" style="display: none;">
+                                    <?php while ($trem = mysqli_fetch_assoc($trens)) { ?>
+                                    <option value="<?php echo $trem['id_trem']; ?>">
+                                        <?php echo htmlspecialchars($trem['nome'], ENT_QUOTES, 'UTF-8'); ?>
+                                    </option>
+                                    <?php } ?>
+                                </select>
+                            </div>
                             
+                        </div>
+                        <div class="row g-3 mb-4">
                             <div class="col-md-6">
                                 <label for="snr_id_rota"
                                     class="form-label text-uppercase small fw-semibold text-secondary">Rota</label>
@@ -90,7 +101,6 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                                     <?php } ?>
                                 </select>
                             </div>
-                        
                             <div class="col-md-6">
                                 <label for="snr_status"
                                     class="form-label text-uppercase small fw-semibold text-secondary">Status
@@ -102,7 +112,6 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                                 </select>
                             </div>
                         </div>
-                            
                         <div class="d-flex gap-2 flex-wrap">
                             <button type="submit" class="btn btn-primary" id="btn_salvar_sensor">Salvar sensor</button>
                             <button type="button" class="btn btn-outline-secondary"

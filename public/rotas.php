@@ -1,4 +1,5 @@
 <?php
+include '../infra/auth.php';
 include '../infra/conexao.php';
 
 $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distancia_km FROM rotas ORDER BY id_rota");

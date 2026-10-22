@@ -1,4 +1,5 @@
 <?php
+include '../infra/auth.php';
 include '../infra/conexao.php';
 ?>
 <!DOCTYPE html>

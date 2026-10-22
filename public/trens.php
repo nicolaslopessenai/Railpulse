@@ -1,4 +1,5 @@
 <?php
+include '../infra/auth.php';
 include '../infra/conexao.php';
 
 $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operacional FROM trens ORDER BY id_trem");
