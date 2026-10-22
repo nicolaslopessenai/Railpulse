@@ -98,7 +98,7 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distanci
                                 <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody class="tbody-busca-universal">
+                        <tbody id="tbody_rotas" class="tbody-busca-universal">
                             <?php if (mysqli_num_rows($rotas) === 0) { ?>
                                 <tr><td colspan="6" class="text-secondary">Nenhuma rota cadastrada ainda.</td></tr>
                             <?php } ?>

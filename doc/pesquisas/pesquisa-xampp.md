@@ -1,5 +1,3 @@
-![Texto Alternativo](./logo_xampp.png)
-
 <h1 align=center>XAMPP</h1>
 
 <h2 align=center>O XAMPP é uma estrutura integrada (framework de servidores) leve, baseada em código aberto, que ajuda desenvolvedores a criar ambientes locais para construir e testar aplicações web baseadas em PHP de forma rápida e produtiva</h2>

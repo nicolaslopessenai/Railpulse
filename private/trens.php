@@ -100,7 +100,7 @@ $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operaciona
                                 <th>Ações</th>
                             </tr>
                         </thead>
-                        <tbody class="tbody-busca-universal">
+                        <tbody id="tbody_trens" class="tbody-busca-universal">
                             <?php if (mysqli_num_rows($trens) === 0) { ?>
                                 <tr><td colspan="5" class="text-secondary">Nenhum trem cadastrado ainda.</td></tr>
                             <?php } ?>
