@@ -33,7 +33,7 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                 </ul>
                 <div class="d-flex align-items-center gap-2">
                     <span id="info_matricula" class="badge badge-soft rounded-pill px-3 py-2"></span>
-                    <a href="../index.php" class="btn btn-outline-secondary btn-sm">Sair</a>
+                    <a href="../infra/logout.php" class="btn btn-outline-secondary btn-sm">Sair</a>
                 </div>
             </div>
         </div>
@@ -54,12 +54,6 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                     <form id="form_sensor" action="../infra/salvar_sensor.php" method="POST" autocomplete="off">
                         <input type="hidden" id="snr_id_sensor" name="snr_id_sensor">
                         <div class="row g-3 mb-3">
-                            <div class="col-md-12">
-                                <label for="snr_nome"
-                                    class="form-label text-uppercase small fw-semibold text-secondary">Nome do
-                                    sensor</label>
-                                <input type="text" class="form-control" id="snr_nome" name="snr_nome" required>
-                            </div>
                         </div>
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
@@ -83,18 +77,7 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                             </div>
                         </div>
                         <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <label for="snr_id_trem"
-                                    class="form-label text-uppercase small fw-semibold text-secondary">Trem</label>
-                                <select class="form-select" id="snr_id_trem" name="snr_id_trem" required>
-                                    <option value="">Selecione o trem</option>
-                                    <?php while ($trem = mysqli_fetch_assoc($trens)) { ?>
-                                    <option value="<?php echo $trem['id_trem']; ?>">
-                                        <?php echo htmlspecialchars($trem['nome'], ENT_QUOTES, 'UTF-8'); ?>
-                                    </option>
-                                    <?php } ?>
-                                </select>
-                            </div>
+                            
                             <div class="col-md-6">
                                 <label for="snr_id_rota"
                                     class="form-label text-uppercase small fw-semibold text-secondary">Rota</label>
@@ -107,8 +90,7 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                                     <?php } ?>
                                 </select>
                             </div>
-                        </div>
-                        <div class="row g-3 mb-4">
+                        
                             <div class="col-md-6">
                                 <label for="snr_status"
                                     class="form-label text-uppercase small fw-semibold text-secondary">Status
@@ -119,12 +101,8 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                                     <option value="falha">Falha</option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
-                                <label for="snr_descricao"
-                                    class="form-label text-uppercase small fw-semibold text-secondary">Descrição</label>
-                                <input type="text" class="form-control" id="snr_descricao" name="snr_descricao">
-                            </div>
                         </div>
+                            
                         <div class="d-flex gap-2 flex-wrap">
                             <button type="submit" class="btn btn-primary" id="btn_salvar_sensor">Salvar sensor</button>
                             <button type="button" class="btn btn-outline-secondary"

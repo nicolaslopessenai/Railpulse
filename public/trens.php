@@ -28,7 +28,7 @@ $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operaciona
                 </ul>
                 <div class="d-flex align-items-center gap-2">
                     <span id="info_matricula" class="badge badge-soft rounded-pill px-3 py-2"></span>
-                    <a href="../index.php" class="btn btn-outline-secondary btn-sm">Sair</a>
+                    <a href="../infra/logout.php" class="btn btn-outline-secondary btn-sm">Sair</a>
                 </div>
             </div>
         </div>
