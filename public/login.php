@@ -1,5 +1,10 @@
 <?php
 include '../infra/conexao.php';
+
+$mensagem_erro = '';
+if (isset($_GET['erro']) && $_GET['erro'] == '1') {
+    $mensagem_erro = 'Email ou senha inválidos. Verifique os dados e tente novamente.';
+}
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +26,11 @@ include '../infra/conexao.php';
                 <div class="card card-soft border-0 rounded-4">
                     <div class="card-body p-4 p-md-5">
                         <h2 class="h3 fw-bold mb-4">Login</h2>
+                        <?php if ($mensagem_erro !== ''): ?>
+                            <div class="alert alert-danger py-2 px-3 mb-3" role="alert">
+                                <?php echo htmlspecialchars($mensagem_erro, ENT_QUOTES, 'UTF-8'); ?>
+                            </div>
+                        <?php endif; ?>
                         <form id="form" method="POST" action="../infra/processar_login.php">
                             <div class="mb-3" id="e_email">
                                 <label for="email" class="form-label text-uppercase small fw-semibold text-secondary">Email</label>

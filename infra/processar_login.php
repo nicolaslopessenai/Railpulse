@@ -3,8 +3,13 @@ session_start();
 
 include '../infra/conexao.php';
 
-$email_digitado = $_POST['email'] ?? '';
-$senha_digitada = $_POST['senha'] ?? '';
+$email_digitado = trim((string)($_POST['email'] ?? ''));
+$senha_digitada = (string)($_POST['senha'] ?? '');
+
+if ($email_digitado === '' || !filter_var($email_digitado, FILTER_VALIDATE_EMAIL)) {
+    header('Location: ../public/login.php?erro=1');
+    exit;
+}
 
 $stmt = $conexao->prepare("SELECT id_usuario, nome, cargo, senha FROM usuarios WHERE email = ?");
 $stmt->bind_param("s", $email_digitado);
