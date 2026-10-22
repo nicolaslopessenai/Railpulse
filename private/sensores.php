@@ -184,7 +184,7 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/sensores_private.js?v=2"></script>
+    <script src="../js/sensores_private.js?v=3"></script>
     <script src="../js/pesquisa_tabelas.js"></script>
 </body>
 

@@ -27,17 +27,20 @@ document.addEventListener("DOMContentLoaded", () => {
     tbody_sensores.addEventListener("click", (event) => {
       const btn_editar = event.target.closest(".crud_edit_button");
       if (btn_editar) {
-        snr_id_sensor.value = btn_editar.dataset.id;
-        document.getElementById("snr_nome").value = btn_editar.dataset.nome;
-        document.getElementById("snr_tipo").value = btn_editar.dataset.tipo;
-        document.getElementById("snr_localizacao").value =
-          btn_editar.dataset.localizacao;
-        document.getElementById("snr_status").value = btn_editar.dataset.status;
-        document.getElementById("snr_descricao").value =
-          btn_editar.dataset.descricao;
-        document.getElementById("snr_id_trem").value = btn_editar.dataset.trem;
-        document.getElementById("snr_id_rota").value = btn_editar.dataset.rota;
+        const snr_tipo = document.getElementById("snr_tipo");
+        const snr_localizacao = document.getElementById("snr_localizacao");
+        const snr_status = document.getElementById("snr_status");
+        const snr_id_rota = document.getElementById("snr_id_rota");
+
+        if (snr_id_sensor) snr_id_sensor.value = btn_editar.dataset.id || "";
+        if (snr_tipo) snr_tipo.value = btn_editar.dataset.tipo || "";
+        if (snr_localizacao)
+          snr_localizacao.value = btn_editar.dataset.localizacao || "";
+        if (snr_status) snr_status.value = btn_editar.dataset.status || "";
+        if (snr_id_rota) snr_id_rota.value = btn_editar.dataset.rota || "";
+
         modal_sensor.classList.remove("oculto");
+        document.body.classList.add("modal-open");
       }
     });
 
