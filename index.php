@@ -28,7 +28,6 @@ include 'infra/conexao.php';
                     <span class="badge bg-primary-subtle text-primary rounded-pill px-3 py-2 text-uppercase">Sistema inteligente</span>
                     <h1 class="display-5 fw-bold mt-3 mb-3">Monitoramento de precisão para ferrovias</h1>
                     <p class="lead text-secondary mb-4">Dados de sensores em tempo real para melhorar segurança, operação e tomada de decisão.</p>
-                    <a href="#solucoes" class="btn btn-primary btn-lg px-4">Conhecer solução</a>
                 </div>
             </div>
         </div>
