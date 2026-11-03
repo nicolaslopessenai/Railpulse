@@ -109,6 +109,10 @@ $trens = mysqli_query($conexao, "SELECT t.id_trem, t.nome, t.modelo, t.status_op
             </div>
         </div>
 
+        <?php if (isset($_GET['erro']) && $_GET['erro'] === 'em_uso') { ?>
+            <div class="alert alert-warning mt-3">Este trem está vinculado a rotas e não pode ser excluído.</div>
+        <?php } ?>
+
         <div class="card card-soft border-0">
             <div class="card-body">
                 <div class="input-group mb-3">
