@@ -6,8 +6,7 @@ $cargo_atual = strtolower($_SESSION['cargo'] ?? 'funcionario');
 $cargo_label = $cargo_atual === 'admin' ? 'Admin' : 'Funcionário';
 
 $usuarios = mysqli_query($conexao, "SELECT id_usuario, nome FROM usuarios ORDER BY nome");
-$rotas = mysqli_query($conexao, "SELECT id_rota, nome FROM rotas ORDER BY nome");
-$trens = mysqli_query($conexao, "SELECT t.id_trem, t.nome, t.modelo, t.status_operacional, t.velocidade_atual, t.latitude, t.longitude, t.id_usuario, t.id_rota, u.nome AS usuario_nome, r.nome AS rota_nome FROM trens t JOIN usuarios u ON t.id_usuario = u.id_usuario JOIN rotas r ON t.id_rota = r.id_rota ORDER BY t.id_trem");
+$trens = mysqli_query($conexao, "SELECT t.id_trem, t.nome, t.modelo, t.status_operacional, t.velocidade_atual, t.latitude, t.longitude, t.id_usuario, u.nome AS usuario_nome FROM trens t JOIN usuarios u ON t.id_usuario = u.id_usuario ORDER BY t.id_trem");
 ?>
 
 <!DOCTYPE html>
@@ -84,18 +83,6 @@ $trens = mysqli_query($conexao, "SELECT t.id_trem, t.nome, t.modelo, t.status_op
                                 </select>
                             </div>
                         </div>
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-12">
-                                <label for="edit_id_rota" class="form-label text-uppercase small fw-semibold text-secondary">Rota vinculada</label>
-                                <select class="form-select" id="edit_id_rota" name="trn_id_rota" required>
-                                    <option value="">Selecione uma rota</option>
-                                    <?php while ($rota = mysqli_fetch_assoc($rotas)) { ?>
-                                        <option value="<?php echo $rota['id_rota']; ?>"><?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div>
-
                         <input type="hidden" id="edit_velocidade_atual" name="trn_velocidade" value="0">
                         <input type="hidden" id="edit_latitude" name="trn_latitude" value="0">
                         <input type="hidden" id="edit_longitude" name="trn_longitude" value="0">
@@ -110,7 +97,7 @@ $trens = mysqli_query($conexao, "SELECT t.id_trem, t.nome, t.modelo, t.status_op
         </div>
 
         <?php if (isset($_GET['erro']) && $_GET['erro'] === 'em_uso') { ?>
-            <div class="alert alert-warning mt-3">Este trem está vinculado a rotas e não pode ser excluído.</div>
+            <div class="alert alert-warning mt-3">Este trem está vinculado a usuarios e não pode ser excluído.</div>
         <?php } ?>
 
         <div class="card card-soft border-0">
@@ -128,13 +115,12 @@ $trens = mysqli_query($conexao, "SELECT t.id_trem, t.nome, t.modelo, t.status_op
                                 <th>Modelo</th>
                                 <th>Status</th>
                                 <th>Usuário</th>
-                                <th>Rota</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_trens" class="tbody-busca-universal">
                             <?php if (mysqli_num_rows($trens) === 0) { ?>
-                                <tr><td colspan="7" class="text-secondary">Nenhum trem cadastrado ainda.</td></tr>
+                                <tr><td colspan="6" class="text-secondary">Nenhum trem cadastrado ainda.</td></tr>
                             <?php } ?>
                             <?php while ($trem = mysqli_fetch_assoc($trens)) { ?>
                                 <tr>
@@ -143,7 +129,6 @@ $trens = mysqli_query($conexao, "SELECT t.id_trem, t.nome, t.modelo, t.status_op
                                     <td><?php echo htmlspecialchars($trem['modelo'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars($trem['status_operacional'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars($trem['usuario_nome'], ENT_QUOTES, 'UTF-8'); ?></td>
-                                    <td><?php echo htmlspecialchars($trem['rota_nome'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td class="crud_actions">
                                         <button type="button" class="btn btn-outline-secondary btn-sm crud_edit_button"
                                             data-id="<?php echo (int) $trem['id_trem']; ?>"
@@ -151,7 +136,6 @@ $trens = mysqli_query($conexao, "SELECT t.id_trem, t.nome, t.modelo, t.status_op
                                             data-modelo="<?php echo htmlspecialchars($trem['modelo'], ENT_QUOTES, 'UTF-8'); ?>"
                                             data-status="<?php echo htmlspecialchars($trem['status_operacional'], ENT_QUOTES, 'UTF-8'); ?>"
                                             data-usuario="<?php echo (int) $trem['id_usuario']; ?>"
-                                            data-rota="<?php echo (int) $trem['id_rota']; ?>"
                                             data-velocidade="<?php echo htmlspecialchars((string) $trem['velocidade_atual'], ENT_QUOTES, 'UTF-8'); ?>"
                                             data-latitude="<?php echo htmlspecialchars((string) $trem['latitude'], ENT_QUOTES, 'UTF-8'); ?>"
                                             data-longitude="<?php echo htmlspecialchars((string) $trem['longitude'], ENT_QUOTES, 'UTF-8'); ?>">

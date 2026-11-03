@@ -38,15 +38,25 @@ CREATE TABLE IF NOT EXISTS trens (
     latitude            DECIMAL(10,7),
     longitude           DECIMAL(10,7),
     id_usuario          INT           NOT NULL,
-    id_rota             INT           NOT NULL,
     criado_em           TIMESTAMP     DEFAULT CURRENT_TIMESTAMP,
     atualizado_em       TIMESTAMP     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     CONSTRAINT fk_trens_usuarios
         FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
-        ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT fk_trens_rotas
-        FOREIGN KEY (id_rota) REFERENCES rotas(id_rota)
         ON DELETE RESTRICT ON UPDATE CASCADE
+) ENGINE=InnoDB;
+
+-- Tabela: rota_trem (relaciona rotas com trens)
+CREATE TABLE IF NOT EXISTS rota_trem (
+    id_rota_trem INT AUTO_INCREMENT PRIMARY KEY,
+    id_rota      INT NOT NULL,
+    id_trem      INT NOT NULL,
+    UNIQUE KEY uq_rota_trem (id_rota, id_trem),
+    CONSTRAINT fk_rota_trem_rota
+        FOREIGN KEY (id_rota) REFERENCES rotas(id_rota)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_rota_trem_trem
+        FOREIGN KEY (id_trem) REFERENCES trens(id_trem)
+        ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB;
 
 -- Tabela: sensores  (depende de trens e rotas)
@@ -104,14 +114,21 @@ INSERT INTO rotas (nome, origem, destino, distancia_km) VALUES
 ('Rota Vale do Itajaí',   'Blumenau',   'Itajaí',         65.00),
 ('Rota Norte',            'Joinville',  'Curitiba',       120.80);
 
--- 3. Trens (referencia usuários e rotas)
-INSERT INTO trens (nome, modelo, status_operacional, velocidade_atual, latitude, longitude, id_usuario, id_rota) VALUES
-('Locomotiva Alpha', 'SD70ACe',  'normal',  85.50, -26.3044, -48.8487, 1, 1),
-('Locomotiva Beta',  'AC44i',    'alerta',  45.20, -26.2740, -48.6830, 2, 2),
-('Locomotiva Gamma', 'ES43BBi',  'normal', 110.00, -26.9167, -49.0661, 3, 3),
-('Locomotiva Delta', 'GT46MAC',  'falha',    0.00, -26.2250, -48.6353, 4, 4);
+-- 3. Trens (referencia apenas usuários)
+INSERT INTO trens (nome, modelo, status_operacional, velocidade_atual, latitude, longitude, id_usuario) VALUES
+('Locomotiva Alpha', 'SD70ACe',  'normal',  85.50, -26.3044, -48.8487, 1),
+('Locomotiva Beta',  'AC44i',    'alerta',  45.20, -26.2740, -48.6830, 2),
+('Locomotiva Gamma', 'ES43BBi',  'normal', 110.00, -26.9167, -49.0661, 3),
+('Locomotiva Delta', 'GT46MAC',  'falha',    0.00, -26.2250, -48.6353, 4);
 
--- 4. Sensores (referencia trens e rotas)
+-- 4. Vínculos de trens nas rotas
+INSERT INTO rota_trem (id_rota, id_trem) VALUES
+(1, 1),
+(2, 2),
+(3, 3),
+(4, 4);
+
+-- 5. Sensores (referencia trens e rotas)
 INSERT INTO sensores (nome, tipo_dado, localizacao, status, descricao, id_trem, id_rota) VALUES
 ('Sensor Velocidade A1',  'velocidade',  'Eixo dianteiro - Locomotiva Alpha',  'ativo',      'Monitora velocidade do eixo dianteiro',      1, 1),
 ('Sensor Temperatura A2', 'temperatura', 'Motor principal - Locomotiva Alpha',  'ativo',      'Monitora temperatura do motor principal',     1, 1),

@@ -9,7 +9,7 @@ if ($id_rota <= 0) {
     exit;
 }
 
-$verifica_trens = $conexao->prepare("SELECT COUNT(*) FROM trens WHERE id_rota = ?");
+$verifica_trens = $conexao->prepare("SELECT COUNT(*) FROM rota_trem WHERE id_rota = ?");
 $verifica_trens->bind_param("i", $id_rota);
 $verifica_trens->execute();
 $verifica_trens->bind_result($total_trens);

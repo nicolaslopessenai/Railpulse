@@ -6,6 +6,15 @@ $cargo_atual = strtolower($_SESSION['cargo'] ?? 'funcionario');
 $cargo_label = $cargo_atual === 'admin' ? 'Admin' : 'Funcionário';
 
 $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distancia_km FROM rotas ORDER BY id_rota");
+$rotas_trens = mysqli_query($conexao, "SELECT rt.id_rota, t.id_trem, t.nome AS trem_nome FROM rota_trem rt JOIN trens t ON t.id_trem = rt.id_trem ORDER BY rt.id_rota, t.nome");
+$vinculos_rota_trem = [];
+while ($vinculo = mysqli_fetch_assoc($rotas_trens)) {
+    $id_rota_vinculo = (int) $vinculo['id_rota'];
+    $vinculos_rota_trem[$id_rota_vinculo][] = [
+        'id_trem' => (int) $vinculo['id_trem'],
+        'nome' => $vinculo['trem_nome'],
+    ];
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -61,19 +70,30 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distanci
                                 <th>Origem</th>
                                 <th>Destino</th>
                                 <th>Distância (km)</th>
+                                <th>Trens vinculados</th>
                             </tr>
                         </thead>
                         <tbody class="tbody-busca-universal">
                             <?php if (mysqli_num_rows($rotas) === 0) { ?>
-                                <tr><td colspan="5" class="text-secondary">Nenhuma rota cadastrada ainda.</td></tr>
+                                <tr><td colspan="6" class="text-secondary">Nenhuma rota cadastrada ainda.</td></tr>
                             <?php } ?>
                             <?php while ($rota = mysqli_fetch_assoc($rotas)) { ?>
+                                <?php $id_rota_atual = (int) $rota['id_rota']; $trens_vinculados = $vinculos_rota_trem[$id_rota_atual] ?? []; ?>
                                 <tr>
                                     <td><?php echo (int) $rota['id_rota']; ?></td>
                                     <td><?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars($rota['origem'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars($rota['destino'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars((string) $rota['distancia_km'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                    <td>
+                                        <?php if (empty($trens_vinculados)) { ?>
+                                            <span class="text-secondary small">Nenhum trem vinculado</span>
+                                        <?php } else { ?>
+                                            <?php foreach ($trens_vinculados as $trem_vinculado) { ?>
+                                                <div><?php echo htmlspecialchars($trem_vinculado['nome'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </td>
                                 </tr>
                             <?php } ?>
                         </tbody>

@@ -30,16 +30,19 @@ document.addEventListener("DOMContentLoaded", () => {
       if (btn_editar) {
         const edit_nome = document.getElementById("edit_nome");
         const edit_modelo = document.getElementById("edit_modelo");
-        const edit_status_operacional = document.getElementById("edit_status_operacional");
+        const edit_status_operacional = document.getElementById(
+          "edit_status_operacional",
+        );
         const edit_id_usuario = document.getElementById("edit_id_usuario");
-        const edit_id_rota = document.getElementById("edit_id_rota");
 
-        if (edit_original_id) edit_original_id.value = btn_editar.dataset.id || "";
+        if (edit_original_id)
+          edit_original_id.value = btn_editar.dataset.id || "";
         if (edit_nome) edit_nome.value = btn_editar.dataset.nome || "";
         if (edit_modelo) edit_modelo.value = btn_editar.dataset.modelo || "";
-        if (edit_status_operacional) edit_status_operacional.value = btn_editar.dataset.status || "";
-        if (edit_id_usuario) edit_id_usuario.value = btn_editar.dataset.usuario || "";
-        if (edit_id_rota) edit_id_rota.value = btn_editar.dataset.rota || "";
+        if (edit_status_operacional)
+          edit_status_operacional.value = btn_editar.dataset.status || "";
+        if (edit_id_usuario)
+          edit_id_usuario.value = btn_editar.dataset.usuario || "";
 
         modal_trem.classList.remove("oculto");
         document.body.classList.add("modal-open");

@@ -6,6 +6,15 @@ $cargo_atual = strtolower($_SESSION['cargo'] ?? 'funcionario');
 $cargo_label = $cargo_atual === 'admin' ? 'Admin' : 'Funcionário';
 
 $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distancia_km FROM rotas ORDER BY id_rota");
+$rotas_trens = mysqli_query($conexao, "SELECT rt.id_rota, t.id_trem, t.nome AS trem_nome FROM rota_trem rt JOIN trens t ON t.id_trem = rt.id_trem ORDER BY rt.id_rota, t.nome");
+$vinculos_rota_trem = [];
+while ($vinculo = mysqli_fetch_assoc($rotas_trens)) {
+    $id_rota_vinculo = (int) $vinculo['id_rota'];
+    $vinculos_rota_trem[$id_rota_vinculo][] = [
+        'id_trem' => (int) $vinculo['id_trem'],
+        'nome' => $vinculo['trem_nome'],
+    ];
+}
 ?>
 
 <!DOCTYPE html>
@@ -73,6 +82,20 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distanci
                                 <input type="number" class="form-control" id="rota_distancia_km" name="rta_distancia_km" min="0.01" step="0.01" required>
                             </div>
                         </div>
+
+                        <div class="mb-3">
+                            <label for="rota_trem_select" class="form-label text-uppercase small fw-semibold text-secondary">Adicionar trem à rota</label>
+                            <select class="form-select" id="rota_trem_select" name="rta_id_trem">
+                                <option value="">Nenhum trem no momento</option>
+                                <?php
+                                    $todos_trens = mysqli_query($conexao, "SELECT id_trem, nome FROM trens ORDER BY nome");
+                                    while ($trem = mysqli_fetch_assoc($todos_trens)) {
+                                        echo '<option value="' . (int) $trem['id_trem'] . '">' . htmlspecialchars($trem['nome'], ENT_QUOTES, 'UTF-8') . '</option>';
+                                    }
+                                ?>
+                            </select>
+                        </div>
+
                         <div class="d-flex gap-2 flex-wrap">
                             <button type="submit" id="btn_salvar_rota" class="btn btn-primary">Salvar</button>
                             <button type="button" id="btn_cancelar_rota" class="btn btn-outline-secondary">Cancelar</button>
@@ -101,28 +124,41 @@ $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distanci
                                 <th>Origem</th>
                                 <th>Destino</th>
                                 <th>Distância (km)</th>
+                                <th>Trens vinculados</th>
                                 <th>Ações</th>
                             </tr>
                         </thead>
                         <tbody id="tbody_rotas" class="tbody-busca-universal">
                             <?php if (mysqli_num_rows($rotas) === 0) { ?>
-                                <tr><td colspan="6" class="text-secondary">Nenhuma rota cadastrada ainda.</td></tr>
+                                <tr><td colspan="7" class="text-secondary">Nenhuma rota cadastrada ainda.</td></tr>
                             <?php } ?>
                             <?php while ($rota = mysqli_fetch_assoc($rotas)) { ?>
+                                <?php
+                                    $id_rota_atual = (int) $rota['id_rota'];
+                                    $trens_vinculados = $vinculos_rota_trem[$id_rota_atual] ?? [];
+                                ?>
                                 <tr>
                                     <td><?php echo (int) $rota['id_rota']; ?></td>
                                     <td><?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars($rota['origem'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars($rota['destino'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars((string) $rota['distancia_km'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                    <td>
+                                        <?php if (empty($trens_vinculados)) { ?>
+                                            <span class="text-secondary small">Nenhum trem vinculado</span>
+                                        <?php } else { ?>
+                                            <?php foreach ($trens_vinculados as $trem_vinculado) { ?>
+                                                <div><?php echo htmlspecialchars($trem_vinculado['nome'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                            <?php } ?>
+                                        <?php } ?>
+                                    </td>
                                     <td class="crud_actions">
                                         <button type="button" class="btn btn-outline-secondary btn-sm crud_edit_button"
                                             data-id="<?php echo (int) $rota['id_rota']; ?>"
                                             data-nome="<?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?>"
                                             data-origem="<?php echo htmlspecialchars($rota['origem'], ENT_QUOTES, 'UTF-8'); ?>"
                                             data-destino="<?php echo htmlspecialchars($rota['destino'], ENT_QUOTES, 'UTF-8'); ?>"
-                                            data-distancia="<?php echo htmlspecialchars((string) $rota['distancia_km'], ENT_QUOTES, 'UTF-8'); ?>"
-                                            data-trem="<?php echo (int) $rota['id_rota']; ?>">
+                                            data-distancia="<?php echo htmlspecialchars((string) $rota['distancia_km'], ENT_QUOTES, 'UTF-8'); ?>">
                                             Editar
                                         </button>
                                         <form class="d-inline crud_delete_form" data-confirm="Excluir esta rota? O banco não permite excluir rotas vinculadas a trens ou sensores." action="../infra/excluir_rota.php" method="POST">

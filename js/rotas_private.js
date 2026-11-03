@@ -5,11 +5,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const tbody_rotas = document.getElementById("tbody_rotas");
   const form_rota = document.getElementById("form_rota");
   const edit_original_id = document.getElementById("edit_original_id");
+  const rota_trem_select = document.getElementById("rota_trem_select");
 
   if (btn_nova_rota && modal_rota && form_rota) {
     btn_nova_rota.addEventListener("click", () => {
       form_rota.reset();
       edit_original_id.value = "";
+      if (rota_trem_select) rota_trem_select.value = "";
       modal_rota.classList.remove("oculto");
       document.body.classList.add("modal-open");
     });
@@ -19,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     btn_cancelar_rota.addEventListener("click", () => {
       modal_rota.classList.add("oculto");
       form_rota.reset();
+      if (rota_trem_select) rota_trem_select.value = "";
       document.body.classList.remove("modal-open");
     });
   }
