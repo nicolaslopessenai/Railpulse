@@ -73,9 +73,46 @@ $cargo_label = $cargo_atual === 'admin' ? 'Admin' : 'Funcionário';
                 </div>
             </div>
         </div>
+
+        <div class="card card-soft border-0 mb-4" id="weather_card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="h5 fw-bold mb-0 text-uppercase text-secondary">Clima atual</h2>
+                    <span class="badge text-bg-light text-secondary small" id="weather_status">Consultando...</span>
+                </div>
+
+                <div id="weather_loading" class="text-secondary small">Consultando a condição climática de Joinville...</div>
+                <div id="weather_error" class="alert alert-warning py-2 px-3 mb-0 d-none" role="alert"></div>
+
+                <div id="weather_content" class="row g-3 d-none">
+                    <div class="col-md-4">
+                        <div class="border rounded-3 p-3 h-100 bg-light">
+                            <div class="text-secondary small text-uppercase">Temperatura atual</div>
+                            <div class="fs-4 fw-bold mt-2"><span id="weather_temperature">--</span> °C</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="border rounded-3 p-3 h-100 bg-light">
+                            <div class="text-secondary small text-uppercase">Condição</div>
+                            <div class="fs-5 fw-bold mt-2" id="weather_condition">--</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="border rounded-3 p-3 h-100 bg-light">
+                            <div class="text-secondary small text-uppercase">Localização</div>
+                            <div class="fs-6 fw-semibold mt-2" id="weather_location">--</div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="text-secondary small text-uppercase">Última atualização</div>
+                        <div class="fw-semibold mt-2" id="weather_updated">--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../script/dashboard.js"></script>
+    <script src="../js/weather_dashboard.js"></script>
 </body>
 </html>

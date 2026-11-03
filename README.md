@@ -1,118 +1,68 @@
-# RailPulse
+﻿# RailPulse
 
-## Sobre o Projeto
+## Visão geral
 
-O **RailPulse** é uma solução tecnológica desenvolvida para otimizar e auxiliar a gestão de operações ferroviárias. O sistema captura e monitora dados críticos dos trens em tempo real — como velocidade, localização, consumo de combustível e diagnósticos de falhas — por meio de sensores IoT (Internet das Coisas) estrategicamente instalados nos trilhos e nas próprias locomotivas.
+O RailPulse é um sistema web para gestão operacional de ferrovias, com foco em monitoramento de trens, sensores, rotas e relatórios. A solução foi organizada em áreas públicas e privadas para separar autenticação, navegação interna e operações administrativas.
 
-O foco principal do projeto é transformar dados brutos em decisões inteligentes, aumentando a segurança e a eficiência operacional. Com isso, falhas podem ser detectadas rapidamente e manutenções preditivas passam a ser realizadas com base em fatos, permitindo que os gestores acompanhem o desempenho da frota e identifiquem padrões operacionais a serem otimizados.
+A estrutura atual usa PHP puro, MySQL e HTML/CSS/JavaScript, mantendo a lógica simples e didática para estudantes de Desenvolvimento de Sistemas.
 
----
+## Objetivo do projeto
 
-## Funcionalidades Principais
+O sistema permite:
 
-* **Controle de Acesso Seguro:** Sistema de login com autenticação para administradores e usuários.
-* **Gestão de Sensores e Trens:** Telas dedicadas para o cadastro e vinculação de sensores IoT a locomotivas específicas.
-* **Monitoramento em Tempo Real:** Painel de controle (Dashboard) para acompanhar o status da ferrovia.
-* **Geolocalização:** Visualização e rastreamento dos trens ativos em um mapa interativo.
-* **Alertas Automáticos:** Notificações instantâneas no sistema em caso de anormalidades ou falhas detectadas.
-* **Relatórios e Gráficos:** Ferramentas para geração de relatórios detalhados e gráficos interativos para análise histórica de desempenho.
+- acompanhar dados operacionais de trens e sensores;
+- controlar acesso por perfil de usuário;
+- gerenciar rotas, trens e relatórios;
+- consultar clima em tempo real para a cidade de Joinville;
+- consultar dados de endereço por CEP através da API ViaCEP.
 
----
+## Landing page e sistema interno
 
-## Regras de Negócio (RN)
+A landing page institucional do projeto permanece em `index.php` e não foi alterada. O sistema interno continua acessível pelas páginas em `public/` e `private/` após login.
 
-As regras abaixo definem as restrições operacionais e políticas do sistema RailPulse:
+## Tecnologias utilizadas
 
-| ID | Regra de Negócio |
-| :--- | :--- |
-| **RN01** | A tela de apresentação inicial deve exibir uma página institucional sobre a empresa. |
-| **RN02** | A autenticação na tela de login exige obrigatoriamente um e-mail válido e senha. |
-| **RN03** | O sistema possui dois níveis de acesso distintos: versão Administrador (Admin) e versão Funcionário. |
-| **RN04** | A versão Admin possui permissões totais de visualização, criação, edição e exclusão de cadastros. |
-| **RN05** | A tela de Dashboard deve exibir o mapa com a plotagem e rastreamento dos trens em tempo real. |
-| **RN06** | Operações de CRUD (Criar, Alterar e Excluir) em sensores são restritas à versão Admin. |
-| **RN07** | Operações de CRUD (Criar, Alterar e Excluir) em trens/locomotivas são restritas à versão Admin. |
-| **RN08** | O gerenciamento completo de usuários e contas de login é exclusivo da versão Admin. |
-| **RN09** | A tela de sensores deve listar e permitir a visualização de todos os dispositivos para ambos os perfis. |
-| **RN10** | A tela de trens deve listar e permitir a visualização de todas as locomotivas para ambos os perfis. |
+- PHP 8.x (backend e autenticação via sessão)
+- MySQL/MariaDB
+- HTML5
+- CSS3
+- JavaScript ES6+
+- Bootstrap 5
+- APIs externas: Open-Meteo e ViaCEP
 
----
-
-## Requisitos Funcionais (RF)
-
-Os requisitos abaixo descrevem as funcionalidades que o sistema deve executar para atender aos usuários:
-
-| ID | Descrição do Requisito |
-| :--- | :--- |
-| **RF01** | Permitir que os usuários e administradores façam login utilizando e-mail e senha. |
-| **RF02** | Redirecionar o usuário diretamente para a tela de Dashboard imediatamente após a autenticação bem-sucedida. |
-| **RF03** | Disponibilizar um menu de navegação fluido no Dashboard para acessar as telas de sensores, relatórios e rotas. |
-| **RF04** | Exibir de forma dinâmica no mapa a localização geográfica, velocidade e temperatura dos trens à medida que os dados chegam. |
-| **RF05** | Listar os sensores cadastrados exibindo ID, Tipo, Status e Coordenadas, exibindo botões de ação apenas para o Admin. |
-| **RF06** | Permitir que o Admin cadastre novos sensores vinculados a um trem específico ou a uma localização da via. |
-| **RF07** | Permitir que o Admin altere e atualize as informações técnicas dos sensores cadastrados. |
-| **RF08** | Exigir confirmação manual para exclusão de sensores pelo Admin e exibir erro caso possua histórico de telemetria no banco. |
-| **RF09** | Exibir cartões de indicadores analíticos no topo da tela (total de ativos, trens operando, em manutenção e em reserva). |
-| **RF10** | Listar as locomotivas exibindo ID/Nome, Modelo, Capacidade, Última Manutenção e Status, utilizando paginação de dados. |
-| **RF11** | Restringir estritamente ao administrador as permissões para criar, alterar dados e deletar locomotivas da base. |
-| **RF12** | Exibir um resumo consolidado do trajeto contendo o total de rotas cadastradas, extensão em quilômetros (km) e rotas ativas. |
-| **RF13** | Listar as rotas cadastradas detalhando Nome, Origem, Destino e Distância, utilizando suporte a paginação. |
-| **RF14** | Restringir estritamente ao administrador a permissão de registrar novas rotas, atualizar trajetos ou remover rotas. |
-| **RF15** | Permitir somente ao perfil administrador cadastrar novos usuários, além de editar perfis existentes ou excluí-los. |
-| **RF16** | Permitir a busca ou geração de relatórios de telemetria filtrando por ID, Nome do Sensor ou intervalo de período de tempo. |
-| **RF17** | Disponibilizar filtros de data (inicial e final), status e tipo de falha para geração automática de gráficos de tendência. |
-| **RF18** | Apresentar uma tabela de histórico contendo relatórios gerados previamente com um botão para visualização detalhada. |
-| **RF19** | Manter um endpoint ou integração contínua ativa para receber e processar pacotes de dados do hardware externo de IoT. |
-
----
-
-## Requisitos Não Funcionais (RNF)
-
-Os critérios abaixo especificam as características de qualidade, segurança e restrições técnicas do sistema:
-
-| ID | Descrição do Requisito Não Funcional |
-| :--- | :--- |
-| **RNF01** | **Segurança / Acesso:** O sistema deve bloquear o acesso de usuários comuns a URLs ou funções restritas do Admin. |
-| **RNF02** | **Confiabilidade:** O banco de dados MySQL deve assegurar a integridade referencial rígida via chaves primárias e estrangeiras. |
-| **RNF03** | **Desempenho:** O processamento e a atualização dos dados recebidos dos sensores IoT no Dashboard devem ocorrer em tempo real. |
-| **RNF04** | **Usabilidade (UX/UI):** A interface deve seguir boas práticas de design, fornecendo gráficos interpretativos claros e limpos. |
-| **RNF05** | **Segurança de Sessão:** A função de logout deve destruir a sessão, redirecionar para o login e impedir o reuso de rotas privadas. |
-| **RNF06** | **Integridade de Dados:** O sistema deve impedir a deleção física de sensores com leituras salvas para evitar perda de histórico. |
-
----
-
-## Tecnologias Utilizadas
-
-* **Back-end:** PHP (Estruturado com separação de rotas e camadas pública/privada)
-* **Front-end:** HTML5, CSS3, JavaScript (ES6+)
-* **Banco de Dados:** MySQL / MariaDB (Arquivo `railpulse.sql`)
-* **Metodologia & Documentação:** Scrum, Markdown (pesquisas e documentações internas)
-
----
-
-## Estrutura do Projeto
-
-Abaixo está a organização de pastas e arquivos do repositório:
+## Estrutura do repositório
 
 ```text
-RAILPULSE/
-│
+Railpulse/
 ├── assets/
-│   ├── img/                  # Imagens e vetores do sistema
-│   └── style/                # Arquivos de estilização CSS
-│
-├── doc/                      # Documentação do projeto e pesquisas
-│   ├── logo_scrum.png
-│   ├── logo_xampp.png
-│   ├── pesquisa-crud.md
-│   ├── pesquisa-scrum.md
-│   └── pesquisa-xampp.md
-│
+│   ├── img/
+│   └── style/
+├── database/
+│   └── railpulse.sql
+├── doc/
+│   └── pesquisas/
+├── docs/
+│   └── relatorio-uso-ia.md
 ├── infra/
-│   └── db/
-│       └── railpulse.sql     # Script de criação do banco de dados
-│
-├── private/                  # Regras de negócio e processamento interno (PHP)
+│   ├── auth.php
+│   ├── conexao.php
+│   ├── processar_login.php
+│   ├── logout.php
+│   ├── salvar_usuario.php
+│   ├── salvar_trem.php
+│   ├── salvar_rota.php
+│   ├── salvar_sensor.php
+│   ├── excluir_usuario.php
+│   ├── excluir_trem.php
+│   ├── excluir_rota.php
+│   └── excluir_sensor.php
+├── js/
+│   ├── cep_lookup.js
+│   ├── weather_dashboard.js
+│   ├── pesquisa_tabelas.js
+│   ├── usuarios_private.js
+│   └── ...
+├── private/
 │   ├── cadastro.php
 │   ├── dashboard.php
 │   ├── relatorios.php
@@ -120,57 +70,104 @@ RAILPULSE/
 │   ├── sensores.php
 │   ├── trens.php
 │   └── usuarios.php
-│
-├── public/                   # Telas e arquivos acessíveis ao usuário (PHP)
+├── public/
 │   ├── dashboard.php
 │   ├── login.php
 │   ├── relatorios.php
 │   ├── rotas.php
 │   ├── sensores.php
 │   └── trens.php
-│
-│
-├── index.html                # Página de entrada da aplicação
-├── LICENSE                   # Arquivo de licença do projeto
-└── README.md                 # Documentação principal
+├── index.php
+├── LICENSE
+├── README.md
+└── ...
 ```
 
----
+## Autenticação e acesso
 
-## Aprendizados e Objetivos
+A autenticação do projeto é baseada em sessão do PHP.
 
-O principal objetivo deste projeto é aplicar conceitos práticos de desenvolvimento de sistemas comerciais, conectando hardware (sensores IoT simulados/integrados) a uma aplicação web completa. Durante o desenvolvimento, foram consolidados aprendizados em:
+- `infra/auth.php` valida a presença de sessão e o cargo do usuário.
+- `infra/processar_login.php` verifica e-mail e senha contra o banco.
+- páginas em `private/` exigem acesso administrativo ou do perfil correspondente.
+- `infra/logout.php` encerra a sessão e redireciona para a tela de login.
 
-* Arquitetura e organização de projetos web divididos em escopo público e privado.
-* Integração de banco de dados relacional com PHP.
-* Manipulação dinâmica de elementos de tela, mapas e gráficos via JavaScript.
-* Aplicação da metodologia ágil Scrum para organização de tarefas da equipe.
+## Banco de dados
 
----
+O banco principal está em `database/railpulse.sql`.
 
-## Como Executar o Projeto
+A conexão é feita em `infra/conexao.php` e usa as credenciais locais padrão do ambiente XAMPP:
 
-1. **Pré-requisitos:** Certifique-se de ter um ambiente de servidor local instalado, como o XAMPP (com instâncias de PHP e MySQL ativas).
-2. **Clonar o Repositório:**
-   ```bash
-   git clone https://github.com
-   ```
-3. **Mover para o Servidor:** Cole a pasta do projeto dentro do diretório `htdocs` do seu XAMPP (ou equivalente do seu servidor local).
-4. **Configurar o Banco de Dados:**
-   * Abra o phpMyAdmin (`http://localhost/phpmyadmin`).
-   * Crie um banco de dados chamado `railpulse`.
-   * Importe o arquivo estrutural encontrado em `infra/db/railpulse.sql`.
-5. **Acessar a Aplicação:** Abra o navegador de sua preferência e digite `http://localhost/railpulse/index.html`.
+- host: `localhost`
+- usuário: `root`
+- senha: vazia
+- banco: `railpulse`
 
----
+## APIs integradas
+
+### Open-Meteo
+
+- documentação: https://open-meteo.com/en/docs
+- objetivo: consultar clima atual da cidade de Joinville.
+- não exige chave de API.
+- consulta usada na dashboard após login.
+
+### ViaCEP
+
+- documentação: https://viacep.com.br/
+- objetivo: localizar endereço por CEP, preenchendo automaticamente os campos de logradouro, bairro, cidade e UF.
+- valida o CEP antes da busca e trata erros e CEP inexistente.
+
+## Instalação e execução
+
+### Pré-requisitos
+
+- XAMPP ou outro ambiente com PHP + MySQL em execução.
+- acesso ao diretório `htdocs` do servidor local.
+
+### Passos
+
+1. Clone o projeto para o diretório do servidor local.
+2. Importe o script `database/railpulse.sql` no phpMyAdmin ou via linha de comando do MySQL.
+3. Confirme que o banco `railpulse` foi criado corretamente.
+4. Acesse a aplicação em:
+   - `http://localhost/Railpulse/` para a landing page.
+   - `http://localhost/Railpulse/public/login.php` para o login do sistema.
+
+## Como a integração funciona
+
+### Clima
+
+A dashboard consulta a API Open-Meteo em JavaScript. O fluxo é:
+
+1. buscar geolocalização da cidade de Joinville;
+2. consultar temperatura e condição climática atual;
+3. mostrar o local, data/hora da atualização e mensagem de erro quando necessário.
+
+### CEP
+
+Os formulários de cadastro/edição de usuário foram adaptados para incluir busca por CEP. O comportamento é:
+
+1. validação de 8 dígitos numéricos;
+2. remoção de máscara e espaços;
+3. consulta real à API ViaCEP;
+4. preenchimento automático dos campos disponíveis;
+5. mensagem de erro para CEP inválido, inexistente ou indisponível.
+
+## Observações importantes
+
+- A landing page institucional não foi alterada.
+- O banco foi mantido sem alterações estruturais desnecessárias.
+- As integrações foram feitas com APIs reais e sem dados estáticos.
+- As consultas são executadas somente quando a página é carregada ou quando o usuário solicita o CEP.
 
 ## Desenvolvedores
 
-Este projeto foi orgulhosamente desenvolvido por:
+- Arthur Vieira
+- Gabriel Ostrovski
+- Gustavo Miquelute
+- Nicolas Lopes
 
-* **Arthur Vieira**
-* **Gabriel Ostrovski**
-* **Gustavo Miquelute**
-* **Nicolas Lopes**
+## Licença
 
-Estudantes do Curso Técnico em Desenvolvimento de Sistemas no **SENAI Santa Catarina**.
+O projeto está sob a licença do repositório em `LICENSE`.
