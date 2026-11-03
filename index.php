@@ -14,7 +14,7 @@ include 'infra/conexao.php';
 <body>
     <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm sticky-top">
         <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="index.php">Rail<span class="text-primary">Pulse</span></a>
+            <div class="navbar-brand fw-bold fs-3 mb-0">Rail<span class="text-primary">Pulse</span></div>
             <div class="ms-auto">
                 <a class="btn btn-primary px-4" href="public/login.php">Entrar</a>
             </div>
