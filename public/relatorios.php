@@ -38,41 +38,43 @@ $cargo_label = $cargo_atual === 'admin' ? 'Admin' : 'Funcionário';
     </nav>
 
     <main class="container py-4">
-        <h1 class="h3 fw-bold mb-3">Relatórios</h1>
-
-        <div class="input-group mb-4">
-            <input type="search" class="form-control" id="input_busca" placeholder="Buscar relatório..." aria-label="Buscar relatório">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-3">
+            <h1 class="h3 fw-bold mb-0">Relatórios</h1>
+            <button id="btn_gerar_pdf" class="btn btn-primary px-4" type="button">
+                Gerar PDF
+            </button>
         </div>
 
-        <section class="row g-4" aria-label="Relatórios disponíveis">
-            <div class="col-md-4 relatorio_card">
-                <article class="card card-soft border-0 h-100">
-                    <div class="card-body p-4">
-                        <h2 class="h5 fw-bold mb-2">Trens em operação</h2>
-                        <p class="text-secondary mb-0">Resumo da frota e status geral.</p>
-                    </div>
-                </article>
+        <div id="report_loading" class="alert alert-info d-none" role="status" aria-live="polite">
+            Gerando relatório consolidado...
+        </div>
+        <div id="report_error" class="alert alert-danger d-none" role="alert"></div>
+
+        <div class="input-group mb-4">
+            <input type="search" class="form-control" id="input_busca" placeholder="Buscar relatório baixado..." aria-label="Buscar relatório baixado">
+        </div>
+
+        <p id="msg_busca_vazia" class="text-secondary mt-3 oculto">Nenhum relatório encontrado no histórico.</p>
+
+        <div class="card card-soft border-0 mb-4">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center mb-3 gap-2">
+                    <h2 class="h5 fw-bold mb-0">Relatórios gerados</h2>
+                    <button id="btn_limpar_historico" class="btn btn-outline-secondary btn-sm" type="button">
+                        Limpar histórico
+                    </button>
+                </div>
+                <ul id="lista_relatorios" class="list-group list-group-flush"></ul>
+                <div id="lista_relatorios_vazia" class="text-secondary small mb-0">
+                    Nenhum relatório gerado ainda.
+                </div>
             </div>
-            <div class="col-md-4 relatorio_card">
-                <article class="card card-soft border-0 h-100">
-                    <div class="card-body p-4">
-                        <h2 class="h5 fw-bold mb-2">Rotas ativas</h2>
-                        <p class="text-secondary mb-0">Linhas com movimentação registrada hoje.</p>
-                    </div>
-                </article>
-            </div>
-            <div class="col-md-4 relatorio_card">
-                <article class="card card-soft border-0 h-100">
-                    <div class="card-body p-4">
-                        <h2 class="h5 fw-bold mb-2">Alertas</h2>
-                        <p class="text-secondary mb-0">Sensores e falhas pendentes de atenção.</p>
-                    </div>
-                </article>
-            </div>
-        </section>
-        <p id="msg_busca_vazia" class="text-secondary mt-3 oculto">Nenhum resultado encontrado.</p>
+        </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script src="../js/relatorios.js"></script>
 </body>
 </html>
