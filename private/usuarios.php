@@ -148,7 +148,7 @@ $usuarios = mysqli_query($conexao, "SELECT id_usuario, nome, email, matricula, c
                                 <th>Email</th>
                                 <th>Matrícula</th>
                                 <th>Cargo</th>
-                                <th>Ações</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_usuarios" class="tbody-busca-universal">
@@ -163,17 +163,29 @@ $usuarios = mysqli_query($conexao, "SELECT id_usuario, nome, email, matricula, c
                                     <td><?php echo htmlspecialchars($usuario['matricula'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars($usuario['cargo'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td class="crud_actions">
-                                        <button type="button" class="btn btn-outline-secondary btn-sm crud_edit_button"
+                                        <button type="button" class="btn btn-primary btn-sm crud_edit_button"
                                             data-id="<?php echo (int) $usuario['id_usuario']; ?>"
                                             data-nome="<?php echo htmlspecialchars($usuario['nome'], ENT_QUOTES, 'UTF-8'); ?>"
                                             data-email="<?php echo htmlspecialchars($usuario['email'], ENT_QUOTES, 'UTF-8'); ?>"
                                             data-matricula="<?php echo htmlspecialchars($usuario['matricula'], ENT_QUOTES, 'UTF-8'); ?>"
-                                            data-cargo="<?php echo htmlspecialchars($usuario['cargo'], ENT_QUOTES, 'UTF-8'); ?>">
-                                            Editar
+                                            data-cargo="<?php echo htmlspecialchars($usuario['cargo'], ENT_QUOTES, 'UTF-8'); ?>"
+                                            aria-label="Editar usuário">
+                                            <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                <path d="M11.5 2.5L13.5 4.5L5.75 12.25L2.75 13.25L3.75 10.25L11.5 2.5Z" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M9.75 4.25L11.75 6.25" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                                            </svg>
                                         </button>
                                         <form class="d-inline crud_delete_form" data-confirm="Excluir este usuário?" action="../infra/excluir_usuario.php" method="POST">
                                             <input type="hidden" name="id_usuario" value="<?php echo (int) $usuario['id_usuario']; ?>">
-                                            <button type="submit" class="btn btn-outline-danger btn-sm">Excluir</button>
+                                            <button type="submit" class="btn btn-outline-danger btn-sm crud_delete_button" aria-label="Excluir usuário">
+                                                <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                    <path d="M3 4.25H13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                                                    <path d="M6 4.25V2.75C6 2.33579 6.33579 2 6.75 2H9.25C9.66421 2 10 2.33579 10 2.75V4.25" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <path d="M4.5 4.25L5.25 12.75C5.3 13.3 5.76 13.75 6.31 13.75H9.69C10.24 13.75 10.7 13.3 10.75 12.75L11.5 4.25" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <path d="M7 6.75V11.25" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                                                    <path d="M9 6.75V11.25" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+                                                </svg>
+                                            </button>
                                         </form>
                                     </td>
                                 </tr>
