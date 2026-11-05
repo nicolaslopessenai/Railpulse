@@ -6,14 +6,18 @@ $cargo_atual = strtolower($_SESSION['cargo'] ?? 'funcionario');
 $cargo_label = $cargo_atual === 'admin' ? 'Admin' : 'Funcionário';
 
 $rotas = mysqli_query($conexao, "SELECT id_rota, nome, origem, destino, distancia_km FROM rotas ORDER BY id_rota");
-$rotas_trens = mysqli_query($conexao, "SELECT rt.id_rota, t.id_trem, t.nome AS trem_nome FROM rota_trem rt JOIN trens t ON t.id_trem = rt.id_trem ORDER BY rt.id_rota, t.nome");
+$rotas_trens = mysqli_query($conexao, "SELECT rt.id_rota, t.id_trem, t.nome AS trem_nome FROM rota_trem rt JOIN trens t ON t.id_trem = rt.id_trem GROUP BY rt.id_rota, t.id_trem, t.nome ORDER BY rt.id_rota, t.nome");
 $vinculos_rota_trem = [];
 while ($vinculo = mysqli_fetch_assoc($rotas_trens)) {
     $id_rota_vinculo = (int) $vinculo['id_rota'];
-    $vinculos_rota_trem[$id_rota_vinculo][] = [
-        'id_trem' => (int) $vinculo['id_trem'],
-        'nome' => $vinculo['trem_nome'],
-    ];
+    $id_trem_vinculado = (int) $vinculo['id_trem'];
+
+    if (!isset($vinculos_rota_trem[$id_rota_vinculo][$id_trem_vinculado])) {
+        $vinculos_rota_trem[$id_rota_vinculo][$id_trem_vinculado] = [
+            'id_trem' => $id_trem_vinculado,
+            'nome' => $vinculo['trem_nome'],
+        ];
+    }
 }
 ?>
 
@@ -125,7 +129,7 @@ while ($vinculo = mysqli_fetch_assoc($rotas_trens)) {
                                 <th>Destino</th>
                                 <th>Distância (km)</th>
                                 <th>Trens vinculados</th>
-                                <th>Ações</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_rotas" class="tbody-busca-universal">

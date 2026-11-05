@@ -139,7 +139,7 @@ $sensores = mysqli_query($conexao, "SELECT s.id_sensor, s.nome, s.tipo_dado, s.l
                                 <th>Localização</th>
                                 <th>Status</th>
                                 <th>Rota</th>
-                                <th>Ações</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_sensores" class="tbody-busca-universal">

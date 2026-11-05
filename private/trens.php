@@ -115,7 +115,7 @@ $trens = mysqli_query($conexao, "SELECT t.id_trem, t.nome, t.modelo, t.status_op
                                 <th>Modelo</th>
                                 <th>Status</th>
                                 <th>Usuário</th>
-                                <th>Ações</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_trens" class="tbody-busca-universal">

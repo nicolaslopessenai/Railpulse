@@ -51,6 +51,34 @@ a {
   text-transform: uppercase;
 }
 
+.table-soft th:last-child,
+.table-soft td:last-child {
+  position: sticky;
+  right: 0.5rem;
+  background: rgba(255, 255, 255, 0.98);
+  z-index: 3;
+  min-width: 120px;
+  box-shadow: -2px 0 0 var(--rail-line);
+}
+
+.table-soft th:last-child {
+  z-index: 4;
+}
+
+.crud_actions {
+  position: sticky;
+  right: 0.5rem;
+  background: rgba(255, 255, 255, 0.98);
+  z-index: 2;
+  min-width: 120px;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  box-shadow: -2px 0 0 var(--rail-line);
+}
+
 .badge-soft {
   background: #edf7ff;
   color: var(--rail-blue) !important;

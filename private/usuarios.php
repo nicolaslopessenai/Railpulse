@@ -148,7 +148,7 @@ $usuarios = mysqli_query($conexao, "SELECT id_usuario, nome, email, matricula, c
                                 <th>Email</th>
                                 <th>Matrícula</th>
                                 <th>Cargo</th>
-                                <th>Ações</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="tbody_usuarios" class="tbody-busca-universal">
