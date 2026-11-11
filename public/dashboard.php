@@ -4,6 +4,30 @@ include '../infra/conexao.php';
 
 $cargo_atual = strtolower($_SESSION['cargo'] ?? 'funcionario');
 $cargo_label = $cargo_atual === 'admin' ? 'Admin' : 'Funcionário';
+
+$total_rotas = 0;
+$velocidade_media = 0;
+$percentual_ativos = 0;
+
+$q_rotas = mysqli_query($conexao, "SELECT COUNT(*) AS total FROM rotas");
+if ($q_rotas) {
+    $total_rotas = (int) (mysqli_fetch_assoc($q_rotas)['total'] ?? 0);
+}
+
+$q_vel = mysqli_query($conexao, "SELECT AVG(velocidade_atual) AS media FROM trens");
+if ($q_vel) {
+    $velocidade_media = (float) (mysqli_fetch_assoc($q_vel)['media'] ?? 0);
+}
+
+$q_sensores = mysqli_query($conexao, "SELECT COUNT(*) AS total, SUM(CASE WHEN status = 'ativo' THEN 1 ELSE 0 END) AS ativos FROM sensores");
+if ($q_sensores) {
+    $linha_sensores = mysqli_fetch_assoc($q_sensores);
+    $total_sensores = (int) ($linha_sensores['total'] ?? 0);
+    $ativos = (int) ($linha_sensores['ativos'] ?? 0);
+    if ($total_sensores > 0) {
+        $percentual_ativos = round(($ativos / $total_sensores) * 100);
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -53,20 +77,20 @@ $cargo_label = $cargo_atual === 'admin' ? 'Admin' : 'Funcionário';
                 <div class="row g-3">
                     <div class="col-md-4">
                         <div class="border rounded-3 p-3 h-100 bg-light">
-                            <div class="text-secondary small text-uppercase">Total de trechos</div>
-                            <div class="fs-4 fw-bold mt-2">24</div>
+                            <div class="text-secondary small text-uppercase">Total de rotas</div>
+                            <div class="fs-4 fw-bold mt-2"><?php echo $total_rotas; ?></div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="border rounded-3 p-3 h-100 bg-light">
                             <div class="text-secondary small text-uppercase">Velocidade média</div>
-                            <div class="fs-4 fw-bold mt-2">82 km/h</div>
+                            <div class="fs-4 fw-bold mt-2"><?php echo number_format($velocidade_media, 1, ',', '.'); ?> km/h</div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="border rounded-3 p-3 h-100 bg-light">
                             <div class="text-secondary small text-uppercase">Sensores ativos</div>
-                            <div class="fs-4 fw-bold mt-2">96%</div>
+                            <div class="fs-4 fw-bold mt-2"><?php echo $percentual_ativos; ?>%</div>
                         </div>
                     </div>
                 </div>

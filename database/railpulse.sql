@@ -100,11 +100,12 @@ CREATE INDEX idx_dados_sensor   ON dados_sensores(id_sensor);
 
 -- Dados iniciais — ORDEM CORRETA (respeita FK)
 -- 1. Usuários primeiro
+-- Senha de demonstração de todos os usuários abaixo: 1234 (hash bcrypt)
 INSERT INTO usuarios (nome, email, senha, matricula, cargo) VALUES
 ('Administrador Master', 'admin@gmail.com', '$2y$10$hzzAyq0tdLb83.4g2zqfHeo2x0JW1S68PiiJ47/SlM60OiG1RtMyi', '0001', 'admin'),
-('Nicolas Lopes', 'nicolas@empresa.com', '$2y$10$4A74XWST0RyRU7r/cmOSZ.gHtwBC9BtgFlrMDAeZ7o.ZMaFsb3HVm', '0002', 'admin'),
-('Arthur Vieira', 'arthur@empresa.com', '$2y$10$4A74XWST0RyRU7r/cmOSZ.gHtwBC9BtgFlrMDAeZ7o.ZMaFsb3HVm', '0003', 'funcionario'),
-('Gabriel Ostrovski', 'gabriel@empresa.com', '$2y$10$4A74XWST0RyRU7r/cmOSZ.gHtwBC9BtgFlrMDAeZ7o.ZMaFsb3HVm', '0004', 'funcionario'),
+('Nicolas Lopes', 'nicolas@empresa.com', '$2y$10$hzzAyq0tdLb83.4g2zqfHeo2x0JW1S68PiiJ47/SlM60OiG1RtMyi', '0002', 'admin'),
+('Arthur Vieira', 'arthur@empresa.com', '$2y$10$hzzAyq0tdLb83.4g2zqfHeo2x0JW1S68PiiJ47/SlM60OiG1RtMyi', '0003', 'funcionario'),
+('Gabriel Ostrovski', 'gabriel@empresa.com', '$2y$10$hzzAyq0tdLb83.4g2zqfHeo2x0JW1S68PiiJ47/SlM60OiG1RtMyi', '0004', 'funcionario'),
 ('Gustavo Miquelute', 'mk@gmail.com', '$2y$10$hzzAyq0tdLb83.4g2zqfHeo2x0JW1S68PiiJ47/SlM60OiG1RtMyi', '0011', 'admin');
 
 -- 2. Rotas

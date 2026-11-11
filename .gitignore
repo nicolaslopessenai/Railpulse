@@ -1,0 +1,20 @@
+# Ambiente e credenciais locais
+.env
+.env.*
+*.local
+
+# Logs e temporários
+*.log
+*.tmp
+*_tmp_*
+Thumbs.db
+.DS_Store
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
+
+# Dependências (caso sejam adicionadas no futuro)
+vendor/
+node_modules/

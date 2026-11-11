@@ -2,12 +2,27 @@
 include 'conexao.php';
 include 'auth.php';
 
-$nome       = $_POST['usr_nome'] ?? '';
-$email      = $_POST['usr_email'] ?? '';
-$senha      = $_POST['usr_senha'] ?? '';
-$matricula  = $_POST['usr_matricula'] ?? '';
-$cargo      = $_POST['usr_cargo'] ?? '';
+$nome       = trim((string) ($_POST['usr_nome'] ?? ''));
+$email      = trim((string) ($_POST['usr_email'] ?? ''));
+$senha      = (string) ($_POST['usr_senha'] ?? '');
+$matricula  = trim((string) ($_POST['usr_matricula'] ?? ''));
+$cargo      = trim((string) ($_POST['usr_cargo'] ?? ''));
 $id_usuario = isset($_POST['usr_id']) && $_POST['usr_id'] !== '' ? (int) $_POST['usr_id'] : null;
+
+if ($nome === '' || $email === '' || $matricula === '' || ($cargo !== 'admin' && $cargo !== 'funcionario')) {
+    header('Location: ../private/usuarios.php');
+    exit;
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    header('Location: ../private/usuarios.php');
+    exit;
+}
+
+if ($id_usuario === null && $senha === '') {
+    header('Location: ../private/usuarios.php');
+    exit;
+}
 
 if ($id_usuario !== null) {
     if ($senha !== '') {

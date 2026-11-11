@@ -40,9 +40,8 @@ Railpulse/
 ├── database/
 │   └── railpulse.sql
 ├── doc/
-│   └── pesquisas/
-├── docs/
-│   └── relatorio-uso-ia.md
+│   ├── pesquisas/
+│   └── relatorio_uso_ia.md
 ├── infra/
 │   ├── auth.php
 │   ├── conexao.php
@@ -127,12 +126,24 @@ A conexão é feita em `infra/conexao.php` e usa as credenciais locais padrão d
 
 ### Passos
 
-1. Clone o projeto para o diretório do servidor local.
+1. Clone o projeto para o diretório do servidor local (ex.: `htdocs`).
 2. Importe o script `database/railpulse.sql` no phpMyAdmin ou via linha de comando do MySQL.
 3. Confirme que o banco `railpulse` foi criado corretamente.
-4. Acesse a aplicação em:
-   - `http://localhost/Railpulse/` para a landing page.
-   - `http://localhost/Railpulse/public/login.php` para o login do sistema.
+4. Acesse a aplicação (ajuste a porta se o Apache do XAMPP estiver em `8080`):
+   - `http://localhost/Railpulse/` ou `http://localhost:8080/Railpulse/` — landing page
+   - `http://localhost/Railpulse/public/login.php` — login do sistema
+
+### Contas de demonstração
+
+Senha de todos os usuários iniciais: `1234`
+
+| E-mail | Cargo |
+|--------|-------|
+| `admin@gmail.com` | admin |
+| `nicolas@empresa.com` | admin |
+| `arthur@empresa.com` | funcionario |
+| `gabriel@empresa.com` | funcionario |
+| `mk@gmail.com` | admin |
 
 ## Como a integração funciona
 

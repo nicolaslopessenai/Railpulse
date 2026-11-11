@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-require __DIR__ . '/conexao.php';
+session_start();
 
 $resposta = [
     'success' => false,
@@ -9,6 +9,16 @@ $resposta = [
     'total' => 0,
     'message' => ''
 ];
+
+// Qualquer usuário logado pode consultar o relatório (admin ou funcionário).
+if (!isset($_SESSION['id'])) {
+    http_response_code(401);
+    $resposta['message'] = 'Faça login para acessar o relatório.';
+    echo json_encode($resposta, JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+require __DIR__ . '/conexao.php';
 
 try {
     // Relatório centrado nas rotas:

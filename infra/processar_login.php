@@ -20,7 +20,7 @@ if ($result && $result->num_rows === 1) {
     $usuario = $result->fetch_assoc();
     $senha_armazenada = $usuario['senha'];
 
-    if (password_verify($senha_digitada, $senha_armazenada) || $senha_digitada === $senha_armazenada) {
+    if (password_verify($senha_digitada, $senha_armazenada)) {
         $_SESSION['id'] = $usuario['id_usuario'];
         $_SESSION['nome'] = $usuario['nome'];
         $_SESSION['cargo'] = $usuario['cargo'];
