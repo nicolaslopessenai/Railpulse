@@ -112,6 +112,7 @@ $cargo_label = $cargo_atual === 'admin' ? 'Admin' : 'Funcionário';
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/confirmar.js"></script>
     <script src="../js/weather_dashboard.js"></script>
 </body>
 </html>

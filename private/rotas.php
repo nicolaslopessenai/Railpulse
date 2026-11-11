@@ -57,7 +57,75 @@ while ($vinculo = mysqli_fetch_assoc($rotas_trens)) {
     <main class="container py-4">
         <div class="d-flex justify-content-between align-items-center mb-3">
             <h1 class="h3 fw-bold mb-0">Rotas</h1>
-            <button id="btn_nova_rota" class="btn btn-primary admin_only">+ Nova rota</button>
+            <div class="d-flex gap-2">
+                <button id="btn_novo_endereco" class="btn btn-outline-primary admin_only">+ Adicionar endereço</button>
+                <button id="btn_nova_rota" class="btn btn-primary admin_only">+ Nova rota</button>
+            </div>
+        </div>
+
+        <div id="modal_detalhe_rota" class="crud_modal oculto" role="dialog" aria-modal="true" aria-labelledby="detalhe_nome">
+            <div class="card card-soft border-0 w-100" style="max-width: 560px;">
+                <div class="card-body p-4">
+                    <h2 id="detalhe_nome" class="h5 fw-bold text-uppercase text-secondary mb-3"></h2>
+                    <div class="mb-3">
+                        <div class="small fw-semibold text-uppercase text-secondary">Origem</div>
+                        <div id="detalhe_origem"></div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="small fw-semibold text-uppercase text-secondary">Destino</div>
+                        <div id="detalhe_destino"></div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="small fw-semibold text-uppercase text-secondary">Distância</div>
+                        <div id="detalhe_distancia"></div>
+                    </div>
+                    <button type="button" id="btn_fechar_detalhe" class="btn btn-outline-secondary">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="modal_endereco" class="crud_modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_endereco">
+            <div class="card card-soft border-0 w-100" style="max-width: 760px;">
+                <div class="card-body p-4">
+                    <h2 id="titulo_modal_endereco" class="h5 fw-bold text-uppercase text-secondary mb-3">Endereços salvos</h2>
+
+                    <div data-cep-form class="border rounded-3 p-3 bg-light mb-3">
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-4">
+                                <label for="end_cep" class="form-label text-uppercase small fw-semibold text-secondary">CEP</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="end_cep" maxlength="9" placeholder="00000-000" data-cep-input>
+                                    <button type="button" class="btn btn-outline-secondary" data-consultar-cep>Buscar</button>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <label for="end_logradouro" class="form-label text-uppercase small fw-semibold text-secondary">Logradouro</label>
+                                <input type="text" class="form-control" id="end_logradouro" data-endereco-field="logradouro" readonly>
+                            </div>
+                        </div>
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-5">
+                                <label for="end_bairro" class="form-label text-uppercase small fw-semibold text-secondary">Bairro</label>
+                                <input type="text" class="form-control" id="end_bairro" data-endereco-field="bairro" readonly>
+                            </div>
+                            <div class="col-md-5">
+                                <label for="end_cidade" class="form-label text-uppercase small fw-semibold text-secondary">Cidade</label>
+                                <input type="text" class="form-control" id="end_cidade" data-endereco-field="cidade" readonly>
+                            </div>
+                            <div class="col-md-2">
+                                <label for="end_uf" class="form-label text-uppercase small fw-semibold text-secondary">UF</label>
+                                <input type="text" class="form-control" id="end_uf" data-endereco-field="uf" readonly>
+                            </div>
+                        </div>
+                        <div data-cep-status class="form-text mb-2"></div>
+                        <button type="button" id="btn_salvar_endereco" class="btn btn-primary btn-sm">Salvar endereço</button>
+                    </div>
+
+                    <ul id="lista_enderecos" class="list-group mb-3"></ul>
+
+                    <button type="button" id="btn_fechar_endereco" class="btn btn-outline-secondary">Fechar</button>
+                </div>
+            </div>
         </div>
 
         <div id="modal_rota" class="crud_modal oculto" role="dialog" aria-modal="true" aria-labelledby="titulo_modal_rota">
@@ -73,13 +141,13 @@ while ($vinculo = mysqli_fetch_assoc($rotas_trens)) {
                             </div>
                             <div class="col-md-6">
                                 <label for="rota_origem" class="form-label text-uppercase small fw-semibold text-secondary">Origem</label>
-                                <input type="text" class="form-control" id="rota_origem" name="rta_origem" required>
+                                <select class="form-select select_endereco" id="rota_origem" name="rta_origem" required></select>
                             </div>
                         </div>
                         <div class="row g-3 mb-3">
                             <div class="col-md-6">
                                 <label for="rota_destino" class="form-label text-uppercase small fw-semibold text-secondary">Destino</label>
-                                <input type="text" class="form-control" id="rota_destino" name="rta_destino" required>
+                                <select class="form-select select_endereco" id="rota_destino" name="rta_destino" required></select>
                             </div>
                             <div class="col-md-6">
                                 <label for="rota_distancia_km" class="form-label text-uppercase small fw-semibold text-secondary">Distância (km)</label>
@@ -100,6 +168,8 @@ while ($vinculo = mysqli_fetch_assoc($rotas_trens)) {
                             </select>
                         </div>
 
+                        <div id="erro_rota" class="text-danger small mb-3 oculto">A origem e o destino não podem ser o mesmo local.</div>
+
                         <div class="d-flex gap-2 flex-wrap">
                             <button type="submit" id="btn_salvar_rota" class="btn btn-primary">Salvar</button>
                             <button type="button" id="btn_cancelar_rota" class="btn btn-outline-secondary">Cancelar</button>
@@ -108,6 +178,10 @@ while ($vinculo = mysqli_fetch_assoc($rotas_trens)) {
                 </div>
             </div>
         </div>
+
+        <?php if (isset($_GET['erro']) && $_GET['erro'] === 'mesmo_local') { ?>
+            <div class="alert alert-warning mt-3">A origem e o destino não podem ser o mesmo local.</div>
+        <?php } ?>
 
         <?php if (isset($_GET['erro']) && $_GET['erro'] === 'em_uso') { ?>
             <div class="alert alert-warning mt-3">Esta rota está vinculada a trens ou sensores e não pode ser excluída.</div>
@@ -143,7 +217,13 @@ while ($vinculo = mysqli_fetch_assoc($rotas_trens)) {
                                 ?>
                                 <tr>
                                     <td><?php echo (int) $rota['id_rota']; ?></td>
-                                    <td><?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?></td>
+                                    <td>
+                                        <a href="#" class="link_rota fw-semibold"
+                                            data-nome="<?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?>"
+                                            data-origem="<?php echo htmlspecialchars($rota['origem'], ENT_QUOTES, 'UTF-8'); ?>"
+                                            data-destino="<?php echo htmlspecialchars($rota['destino'], ENT_QUOTES, 'UTF-8'); ?>"
+                                            data-distancia="<?php echo htmlspecialchars((string) $rota['distancia_km'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($rota['nome'], ENT_QUOTES, 'UTF-8'); ?></a>
+                                    </td>
                                     <td><?php echo htmlspecialchars($rota['origem'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars($rota['destino'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td><?php echo htmlspecialchars((string) $rota['distancia_km'], ENT_QUOTES, 'UTF-8'); ?></td>
@@ -192,7 +272,9 @@ while ($vinculo = mysqli_fetch_assoc($rotas_trens)) {
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/rotas_private.js?v=2"></script>
+    <script src="../js/confirmar.js"></script>
+    <script src="../js/rotas_private.js?v=5"></script>
+    <script src="../js/cep_lookup.js"></script>
         <script src="../js/pesquisa_tabelas.js"></script>
 
 </body>

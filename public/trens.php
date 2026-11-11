@@ -83,6 +83,7 @@ $trens = mysqli_query($conexao, "SELECT id_trem, nome, modelo, status_operaciona
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/confirmar.js"></script>
     <script src="../js/trens.public.js?v=1"></script>
         <script src="../js/pesquisa_tabelas.js"></script>
 

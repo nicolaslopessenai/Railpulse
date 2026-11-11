@@ -109,6 +109,7 @@ while ($vinculo = mysqli_fetch_assoc($rotas_trens)) {
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/confirmar.js"></script>
     <script src="../js/rotas.public.js?v=1"></script>
         <script src="../js/pesquisa_tabelas.js"></script>
 

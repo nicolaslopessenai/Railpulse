@@ -48,13 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.add("modal-open");
       }
     });
-
-    tbody_trens.addEventListener("submit", (event) => {
-      const form_excluir = event.target.closest(".crud_delete_form");
-      if (form_excluir && !window.confirm(form_excluir.dataset.confirm)) {
-        event.preventDefault();
-      }
-    });
   }
 
   if (modal_trem) {

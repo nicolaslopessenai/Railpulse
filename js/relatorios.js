@@ -235,15 +235,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const linhas = itens.map((item, indice) => [
       indice + 1,
-      `${item.rota_nome || "-"} (${item.origem || "-"} → ${item.destino || "-"})`,
-      item.trem_nome || "-",
-      item.sensor_nome || "-",
+      item.rota_nome || "-",
+      `${item.origem || "-"} → ${item.destino || "-"}`,
+      item.distancia_km !== null && item.distancia_km !== undefined && item.distancia_km !== ""
+        ? `${item.distancia_km} km`
+        : "-",
+      item.trem_nome || "Sem trem vinculado",
+      item.sensor_nome || (item.trem_nome ? "Sem sensor" : "-"),
       item.responsavel_nome || "-",
-      `${formatarTexto(item.trem_status)} / ${formatarTexto(item.sensor_status)}`,
+      item.trem_nome
+        ? item.sensor_nome
+          ? `${formatarTexto(item.trem_status)} / ${formatarTexto(item.sensor_status)}`
+          : formatarTexto(item.trem_status)
+        : "-",
       item.localizacao || "-",
     ]);
 
-    const cabecalho = [["#", "Rota", "Trem", "Sensor", "Responsável", "Status", "Localização"]];
+    const cabecalho = [
+      ["#", "Rota", "Origem → Destino", "Distância", "Trem", "Sensor", "Responsável", "Status", "Localização"],
+    ];
 
     if (typeof documento.autoTable === "function") {
       documento.autoTable({
@@ -278,7 +288,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         documento.text(
-          `${linha[0]}. ${linha[1]} | ${linha[2]} | ${linha[3]} | ${linha[4]} | ${linha[5]} | ${linha[6]}`,
+          linha.map((campo, posicao) => (posicao === 0 ? `${campo}.` : campo)).join(" | ").replace(". |", "."),
           40,
           cursorY,
           { maxWidth: 510 },

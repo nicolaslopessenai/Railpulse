@@ -9,10 +9,15 @@ $distancia_km = (float) ($_POST['rta_distancia_km'] ?? $_POST['rota_distancia_km
 $id_rota      = isset($_POST['rta_id_rota']) && $_POST['rta_id_rota'] !== '' ? (int) $_POST['rta_id_rota'] : (isset($_POST['rota_id_rota']) && $_POST['rota_id_rota'] !== '' ? (int) $_POST['rota_id_rota'] : null);
 $id_trem      = isset($_POST['rta_id_trem']) && $_POST['rta_id_trem'] !== '' ? (int) $_POST['rta_id_trem'] : (isset($_POST['rota_id_trem']) && $_POST['rota_id_trem'] !== '' ? (int) $_POST['rota_id_trem'] : 0);
 
+if (strtolower($origem) === strtolower($destino)) {
+    header("Location: ../private/rotas.php?erro=mesmo_local");
+    exit;
+}
+
 if ($id_rota !== null) {
     $sql = "UPDATE rotas SET nome = ?, origem = ?, destino = ?, distancia_km = ? WHERE id_rota = ?";
     $stmt = $conexao->prepare($sql);
-    $stmt->bind_param("ssdsi", $nome, $origem, $destino, $distancia_km, $id_rota);
+    $stmt->bind_param("sssdi", $nome, $origem, $destino, $distancia_km, $id_rota);
     $stmt->execute();
     $rota_id = $id_rota;
 } else {

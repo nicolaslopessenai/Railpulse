@@ -78,40 +78,6 @@ include '../infra/auth.php';
                         </div>
                     </div>
 
-                    <div data-cep-form class="border rounded-3 p-3 bg-light mb-4">
-                        <h3 class="h6 fw-bold text-uppercase text-secondary mb-3">Endereço</h3>
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-4">
-                                <label class="form-label text-uppercase small fw-semibold text-secondary">CEP</label>
-                                <div class="input-group">
-                                    <input type="text" class="form-control" id="cad_cep" name="usr_cep" maxlength="9" placeholder="00000-000" data-cep-input>
-                                    <button type="button" class="btn btn-outline-secondary" data-consultar-cep>Buscar</button>
-                                </div>
-                            </div>
-                            <div class="col-md-8">
-                                <label class="form-label text-uppercase small fw-semibold text-secondary">Logradouro</label>
-                                <input type="text" class="form-control" id="cad_logradouro" name="usr_logradouro" data-endereco-field="logradouro" readonly>
-                            </div>
-                        </div>
-
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-5">
-                                <label class="form-label text-uppercase small fw-semibold text-secondary">Bairro</label>
-                                <input type="text" class="form-control" id="cad_bairro" name="usr_bairro" data-endereco-field="bairro" readonly>
-                            </div>
-                            <div class="col-md-5">
-                                <label class="form-label text-uppercase small fw-semibold text-secondary">Cidade</label>
-                                <input type="text" class="form-control" id="cad_cidade" name="usr_cidade" data-endereco-field="cidade" readonly>
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label text-uppercase small fw-semibold text-secondary">UF</label>
-                                <input type="text" class="form-control" id="cad_uf" name="usr_uf" data-endereco-field="uf" readonly>
-                            </div>
-                        </div>
-
-                        <div data-cep-status class="form-text"></div>
-                    </div>
-
                     <div class="d-flex gap-2 flex-wrap">
                         <button type="submit" class="btn btn-primary" id="btn_cadastrar">Cadastrar novo</button>
                         <a href="usuarios.php" class="btn btn-outline-secondary">Cancelar</a>
@@ -122,6 +88,6 @@ include '../infra/auth.php';
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../js/cep_lookup.js"></script>
+    <script src="../js/confirmar.js"></script>
 </body>
 </html>
